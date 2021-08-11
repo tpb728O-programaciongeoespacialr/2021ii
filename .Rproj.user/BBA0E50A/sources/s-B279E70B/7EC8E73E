@@ -3,7 +3,7 @@
     "path": "C:/Users/mfvargas/tpb728O-programaciongeoespacialr/2021ii/index.Rmd",
     "project_path": "index.Rmd",
     "type": "r_markdown",
-    "hash": "277196904",
+    "hash": "3441793155",
     "contents": "",
     "dirty": false,
     "created": 1628663785608.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "34,0",
-        "scrollLine": "30"
+        "cursorPosition": "34,64",
+        "scrollLine": "29"
     },
     "folds": "",
-    "lastKnownWriteTime": 1628696471,
+    "lastKnownWriteTime": 1628701493,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1628696471452,
+    "last_content_update": 1628701493885,
     "read_only": false,
     "read_only_alternatives": []
 }
