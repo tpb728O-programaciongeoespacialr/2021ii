@@ -1,0 +1,87 @@
+---
+title: "Recursos"
+description: |
+  Recursos adicionales a los mencionados en la bibliografía del curso.
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# GDAL
+- [GDAL](https://gdal.org/)
+
+# Git y GitHub
+- [Git](https://git-scm.com/)
+- [GitHub](https://github.com/)
+- [The Best Git Tutorials](https://www.freecodecamp.org/news/best-git-tutorial/)
+
+# Línea de comandos del sistema operativo
+- [SS64 Command line reference](https://ss64.com/)
+- [Command Prompt: 11 basic commands you should know (cd, dir, mkdir, etc.) - Digital Citizen](https://www.digitalcitizen.life/command-prompt-how-use-basic-commands)
+
+# Markdown y R Markdown
+- [Daring Fireball: Markdown](https://daringfireball.net/projects/markdown/)
+- [Markdown Guide](https://www.markdownguide.org/)
+- [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+- [Markdown Tutorial](https://www.markdowntutorial.com/)
+- [R Markdown](https://rmarkdown.rstudio.com/)
+- [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+- [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)
+- [Yihui Xie | One R Markdown Document, Fourteen Demos | RStudio (2020)](https://www.youtube.com/watch?v=qLEkUjxk7e8)
+
+# Pensamiento computacional
+- [Computational Thinking for Problem Solving](https://www.coursera.org/learn/computational-thinking-problem-solving)
+- [CS50's Introduction to Computer Science](https://www.edx.org/course/cs50s-introduction-to-computer-science)
+- [Introduction to Computational Thinking](https://computationalthinking.mit.edu/)
+
+# R y RStudio
+- [The R Project for Statistical Computing](https://www.r-project.org/)
+- [R Language Definition](https://cran.r-project.org/doc/manuals/r-release/R-lang.html)
+- [R Package Documentation](https://rdrr.io/)
+- [RStudio - Open source & professional software for data science teams](https://www.rstudio.com/)
+- [Hands-On Programming with R](https://rstudio-education.github.io/hopr/)
+- [R for Data Science](https://r4ds.had.co.nz/)
+- [(Tutorial) How to Install R on Windows, Mac OS X, and Ubuntu](https://www.datacamp.com/community/tutorials/installing-R-windows-mac-ubuntu)
+- [R Packages: A Beginner’s Guide](https://www.datacamp.com/community/tutorials/r-packages-guide)
+- [Style guide - Advanced R](http://adv-r.had.co.nz/Style.html)
+
+# R - Graficación
+- [The R Graphics Package](http://search.r-project.org/R/library/graphics/html/graphics-package.html)  
+- [Create Elegant Data Visualisations Using the Grammar of Graphics - ggplot2](https://ggplot2.tidyverse.org/)  
+- [Plotly: The front end for ML and data science models](https://plotly.com/)  
+
+- [_R Graphics Cookbook_, de Winston Chang](https://r-graphics.org/)  
+- [_The Grammar of Graphics_, de Leland Wilkinson et al.](https://www.springer.com/gp/book/9780387245447)  
+- [From data to Viz | Find the graphic you need](https://www.data-to-viz.com/)
+
+# R - Geoespacial
+## Paquetes
+- [Simple Features for R - sf](https://r-spatial.github.io/sf/)
+- [The raster package - R Spatial](https://rspatial.org/raster/pkg/)
+- [The terra package - R Spatial](https://rspatial.org/terra/pkg/)
+- [Leaflet for R](https://rstudio.github.io/leaflet/)
+- [tmap - R package for thematic maps](https://github.com/mtennekes/tmap)
+- [Interactive viewing of spatial data in R - mapview](https://r-spatial.github.io/mapview/)
+- [Spatiotemporal Arrays: Raster and Vector Datacubes - stars](https://r-spatial.github.io/stars/)
+- [CRAN - Package satellite](https://cran.r-project.org/web/packages/satellite/)
+
+## Libros
+- [_Geocomputation with R_, de Robin Lovelace et al.](https://geocompr.robinlovelace.net/)
+- [_Spatial Data Science with applications in R_, de Edzer Pebesma y Roger Bivand](https://keen-swartz-3146c4.netlify.app/)
+
+## Tutoriales
+- [Drawing beautiful maps programmatically with R, sf and ggplot2](http://r-spatial.org/r/2018/10/25/ggplot2-sf.html)
+
+## Otros
+- [r-spatial](http://r-spatial.org/)
+- [Spatial Data Science with R - R Spatial](https://rspatial.org/)
+
+# Scratch
+- [Scratch - Imagine, Program, Share](https://scratch.mit.edu/)
+- [CS50's Introduction to Programming with Scratch](https://www.edx.org/course/cs50s-introduction-to-programming-with-scratch)
+
+
+
+
