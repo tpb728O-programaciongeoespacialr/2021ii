@@ -3,7 +3,7 @@
     "path": "C:/Users/mfvargas/tpb728O-programaciongeoespacialr/2021ii/leccion-01-r-conceptosbasicos.Rmd",
     "project_path": "leccion-01-r-conceptosbasicos.Rmd",
     "type": "r_markdown",
-    "hash": "3575857426",
+    "hash": "4211040604",
     "contents": "",
     "dirty": false,
     "created": 1628701262150.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "88,2",
-        "scrollLine": "85"
+        "cursorPosition": "443,84",
+        "scrollLine": "440"
     },
     "folds": "",
-    "lastKnownWriteTime": 1628703801,
+    "lastKnownWriteTime": 1628706316,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1628703801706,
+    "last_content_update": 1628706316479,
     "read_only": false,
     "read_only_alternatives": []
 }

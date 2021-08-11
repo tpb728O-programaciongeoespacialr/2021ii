@@ -2457,7 +2457,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <li><a href="#ayuda">Ayuda</a></li>
 <li><a href="#conjuntos-de-datos-para-pruebas">Conjuntos de datos para pruebas</a></li>
 </ul></li>
-<li><a href="#bibliotecas-y-paquetes">Bibliotecas y paquetes</a></li>
+<li><a href="#paquetes">Paquetes</a></li>
 <li><a href="#tipos-de-datos">Tipos de datos</a>
 <ul>
 <li><a href="#tipos-básicos">Tipos básicos</a>
@@ -2538,7 +2538,7 @@ Interfaz de RStudio.
 </figure>
 <p>Además de edición de código fuente en R (y otros lenguajes), RStudio contiene capacidades para depurar código y visualizar datos en formatos tabulares, gráficos y de mapas.</p>
 <h1 id="funciones">Funciones</h1>
-<p>R, al igual que otros lenguajes de programación, estructura su funcionalidad en unidades de <a href="https://en.wikipedia.org/wiki/Source_code">código fuente</a> llamadas <a href="https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Functions">funciones</a>. Cada función realiza una tarea específica como, por ejemplo, un cálculo matemático y, por lo general, retorna un valor como salida. Todas las funciones tienen un nombre y un conjunto de argumentos que especifican los datos de entrada que procesa la función. Los argumentos se escriben entre paréntesis redondos (<code>()</code>) y estos siempre deben incluirse, aún en el caso de que la función no tenga ningún argumento. Si la función tiene varios argumentos, deben separarse mediante comas (<code>,</code>).</p>
+<p>R, al igual que otros lenguajes de programación, estructura su funcionalidad en unidades de <a href="https://en.wikipedia.org/wiki/Source_code">código fuente</a> llamadas <a href="https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Functions">funciones</a>. Cada función realiza una tarea específica como, por ejemplo, un cálculo matemático y, por lo general, retorna un valor como salida. Todas las funciones tienen un nombre y, opcionalmente, un conjunto de argumentos que especifican los datos de entrada que procesa la función. Los argumentos se escriben entre paréntesis redondos (<code>()</code>) y estos siempre deben incluirse, aún en el caso de que la función no tenga ningún argumento. Si la función tiene varios argumentos, deben separarse mediante comas (<code>,</code>).</p>
 <h2 id="ejemplos">Ejemplos</h2>
 <p>La función <a href="https://rdrr.io/r/base/print.html">print()</a> recibe como argumento un valor (ej. un texto o un número) para imprimirlo en la pantalla. En el siguiente fragmento de código en R, se utiliza <code>print()</code> para imprimir la hilera <a href="https://en.wikipedia.org/wiki/%22Hello,_World!%22_program">“Hola mundo”</a>. Nótese el uso del símbolo <code>#</code> para comentarios (i.e. texto que no es código ejecutable).</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2654,7 +2654,7 @@ mean&gt; c(xm, mean(x, trim = 0.10))
 </code></pre>
 </div>
 </div>
-<h1 id="bibliotecas-y-paquetes">Bibliotecas y paquetes</h1>
+<h1 id="paquetes">Paquetes</h1>
 <p>Las funciones de R se distribuyen mediante paquetes. Cada paquete contiene un conjunto de funciones y estructuras de datos relacionadas entre sí. Para utilizar un paquete, primero debe cargarse (en la memoria del computador) con la función <a href="https://rdrr.io/r/base/library.html">library()</a>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -3065,7 +3065,7 @@ b. Muestre la distribución de pasajeros fallecidos y sobrevivientes por sexo en
 </div>
 <pre><code>[1] &quot;Francia&quot;   &quot;China&quot;     &quot;Australia&quot;</code></pre>
 </div>
-<p>Con la función <code>c()</code>, es posible especificar un conjunto de índices específicos:</p>
+<p>Con la función <code>c()</code>, es posible especificar un conjunto de índices particulares:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Elementos entre los índices 1, 4 y 5</span>

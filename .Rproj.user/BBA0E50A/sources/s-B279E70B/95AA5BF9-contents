@@ -50,7 +50,7 @@ Para programar en R, puede utilizarse una interfaz de línea de comandos y tambi
 Además de edición de código fuente en R (y otros lenguajes), RStudio contiene capacidades para depurar código y visualizar datos en formatos tabulares, gráficos y de mapas.
 
 # Funciones
-R, al igual que otros lenguajes de programación, estructura su funcionalidad en unidades de [código fuente](https://en.wikipedia.org/wiki/Source_code) llamadas [funciones](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Functions). Cada función realiza una tarea específica como, por ejemplo, un cálculo matemático y, por lo general, retorna un valor como salida. Todas las funciones tienen un nombre y un conjunto de argumentos que especifican los datos de entrada que procesa la función. Los argumentos se escriben entre paréntesis redondos (```()```) y estos siempre deben incluirse, aún en el caso de que la función no tenga ningún argumento. Si la función tiene varios argumentos, deben separarse mediante comas (```,```).
+R, al igual que otros lenguajes de programación, estructura su funcionalidad en unidades de [código fuente](https://en.wikipedia.org/wiki/Source_code) llamadas [funciones](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Functions). Cada función realiza una tarea específica como, por ejemplo, un cálculo matemático y, por lo general, retorna un valor como salida. Todas las funciones tienen un nombre y, opcionalmente, un conjunto de argumentos que especifican los datos de entrada que procesa la función. Los argumentos se escriben entre paréntesis redondos (```()```) y estos siempre deben incluirse, aún en el caso de que la función no tenga ningún argumento. Si la función tiene varios argumentos, deben separarse mediante comas (```,```).
 
 ## Ejemplos
 La función [print()](https://rdrr.io/r/base/print.html) recibe como argumento un valor (ej. un texto o un número) para imprimirlo en la pantalla. En el siguiente fragmento de código en R, se utiliza ```print()``` para imprimir la hilera ["Hola mundo"](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program). Nótese el uso del símbolo ```#``` para comentarios (i.e. texto que no es código ejecutable).
@@ -151,7 +151,7 @@ data()
 ?iris
 ```
 
-# Bibliotecas y paquetes
+# Paquetes
 Las funciones de R se distribuyen mediante paquetes. Cada paquete contiene un conjunto de funciones y estructuras de datos relacionadas entre sí. Para utilizar un paquete, primero debe cargarse (en la memoria del computador) con la función [library()](https://rdrr.io/r/base/library.html).
 
 ```{r}
@@ -441,7 +441,7 @@ El operador ```:``` puede utilizarse para especificar un rango de índices:
 paises[2:4]
 ```
 
-Con la función ```c()```, es posible especificar un conjunto de índices específicos:
+Con la función ```c()```, es posible especificar un conjunto de índices particulares:
 
 ```{r collapse=TRUE}
 # Elementos entre los índices 1, 4 y 5
