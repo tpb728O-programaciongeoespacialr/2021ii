@@ -39,8 +39,8 @@
       "path": "leccion-03-rmarkdown.html",
       "title": "R Markdown",
       "author": [],
-      "contents": "\r\n\r\nContents\r\nResumen\r\nTrabajo previo\r\nDescripción general\r\n\r\nResumen\r\nEn esta lección, se introduce el lenguaje de marcas R Markdown.\r\nTrabajo previo\r\nLea los capítulos del 1 al 3 de Xie, Y., Allaire, J., & Grolemund, G. (2018). R Markdown: The Definitive Guide.\r\nTambién se recomienda:\r\nR Markdown (sitio oficial).\r\nYihui Xie | One R Markdown Document, Fourteen Demos | RStudio (2020).\r\nReproducible reports with R Markdown.\r\nReproducible Templates for Analysis and Dissemination.\r\nHow To Hugo Academic.\r\nSteps to create website with blogdown and the Hugo Academic (Wowchemy) theme.\r\n\r\nDescripción general\r\n\r\n\r\n\r\n",
-      "last_modified": "2021-08-25T12:42:34-06:00"
+      "contents": "\r\n\r\nContents\r\nResumen\r\nTrabajo previo\r\nDescripción general\r\n\r\nResumen\r\nEn esta lección, se introduce el lenguaje de marcas R Markdown.\r\nTrabajo previo\r\nLea los capítulos del 1 al 3 de Xie, Y., Allaire, J., & Grolemund, G. (2018). R Markdown: The Definitive Guide.\r\nTambién se recomienda:\r\nR Markdown (sitio oficial).\r\nYihui Xie | One R Markdown Document, Fourteen Demos | RStudio (2020).\r\nReproducible reports with R Markdown.\r\nReproducible Templates for Analysis and Dissemination.\r\nIntroduction to Blogdown (R Package) | RStudio Webinar - 2017.\r\nSteps to create website with blogdown and the Hugo Academic (Wowchemy) theme.\r\nHow To Hugo Academic.\r\n\r\nDescripción general\r\nR Markdown es un formato de archivo para construir documentos dinámicos con el lenguaje de programación R y el lenguaje de marcado Markdown.\r\n\r\n\r\n\r\n",
+      "last_modified": "2021-08-25T16:01:40-06:00"
     }
   ],
   "collections": []

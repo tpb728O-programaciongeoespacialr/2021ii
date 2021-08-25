@@ -20,8 +20,10 @@ En esta lección, se introduce el lenguaje de marcas R Markdown.
     - [Yihui Xie | One R Markdown Document, Fourteen Demos | RStudio (2020)](https://www.youtube.com/watch?v=qLEkUjxk7e8).  
     - [Reproducible reports with R Markdown](https://rmarkdown-shilaan.netlify.app/).  
     - [Reproducible Templates for Analysis and Dissemination](https://www.coursera.org/learn/reproducible-templates-analysis).  
-    - [How To Hugo Academic](https://www.youtube.com/watch?v=BHpkLJieXPE).  
+    - [Introduction to Blogdown (R Package) | RStudio Webinar - 2017](https://www.youtube.com/watch?v=CjTLN-FXiFA).  
     - [Steps to create website with blogdown and the Hugo Academic (Wowchemy) theme](https://www.emmanuelteitelbaum.com/post/create-a-website-with-blogdown-and-hugo/).    
-    
+    - [How To Hugo Academic](https://www.youtube.com/watch?v=BHpkLJieXPE).  
 
 # Descripción general
+[R Markdown](https://rmarkdown.rstudio.com/) es un formato de archivo para construir documentos dinámicos con el lenguaje de programación [R](https://www.r-project.org/) y el lenguaje de marcado [Markdown](https://daringfireball.net/projects/markdown/).
+
