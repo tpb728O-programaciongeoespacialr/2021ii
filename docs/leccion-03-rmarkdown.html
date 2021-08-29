@@ -2448,7 +2448,25 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <ul>
 <li><a href="#resumen">Resumen</a></li>
 <li><a href="#trabajo-previo">Trabajo previo</a></li>
-<li><a href="#descripción-general">Descripción general</a></li>
+<li><a href="#descripción-general">Descripción general</a>
+<ul>
+<li><a href="#markdown">Markdown</a>
+<ul>
+<li><a href="#variaciones">Variaciones</a></li>
+<li><a href="#sintaxis">Sintaxis</a>
+<ul>
+<li><a href="#encabezados">Encabezados</a></li>
+<li><a href="#itálicas">Itálicas</a></li>
+<li><a href="#negritas">Negritas</a></li>
+<li><a href="#citas-textuales">Citas textuales</a></li>
+<li><a href="#enlaces-a-otros-documentos">Enlaces a otros documentos</a></li>
+<li><a href="#imágenes">Imágenes</a></li>
+<li><a href="#listas-numeradas">Listas numeradas</a></li>
+<li><a href="#listas-no-numeradas">Listas no numeradas</a></li>
+<li><a href="#otros-elementos-de-sintaxis">Otros elementos de sintaxis</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
 </ul>
 </nav>
 </div>
@@ -2476,6 +2494,56 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </ul>
 <h1 id="descripción-general">Descripción general</h1>
 <p><a href="https://rmarkdown.rstudio.com/">R Markdown</a> es un formato de archivo para construir documentos dinámicos con el lenguaje de programación <a href="https://www.r-project.org/">R</a> y el lenguaje de marcado <a href="https://daringfireball.net/projects/markdown/">Markdown</a>.</p>
+<h2 id="markdown">Markdown</h2>
+<p><a href="https://daringfireball.net/projects/markdown/">Markdown</a> es un <a href="https://es.wikipedia.org/wiki/Lenguaje_de_marcado">lenguaje de marcas</a> creado en 2004 por John Gruber. Las “marcas” se utilizan para brindar información acerca de la presentación (ej. negritas, itálicas) o la estructura (ej. títulos, encabezados) de un documento. Se caracteriza por ser más sencillo de leer y de usar que otros lenguajes de marcas (ej. <a href="https://es.wikipedia.org/wiki/HTML">HTML</a>). Los documentos escritos en Markdown pueden exportarse a una gran variedad de formatos (ej. HTML, Doc, PDF, Latex) para ser usados en libros, presentaciones o páginas web, entre otros. Markdown es ampliamente utilizado en comunicación científica, documentación de programas e investigación reproducible.</p>
+<h3 id="variaciones">Variaciones</h3>
+<p>Las variaciones de Markdown, también llamadas <em>flavors</em>, son extensiones o modificaciones de la especificación original. Entre las más populares están:</p>
+<ul>
+<li><a href="https://rmarkdown.rstudio.com/">R Markdown</a>: para el lenguaje R.</li>
+<li><a href="https://jupyterbook.org/content/myst.html">MyST (Markedly Structured Text) Markdown</a>: para <a href="https://jupyterbook.org/">Jupyter Book</a>.</li>
+<li><a href="https://help.github.com/en/github/writing-on-github">GitHub Flavored Markdown</a>: para la plataforma GitHub.</li>
+</ul>
+<p>Puede consultarse una lista más extensa en <a href="https://github.com/commonmark/commonmark-spec/wiki/markdown-flavors">https://github.com/commonmark/commonmark-spec/wiki/markdown-flavors</a>.</p>
+<h3 id="sintaxis">Sintaxis</h3>
+<p>La sintaxis de Markdown permite especificar diferentes componentes de un documento, entre los que están:</p>
+<ul>
+<li>Encabezados.</li>
+<li>Estilos (ej. negritas, itálicas).</li>
+<li>Citas textuales.</li>
+<li>Enlaces a otros documentos (ej. páginas web).</li>
+<li>Imágenes.</li>
+<li>Listas.</li>
+</ul>
+<h4 id="encabezados">Encabezados</h4>
+<p>Pueden definirse seis niveles de encabezados, con los símbolos de numeral (#) antes del texto. El primer nivel es el más grande y el sexto el más pequeño. A la izquierda se muestra la sintaxis Markdown y a la derecha la forma en que se despliega en un documento.</p>
+<p><img src="img/md-headings.png" /></p>
+<h4 id="itálicas">Itálicas</h4>
+<p>Se definen con un asterisco (*) antes y después del texto o con un guión bajo (_) antes y después del texto.</p>
+<p><img src="img/md-italics.png" /></p>
+<h4 id="negritas">Negritas</h4>
+<p>Se definen con dos asteriscos (**) antes y después del texto o con dos guiones bajos (__) antes y después del texto.</p>
+<p><img src="img/md-bold.png" /></p>
+<h4 id="citas-textuales">Citas textuales</h4>
+<p>Se definen con un símbolo de “mayor que” (&gt;) antes de cada línea.</p>
+<p><img src="img/md-blockquotes.png" /></p>
+<h4 id="enlaces-a-otros-documentos">Enlaces a otros documentos</h4>
+<p>Se definen con un paréntesis cuadrados[] seguidos de paréntesis redondos (). En los paréntesis cuadrados se coloca (opcionalmente) el texto del enlace y en los redondos la dirección del documento.</p>
+<p><img src="img/md-links.png" /></p>
+<h4 id="imágenes">Imágenes</h4>
+<p>Se definen con un signo de admiración de cierre (!), paréntesis cuadrados[] y paréntesis redondos (). En los paréntesis cuadrados se coloca (opcionalmente) un texto para la imagen y en los redondos la dirección de la imagen, ya sea en el disco o en la red.</p>
+<p><img src="img/md-images.png" /></p>
+<h4 id="listas-numeradas">Listas numeradas</h4>
+<p>Se definen con números antes de cada elemento.</p>
+<p><img src="img/md-numlist.png" /></p>
+<h4 id="listas-no-numeradas">Listas no numeradas</h4>
+<p>Se definen con guiones antes de cada elemento.</p>
+<p><img src="img/md-notnumlist.png" /></p>
+<h4 id="otros-elementos-de-sintaxis">Otros elementos de sintaxis</h4>
+<p>Para conocer otros elementos de la sintaxis de Markdown, se recomienda revisar en detalle:</p>
+<ul>
+<li>Guía de referencia de Markdown: <a href="https://www.markdownguide.org/">Markdown Guide</a></li>
+<li>Tutorial sobre Markdown: <a href="https://www.markdowntutorial.com/">Markdown Tutorial</a></li>
+</ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
