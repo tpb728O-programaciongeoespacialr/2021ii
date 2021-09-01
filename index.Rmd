@@ -37,5 +37,8 @@ Este sitio web corresponde al curso impartido durante el segundo ciclo lectivo d
 [03 R Markdown](leccion-03-rmarkdown.html)  
 [04 blogdown](leccion-04-blogdown.html)  
 
+# Tareas
+[01 R Markdown](tarea-01-rmarkdown.html)
+
 # Recursos
 [Recursos adicionales a la bibliografía del curso](recursos.html)

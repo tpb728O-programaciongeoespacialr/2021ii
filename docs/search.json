@@ -18,8 +18,8 @@
           "url": "https://github.com/mfvargas"
         }
       ],
-      "contents": "\r\n\r\nContents\r\nDescripción\r\nPrograma\r\nLecciones\r\nRecursos\r\n\r\nDescripción\r\nEste es un curso sobre desarrollo de aplicaciones geoespaciales en el lenguaje de programación R. Forma parte de la Maestría en Sistemas de Información Geográfica y Teledetección de la Universidad de Costa Rica (UCR) y de la Universidad Nacional (UNA).\r\nSe estudian los fundamentos del lenguaje R, sus bibliotecas geoespaciales y sus capacidades para generar gráficos estadísticos. El enfoque del curso es teórico-práctico, con lecciones teóricas combinadas con ejercicios de programación en los cuales los estudiantes aplicarán en diversos escenarios de procesamiento de datos los conocimientos adquiridos.\r\nEste sitio web corresponde al curso impartido durante el segundo ciclo lectivo de 2021. Para ver las versiones de otros ciclos lectivos, puede visitar el sitio web general del curso.\r\nPrograma\r\nPrograma del curso\r\nLecciones\r\n01 R - Conceptos básicos (RStudio, funciones predefinidas, tipos de datos)02 R - Conceptos básicos (definición de funciones, condicionales, ciclos)03 R Markdown04 blogdown\r\nRecursos\r\nRecursos adicionales a la bibliografía del curso\r\n\r\n\r\n\r\n",
-      "last_modified": "2021-08-31T22:22:25-06:00"
+      "contents": "\r\n\r\nContents\r\nDescripción\r\nPrograma\r\nLecciones\r\nTareas\r\nRecursos\r\n\r\nDescripción\r\nEste es un curso sobre desarrollo de aplicaciones geoespaciales en el lenguaje de programación R. Forma parte de la Maestría en Sistemas de Información Geográfica y Teledetección de la Universidad de Costa Rica (UCR) y de la Universidad Nacional (UNA).\r\nSe estudian los fundamentos del lenguaje R, sus bibliotecas geoespaciales y sus capacidades para generar gráficos estadísticos. El enfoque del curso es teórico-práctico, con lecciones teóricas combinadas con ejercicios de programación en los cuales los estudiantes aplicarán en diversos escenarios de procesamiento de datos los conocimientos adquiridos.\r\nEste sitio web corresponde al curso impartido durante el segundo ciclo lectivo de 2021. Para ver las versiones de otros ciclos lectivos, puede visitar el sitio web general del curso.\r\nPrograma\r\nPrograma del curso\r\nLecciones\r\n01 R - Conceptos básicos (RStudio, funciones predefinidas, tipos de datos)02 R - Conceptos básicos (definición de funciones, condicionales, ciclos)03 R Markdown04 blogdown\r\nTareas\r\n01 R Markdown\r\nRecursos\r\nRecursos adicionales a la bibliografía del curso\r\n\r\n\r\n\r\n",
+      "last_modified": "2021-09-01T16:50:18-06:00"
     },
     {
       "path": "leccion-01-r-conceptosbasicos.html",
@@ -48,6 +48,13 @@
       "author": [],
       "contents": "\r\n\r\nContents\r\nResumen\r\nTrabajo previo\r\nDescripción general\r\n\r\nResumen\r\nEn esta lección, se introduce el paquete blogdown para la creación de sitios web mediante R Markdown.\r\nTrabajo previo\r\nLea los capítulos del 1 al 5 de Xie, Y., Thomas, A., & Hill, A. (2017). blogdown: Creating Websites with R Markdown.\r\nTambién se recomienda:\r\nCreate Blogs and Websites with R Markdown - blogdown.\r\nIntroduction to Blogdown (R Package) | RStudio Webinar - 2017.\r\nSteps to create website with blogdown and the Hugo Academic (Wowchemy) theme.\r\nHow To Hugo Academic.\r\nUp & running with blogdown in 2021 - Alison Hill.\r\nMultilingual Mode - Hugo.\r\n\r\nDescripción general\r\nblogdown es un paquete de R para la creación de sitios web mediante R Markdown. Se apoya en Hugo, un generador de sitios web estáticos.\r\n\r\n\r\n\r\n",
       "last_modified": "2021-09-01T11:51:15-06:00"
+    },
+    {
+      "path": "tarea-01-rmarkdown.html",
+      "title": "Tarea 01 - R Markdown",
+      "author": [],
+      "contents": "\r\n\r\nContents\r\nFecha de entrega y entregables\r\nCalificación\r\n\r\nFecha de entrega y entregables\r\nLa fecha y hora límite para la entrega de esta tarea es el miércoles 8 de setiembre de 2021 a las 16:59.\r\nDebe entregar un sitio web publicado en Netlify y desarrollado con blogdown y Hugo Academic Resumé Template.\r\nLa tarea debe realizarse de manera individual.\r\nCalificación\r\nEntre paréntesis, se muestra el porcentaje correspondiente a cada aspecto que se calificará:\r\n() …\r\n\r\n\r\n\r\n",
+      "last_modified": "2021-09-01T16:48:50-06:00"
     }
   ],
   "collections": []
