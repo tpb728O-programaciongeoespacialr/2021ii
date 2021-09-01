@@ -19,7 +19,9 @@ En esta lección, se introduce el paquete blogdown para la creación de sitios w
     - [Create Blogs and Websites with R Markdown - blogdown](https://pkgs.rstudio.com/blogdown/).   
     - [Introduction to Blogdown (R Package) | RStudio Webinar - 2017](https://www.youtube.com/watch?v=CjTLN-FXiFA).  
     - [Steps to create website with blogdown and the Hugo Academic (Wowchemy) theme](https://www.emmanuelteitelbaum.com/post/create-a-website-with-blogdown-and-hugo/).    
-    - [How To Hugo Academic](https://www.youtube.com/watch?v=BHpkLJieXPE).     
+    - [How To Hugo Academic](https://www.youtube.com/watch?v=BHpkLJieXPE).  
+    - [Up & running with blogdown in 2021 - Alison Hill](https://www.apreshill.com/blog/2020-12-new-year-new-blogdown/).  
+    - [Multilingual Mode - Hugo](https://gohugo.io/content-management/multilingual/).  
 
 # Descripción general
 [blogdown](https://pkgs.rstudio.com/blogdown/) es un paquete de R para la creación de sitios web mediante R Markdown. Se apoya en [Hugo](https://gohugo.io/), un [generador de sitios web estáticos](https://www.netlify.com/blog/2020/04/14/what-is-a-static-site-generator-and-3-ways-to-find-the-best-one/).
