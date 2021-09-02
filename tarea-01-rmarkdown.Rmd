@@ -21,4 +21,7 @@ La tarea debe realizarse de manera individual.
 
 Entre paréntesis, se muestra el porcentaje correspondiente a cada aspecto que se calificará:
 
-- () ...
+- (25%) Modificación de la sección de biografía.
+- (25%) Adición de un artículo (*post*) personalizado.
+- (25%) Modificación de la sección de proyectos.
+- (25%) Modificación de la sección de contacto.
