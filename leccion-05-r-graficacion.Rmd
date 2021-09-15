@@ -22,7 +22,7 @@ Este conjunto de datos es publicado por el [Ministerio de Salud de Costa Rica](h
 # Carga de datos desde un archivo CSV
 cr_covid19 <- 
   read.csv(
-    file='https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2021i-datos/main/ministerio-salud/covid/ultimafecha_CSV_GENERAL.csv', 
+    file='https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/minsalud/covid/ultimafecha_CSV_GENERAL.csv', 
     sep = ","
   )
 ```
@@ -105,6 +105,7 @@ library(help="ggplot2")
 ### Gráficos de dispersión
 Un [diagrama o gráfico de dispersión (_scatter plot_)](https://www.data-to-viz.com/graph/scatter.html) muestra la relación entre dos variables numéricas. Para cada punto de datos, el valor de la primera variable se representa en el eje X y el de la segunda variable en el eje Y.
 
+#### graphics
 La función [plot()](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot) del paquete graphics recibe como argumentos los vectores de las variables que se desean graficar. El siguiente ejemplo usa las variables de casos positivos y casos activos de Covid-19 en Costa Rica.
 
 ```{r}
@@ -116,6 +117,7 @@ Para mejorar el gráfico, pueden utilizarse otras opciones de la función ```plo
 
 ```{r}
 # Gráfico con parámetros adicionales de plot()
+options(scipen=999) # para eliminar la notación científica en los ejes
 plot(
   cr_covid19$positivos, 
   cr_covid19$activos,
@@ -142,6 +144,7 @@ plot(
 axis(1, cr_covid19$FECHA, format(cr_covid19$FECHA, "%d %b"), tick = FALSE)
 ```
 
+#### ggplot2
 Con la función [ggplot()](https://ggplot2.tidyverse.org/reference/ggplot.html), del paquete ggplot2, puede obtenerse un resultado similar:
 
 ```{r warning=FALSE}
@@ -156,13 +159,14 @@ ggplot(cr_covid19, aes(x = FECHA, y = positivos)) +
 La manera usual de usar ```ggplot()``` es con un data frame como argumento, especificando cuales columnas usar como valores de x e y. La primera parte, ```ggplot()```, crea la base del gráfico (i.e. el canvas), mientras que [geom_point()](https://ggplot2.tidyverse.org/reference/geom_point.html) agrega una capa adicional, lo mismo que [ggtitle()](https://ggplot2.tidyverse.org/reference/labs.html) y las funciones restantes.
 
 **
-Ejercicio 01:  
-a. Modifique el gráfico anterior para mostrar los casos confirmados en el eje y.  
+Ejercicio:  
+a. Modifique el gráfico anterior para mostrar los casos fallecidos en el eje y.  
 **
 
 ### Gráficos de líneas
 Un [gráfico de líneas (_line graph_ o _line chart_)](https://www.data-to-viz.com/graph/line.html) muestra la evolución de una o varias variables numéricas. Los puntos de datos se conectan mediante segmentos de líneas rectas. Los gráficos de líneas son usados frecuentemente para visualizar tendencias de los datos en intervalos de tiempo (i.e. en series temporales).
 
+#### graphics
 Puede hacerse un gráfico de líneas con la función ```plot()``` al pasarle como argumento ```type="l"```.
 
 ```{r}
@@ -203,6 +207,7 @@ lines(cr_covid19$FECHA, cr_covid19$RECUPERADOS, col="green")
 lines(cr_covid19$FECHA, cr_covid19$fallecidos, col="violet")
 ```
 
+#### ggplot2
 Con las funciones de ggplot2 puede conseguirse un resultado similar al crear el gráfico base con ```ggplot()``` y agregar las series de líneas y puntos con [geom_line()](https://ggplot2.tidyverse.org/reference/geom_path.html) y [geom_point()](https://ggplot2.tidyverse.org/reference/geom_point.html).
 
 ```{r warning=FALSE}
@@ -222,10 +227,11 @@ ggplot(cr_covid19, aes(x=FECHA)) +
 ```
 
 **
-Ejercicio 02:  
+Ejercicio:  
 a. Modifique el gráfico anterior y aumente el tamaño de los puntos.  
 **
 
+#### plotly
 Versión del gráfico en plotly:
 
 ```{r warning=FALSE}
@@ -257,7 +263,7 @@ plot_ly(data = cr_covid19,
 ```
 
 **
-Ejercicio 03:  
+Ejercicio:  
 a. Modifique el gráfico anterior y muestre las etiquetas de los controles en español.  
 **
 
@@ -274,6 +280,7 @@ ca_positivos.ordenado <- order(ca_covid19$positivos, decreasing=TRUE)
 ca_covid19.positivos <- ca_covid19[ca_positivos.ordenado,]
 ```
 
+#### graphics
 La función [barplot()](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/barplot), del paquete graphics, se utiliza en el siguiente ejemplo para generar un gráfico de barras de los casos confirmados.
 
 ```{r}
@@ -286,6 +293,7 @@ barplot(
 )
 ```
 
+#### ggplot2
 La función [geom_col()](https://ggplot2.tidyverse.org/reference/geom_bar.html), en combinación con ```ggplot()```, puede utilizarse para generar gráficos de barras.
 
 ```{r}
