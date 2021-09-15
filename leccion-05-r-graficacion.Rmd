@@ -11,6 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introducción
+La elaboración de gráficos estadísticos es una de las funcionalidades más utilizadas del lenguaje de programación R, el cual proporciona varios paquetes para estos efectos.
 
 ## Conjuntos de datos utilizados
 En los siguientes ejemplos y ejercicios, se utilizarán dos conjuntos de datos, los cuales se cargan en data frames con la función [read.csv()](https://www.rdocumentation.org/packages/iotools/versions/0.3-1/topics/read.csv.raw) y se visualizan con la función [View()](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/View).
@@ -65,6 +66,24 @@ registros_mammalia_cr <-
 View(registros_mammalia_cr)
 ```
 
+**Promedios de LST, NDVI y NDBI de los cantones de la GAM**  
+Este conjunto de datos forma parte del [Atlas de Servicios Ecosistémicos de la Gran Área Metropolitana (GAM)](https://www.atlasverde.org/). Para cada uno de los 31 cantones de la GAM se incluyen los promedios de:
+
+- [LST (*Land Surface Temperature*, Temperatura superficial del suelo)](https://land.copernicus.eu/global/products/lst)  
+- [NDVI (*Normalized Difference Vegetation Index*, Índice de vegetación de diferencia normalizada)](https://es.wikipedia.org/wiki/%C3%8Dndice_de_vegetaci%C3%B3n_de_diferencia_normalizada)  
+- [NDBI (*Normalized Difference Built-up Index*, Índice de edificaciones de diferencia normalizada)](http://www.gisandbeers.com/calculo-indice-ndbi-analisis-urbanisticos/)  
+
+```{r}
+# Carga de datos desde un archivo CSV
+lst_ndvi_ndbi <-
+  read.csv(file = 'https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/atlasverde/lst-ndvi-ndbi/lst_ndvi_ndbi-cantones_gam.csv')
+```
+
+```{r eval=FALSE}
+# Despliegue de los datos
+View(lst_ndvi_ndbi)
+```
+
 ## Paquetes de R para graficación
 R provee varios paquetes para generar gráficos. Aquí se estudiarán tres:  
 
@@ -78,6 +97,9 @@ En R, los paquetes pueden instarlarse con la función [install.packages()](https
 ```{r eval = FALSE}
 # Instalación de ggplot2
 install.packages("ggplot2")
+
+# Instalación de hrbrthemes (temas adicionales para ggplot2)
+install.packages("hrbrthemes")
 
 # Instalación de plotly
 install.packages("plotly")
@@ -99,6 +121,9 @@ library(graphics)
 
 # Carga de ggplot2
 library(ggplot2)
+
+# Carga de hrbrthemes
+library(hrbrthemes)
 
 # Carga de plotly
 library(plotly)
@@ -179,6 +204,20 @@ La manera usual de usar ```ggplot()``` es con un data frame como argumento, espe
 Ejercicio:  
 a. Modifique el gráfico anterior para mostrar los casos fallecidos en el eje y.  
 **
+
+El siguiente gráfico utiliza un tema proporcionado por la función [theme_ipsum()](https://rdrr.io/pkg/hrbrthemes/man/theme_ipsum.html).
+
+```{r}
+# Gráfico de dispersión de NDVI y LST
+ggplot(lst_ndvi_ndbi, aes(x = ndvi_promedio)) +
+  geom_point(
+    aes(y = lst_promedio)
+  ) +
+  ggtitle("Relación entre NDVI y LST en la GAM") +
+  xlab("NDVI") +
+  ylab("LST") +
+  theme_ipsum()
+```
 
 ### Gráficos de líneas
 Un [gráfico de líneas (_line graph_ o _line chart_)](https://www.data-to-viz.com/graph/line.html) muestra la evolución de una o varias variables numéricas. Los puntos de datos se conectan mediante segmentos de líneas rectas. Los gráficos de líneas son usados frecuentemente para visualizar tendencias de los datos en intervalos de tiempo (i.e. en series temporales).
@@ -459,3 +498,154 @@ Para los dos últimos gráficos:
 - Ordene las barras por tamaño, de mayor a menor.  
 - Coloque las etiquetas de cantidades (n) al final de cada barra.  
 - Agregue títulos para los gráficos y para los ejes x e y.**
+
+### Histogramas
+Un [histograma](https://www.data-to-viz.com/graph/histogram.html) es una representación gráfica de la distribución de una variable numérica en forma de barras (*bins*). La altura de cada barra representa la frecuencia de un rango de valores de la variable.
+
+#### ggplot2
+
+```{r}
+# Histograma de LST
+ggplot(lst_ndvi_ndbi, aes(x = lst_promedio)) +
+  geom_histogram(binwidth = 2,
+                 color = "red",
+                 fill = "white") +
+  ggtitle("Distribución de LST en la GAM") +
+  xlab("LST") +
+  ylab("Frecuencia") +
+  theme_ipsum()
+
+# Histograma de NDVI
+ggplot(lst_ndvi_ndbi) +
+  geom_histogram(
+    aes(x = ndvi_promedio),
+    binwidth = 0.1,
+    color = "green",
+    fill = "white"
+  ) +
+  ggtitle("Distribución de NDVI en la GAM") +
+  xlab("NDVI") +
+  ylab("Frecuencia") +
+  theme_ipsum()
+
+# Histograma de NDBI
+ggplot(lst_ndvi_ndbi) +
+  geom_histogram(
+    aes(x = ndbi_promedio),
+    binwidth = 0.05,
+    color = "black",
+    fill = "white"
+  ) +
+  ggtitle("Distribución de NDBI en la GAM") +
+  xlab("NDBI") +
+  ylab("Frecuencia") +
+  theme_ipsum()
+```
+
+**Ejercicio: grafique las variables de NDVI y NDBI en un mismo histograma.**
+
+### Gráficos de densidad
+Un [gráfico de densidad](https://www.data-to-viz.com/graph/density.html) representa mediante una curva la distribución de una variable numérica. Utiliza una estimación de densidad de kernel para mostrar la función de densidad de probabilidad de una variable.
+
+#### ggplot2
+
+```{r}
+# Gráfico de densidad de NDVI
+ggplot(lst_ndvi_ndbi) +
+  geom_density(
+    aes(x = ndvi_promedio),
+    color = "black",
+    fill = "green",
+    alpha = 0.4
+  ) +
+  ggtitle("Distribución de NDVI en la GAM") +
+  xlab("NDVI") +
+  ylab("Densidad") +
+  theme_ipsum()
+```
+
+**Ejercicio: agregue un histograma al gráfico de densidad de NDVI.**
+
+### Gráficos de *lollipops*
+Un [gráfico de *lollipop*](https://www.data-to-viz.com/graph/lollipop.html) es similar a un gráfico de barras, en el cual las barras se transforman en líneas que finalizan en un círculo. Muestran la relación entre una variable categórica y una variable numérica.
+
+#### ggplot2
+
+```{r}
+# Gráfico de lollipop que muestra el promedio de NDVI en cada cantón de la GAM
+lst_ndvi_ndbi %>%
+  arrange(ndvi_promedio) %>%
+  mutate(canton = factor(canton, canton)) %>%
+  ggplot(aes(x = canton, y = ndvi_promedio)) +
+  geom_segment(aes(
+    x = canton,
+    xend = canton,
+    y = 0,
+    yend = ndvi_promedio
+  ), color = "grey") +
+  geom_point(size = 3, color = "#69b3a2") +
+  coord_flip() +
+  theme_ipsum() +
+  ggtitle("Promedio de NDVI en cantones de la GAM") +
+  xlab("Cantón") +
+  ylab("NDVI") +  
+  theme(
+    text = element_text(size = 8),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.y = element_blank(),
+    legend.position = "none"
+  )
+```
+
+**Ejercicio: genere un gráfico de *lollipop* que muestre el LST promedio en cada cantón.**  
+**Ejercicio: genere un gráfico de *lollipop* que muestre conjuntamente el NDVI promedio y el NDBI promedio en cada cantón.** 
+
+### Otros
+
+#### Gráfico de doble eje
+
+##### plotly
+
+```{r}
+library(plotly)
+
+# Ordenar de mayor a menor LST
+df_lst_ndbi_ndvi.temp <-
+  order(lst_ndvi_ndbi$lst_promedio, decreasing = FALSE)
+# Nuevo data frame ordenado
+df_lst_ndbi_ndvi.ordenado_lst <-
+  lst_ndvi_ndbi[df_lst_ndbi_ndvi.temp, ]
+
+ay <- list(
+  tickfont = list(color = "green"),
+  overlaying = "y",
+  side = "right",
+  title = "NDVI"
+)
+
+plot_ly(
+  data = df_lst_ndbi_ndvi.ordenado_lst,
+  x = ~ reorder(canton,-lst_promedio),
+  y = ~ lst_promedio,
+  name = 'LST',
+  type = 'scatter',
+  mode = 'lines',
+  line = list(color = "red")
+) %>%
+  add_trace(
+    y = ~ ndvi_promedio,
+    name = 'NDVI',
+    mode = 'lines',
+    line = list(color = "green"),
+    yaxis = "y2"
+  ) %>%
+  layout(
+    title = "La vegetación urbana regula la temperatura",
+    yaxis = list(title = "LST", tickfont = list(color = "red")),
+    yaxis2 = ay,
+    xaxis = list(title = "Cantón"),
+    legend = list(x = 0.5, y = 1.0),
+    hovermode = "compare"
+  )  %>%
+  config(locale = "es")
+```
