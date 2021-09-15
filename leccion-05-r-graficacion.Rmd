@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Conjuntos de datos utilizados
 En los siguientes ejemplos y ejercicios, se utilizarán dos conjuntos de datos, los cuales se cargan en data frames con la función [read.csv()](https://www.rdocumentation.org/packages/iotools/versions/0.3-1/topics/read.csv.raw) y se visualizan con la función [View()](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/View).
 
-**Casos de COVID-19 en Costa Rica**  
+**Casos de covid en Costa Rica**  
 Este conjunto de datos es publicado por el [Ministerio de Salud de Costa Rica](http://geovision.uned.ac.cr/oges/). Contiene un registro por día con las estadísticas de casos positivos, fallecidos, activos y recuperados.
 
 ```{r}
@@ -32,7 +32,7 @@ cr_covid19 <-
 View(cr_covid19)
 ```
 
-**Casos de COVID-19 en Centroamérica**  
+**Casos de covid en Centroamérica**  
 Este conjunto de datos publicados por el [Centro de Coordinación para la Prevención de los Desastres en Centroamérica y República Dominicana (Cepredenac)](http://www.cepredenac.org/) tiene un registro por país con los casos (positivos, fallecidos, activos, recuperados) acumulados hasta la fecha en cada uno.
 
 ```{r collapse=TRUE}
@@ -46,6 +46,23 @@ ca_covid19 <-
 ```{r collapse=TRUE, eval=FALSE}
 # Despliegue de los datos
 View(ca_covid19)
+```
+
+**Registros de presencia de mamíferos de Costa Rica**  
+En los siguientes ejemplos y ejercicios, se utilizará un conjunto de registros de presencia de mamíferos de Costa Rica, obtenido a través de una [consulta](https://doi.org/10.15468/dl.y3gadr) al portal de datos de la [Infraestructura Mundial de Información en Biodiversidad (GBIF)](https://www.gbif.org/).
+
+```{r}
+# Carga de datos desde un archivo CSV (separado por tabuladores)
+registros_mammalia_cr <- 
+  read.csv(
+    file='https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2021i-datos/main/gbif/mammalia-cr-registros.csv', 
+    sep = "\t"
+  )
+```
+
+```{r eval=FALSE}
+# Despliegue de los datos
+View(registros_mammalia_cr)
 ```
 
 ## Paquetes de R para graficación
@@ -106,7 +123,7 @@ library(help="ggplot2")
 Un [diagrama o gráfico de dispersión (_scatter plot_)](https://www.data-to-viz.com/graph/scatter.html) muestra la relación entre dos variables numéricas. Para cada punto de datos, el valor de la primera variable se representa en el eje X y el de la segunda variable en el eje Y.
 
 #### graphics
-La función [plot()](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot) del paquete graphics recibe como argumentos los vectores de las variables que se desean graficar. El siguiente ejemplo usa las variables de casos positivos y casos activos de Covid-19 en Costa Rica.
+La función [plot()](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot) del paquete graphics recibe como argumentos los vectores de las variables que se desean graficar. El siguiente ejemplo usa las variables de casos positivos y casos activos de covid en Costa Rica.
 
 ```{r}
 # Gráfico
@@ -121,7 +138,7 @@ options(scipen=999) # para eliminar la notación científica en los ejes
 plot(
   cr_covid19$positivos, 
   cr_covid19$activos,
-  main='Relación entre casos positivos y activos de COVID-19 en CR',
+  main='Relación entre casos positivos y activos de covid en CR',
   xlab='Casos positivos',
   ylab='Casos activos'
 )
@@ -137,7 +154,7 @@ cr_covid19$FECHA <- as.Date(cr_covid19$FECHA, "%d/%m/%Y")
 plot(
   cr_covid19$FECHA, 
   cr_covid19$positivos,
-  main='Evolución en el tiempo de los casos positivos de COVID-19 en CR',
+  main='Evolución en el tiempo de los casos positivos de covid en CR',
   xlab='Fecha',
   ylab='Casos positivos'
 )
@@ -150,7 +167,7 @@ Con la función [ggplot()](https://ggplot2.tidyverse.org/reference/ggplot.html),
 ```{r warning=FALSE}
 # Gráfico con fechas
 ggplot(cr_covid19, aes(x = FECHA, y = positivos)) +
-  ggtitle('Evolución en el tiempo de los casos positivos de COVID-19 en CR') +
+  ggtitle('Evolución en el tiempo de los casos positivos de covid en CR') +
   xlab('Fecha') +
   ylab('Casos positivos') +
   geom_point()
@@ -174,7 +191,7 @@ Puede hacerse un gráfico de líneas con la función ```plot()``` al pasarle com
 plot(
   cr_covid19$FECHA, 
   cr_covid19$positivos,
-  main='Evolución en el tiempo de los casos positivos de COVID-19 en CR',
+  main='Evolución en el tiempo de los casos positivos de covid en CR',
   xlab='Fecha',
   ylab='Casos positivos',
   type="l"
@@ -189,7 +206,7 @@ Si se desea agregar más líneas, o series de puntos, debe entonces llamarse a `
 plot(
   cr_covid19$FECHA, 
   cr_covid19$positivos,
-  main='Evolución en el tiempo de los casos de COVID-19 en CR',
+  main='Evolución en el tiempo de los casos de covid en CR',
   xlab='Fecha',
   ylab='Casos',
   type="l",
@@ -211,9 +228,9 @@ lines(cr_covid19$FECHA, cr_covid19$fallecidos, col="violet")
 Con las funciones de ggplot2 puede conseguirse un resultado similar al crear el gráfico base con ```ggplot()``` y agregar las series de líneas y puntos con [geom_line()](https://ggplot2.tidyverse.org/reference/geom_path.html) y [geom_point()](https://ggplot2.tidyverse.org/reference/geom_point.html).
 
 ```{r warning=FALSE}
-# Gráfico de líneas de casos de COVID-19 en Costa Rica
+# Gráfico de líneas de casos de covid en Costa Rica
 ggplot(cr_covid19, aes(x=FECHA)) + 
-  ggtitle("Evolución en el tiempo de los casos de COVID-19 en CR") +
+  ggtitle("Evolución en el tiempo de los casos de covid en CR") +
   xlab("Fecha") + 
   ylab("Casos") +
   geom_line(aes(y = positivos), color = "blue") +
@@ -235,7 +252,7 @@ a. Modifique el gráfico anterior y aumente el tamaño de los puntos.
 Versión del gráfico en plotly:
 
 ```{r warning=FALSE}
-# Gráfico de líneas de casos de COVID-19 en Costa Rica
+# Gráfico de líneas de casos de covid en Costa Rica
 plot_ly(data = cr_covid19,
                 x = ~ FECHA,
                 y = ~ positivos, 
@@ -270,7 +287,7 @@ a. Modifique el gráfico anterior y muestre las etiquetas de los controles en es
 ### Gráficos de barras
 Los [gráficos de barras (_barcharts_ o _barplots_)](https://www.data-to-viz.com/graph/barplot.html) muestran la relación entre una variable categórica y una variable numérica. Cada entidad de la variable categórica es representada mediante una barra, en la que su altura representa el valor correspondiente de la variable numérica.
 
-Para los ejemplos de esta sección, se utilizará el conjunto de datos de casos de COVID-19 de Centroamérica. Para facilitar su visualización, se ordenan los registros de acuerdo con la columna de casos confirmados, mediante la función [order()](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/order).
+Para algunos ejemplos de esta sección, se utilizará el conjunto de datos de casos de covid de Centroamérica. Para facilitar su visualización, se ordenan los registros de acuerdo con la columna de casos confirmados, mediante la función [order()](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/order).
 
 ```{r}
 # Ordenar de mayor a menor
@@ -283,22 +300,118 @@ ca_covid19.positivos <- ca_covid19[ca_positivos.ordenado,]
 #### graphics
 La función [barplot()](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/barplot), del paquete graphics, se utiliza en el siguiente ejemplo para generar un gráfico de barras de los casos confirmados.
 
+##### Barras simples
+
 ```{r}
 barplot(
   height=ca_covid19.positivos$positivos, 
   names.arg=ca_covid19.positivos$pais, 
   xlab="País", 
   ylab="Casos positivos", 
-  main="Casos positivos de COVID-19 en Centroamérica"
+  main="Casos positivos de covid en Centroamérica"
 )
 ```
+
+**Cantidad de registros de mamíferos por año**
+
+```{r}
+# Generación de un nuevo data frame
+registros_agrupados_x_anyo <-
+  registros_mammalia_cr %>%
+  dplyr::count(year)
+
+# Gráfico de barras verticales
+barplot(
+  registros_agrupados_x_anyo$n, 
+  names.arg = registros_agrupados_x_anyo$year,
+  main = "Cantidad de registros de mamíferos por año",
+)
+
+# Gráfico de barras horizontales
+barplot(
+  registros_agrupados_x_anyo$n, 
+  names.arg = registros_agrupados_x_anyo$year,
+  main = "Cantidad de registros de mamíferos por año",
+  horiz = TRUE,
+  las=1
+)
+```
+
+**Cantidad de registros de mamíferos por orden taxonómico**
+
+```{r}
+# Generación de un nuevo data frame
+registros_agrupados_x_orden <-
+  registros_mammalia_cr %>%
+  dplyr::count(order)
+
+# Gráfico de barras verticales
+barplot(
+  registros_agrupados_x_orden$n, 
+  names.arg = registros_agrupados_x_orden$order,
+  main = "Cantidad de registros por orden taxonómico de mamíferos",
+)
+
+# Gráfico de barras horizontales
+par(mai=c(1, 2, 1, 1))
+barplot(
+  registros_agrupados_x_orden$n, 
+  names.arg = registros_agrupados_x_orden$order,
+  main = "Cantidad de registros por orden taxonómico de mamíferos",
+  horiz = TRUE,
+  las=1
+)
+```
+
+**Cantidad de registros de carnívoros por familia taxonómica**
+
+```{r}
+# Generación de un nuevo data frame
+registros_carnivora_agrupados_x_familia <-
+  registros_mammalia_cr %>%
+  filter(order == "Carnivora") %>%
+  dplyr::count(family)
+
+# Gráfico de barras horizontales
+par(mai=c(1, 2, 1, 1))
+barplot(
+  registros_carnivora_agrupados_x_familia$n, 
+  names.arg = registros_carnivora_agrupados_x_familia$family,
+  main = "Cantidad de registros por familia de carnívoros",
+  horiz = TRUE,
+  las=1
+)
+```
+
+**Cantidad de registros de felinos por especie**
+
+```{r}
+# Generación de un nuevo data frame
+registros_felidae_agrupados_x_especie <-
+  registros_mammalia_cr %>%
+  filter(family == "Felidae") %>%
+  dplyr::count(species)
+
+# Gráfico de barras horizontales
+par(mai=c(1, 2, 1, 1))
+barplot(
+  registros_felidae_agrupados_x_especie$n, 
+  names.arg = registros_felidae_agrupados_x_especie$species,
+  main = "Cantidad de registros por especie de felinos",
+  horiz = TRUE,
+  las=1
+)
+```
+
+**Ejercicio:  
+Haga un gráfico de barras que muestre la cantidad de registros por especie de felinos o de caninos.**
 
 #### ggplot2
 La función [geom_col()](https://ggplot2.tidyverse.org/reference/geom_bar.html), en combinación con ```ggplot()```, puede utilizarse para generar gráficos de barras.
 
 ```{r}
 ggplot(ca_covid19, aes(x=reorder(pais, -positivos), y=positivos)) +
-  ggtitle("Casos positivos de COVID-19 en Centroamérica") +
+  ggtitle("Casos positivos de covid en Centroamérica") +
   xlab("País") + 
   ylab("Casos positivos") +  
   geom_col() +
@@ -306,3 +419,43 @@ ggplot(ca_covid19, aes(x=reorder(pais, -positivos), y=positivos)) +
 ```
 
 Note el uso de la función [reorder()](https://www.r-graph-gallery.com/267-reorder-a-variable-in-ggplot2.html) en el ejemplo anterior, para ordenar el orden de las barras (i.e. los países) en el eje X y el de  [geom_text()](https://ggplot2.tidyverse.org/reference/geom_text.html) para desplegar etiquetas sobre las barras.
+
+##### Barras apiladas
+
+**Cantidad de registros de felinos por especie y tipo de registro (*basis or record*)**
+
+```{r}
+# Generación de un nuevo data frame
+registros_felidae_agrupados_x_especie_tiporegistro <-
+  registros_mammalia_cr %>%
+  filter(family == "Felidae") %>%
+  dplyr::count(species, basisOfRecord)
+
+# Gráfico de barras apiladas
+ggplot(
+  registros_felidae_agrupados_x_especie_tiporegistro, 
+  aes(x = species, y = n, fill = basisOfRecord)
+) +
+  geom_col() +
+  coord_flip()
+```
+
+##### Barras agrupadas
+
+**Cantidad de registros de felinos por especie y tipo de registro (*basis or record*)**
+
+```{r}
+# Gráfico de barras apiladas
+ggplot(
+  registros_felidae_agrupados_x_especie_tiporegistro, 
+  aes(x = species, y = n, fill = basisOfRecord)
+) +
+  geom_col(position = "dodge") +
+  coord_flip()
+```
+
+**Ejercicio:  
+Para los dos últimos gráficos:  
+- Ordene las barras por tamaño, de mayor a menor.  
+- Coloque las etiquetas de cantidades (n) al final de cada barra.  
+- Agregue títulos para los gráficos y para los ejes x e y.**
