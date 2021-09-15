@@ -55,7 +55,7 @@ En los siguientes ejemplos y ejercicios, se utilizará un conjunto de registros 
 # Carga de datos desde un archivo CSV (separado por tabuladores)
 registros_mammalia_cr <- 
   read.csv(
-    file='https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2021i-datos/main/gbif/mammalia-cr-registros.csv', 
+    file='https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/gbif/mammalia-cr-registros.csv', 
     sep = "\t"
   )
 ```
