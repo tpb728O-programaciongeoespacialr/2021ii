@@ -10,11 +10,11 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Introducción
-La elaboración de gráficos estadísticos es una de las funcionalidades más utilizadas del lenguaje de programación R, el cual proporciona varios paquetes para estos efectos.
+# Resumen
+La elaboración de gráficos estadísticos es una de las funcionalidades más utilizadas del lenguaje de programación R, el cual proporciona varios paquetes para estos efectos. En esta lección, se presentan ejemplos de varios tipos de gráficos generados mediante estos paquetes.
 
-## Conjuntos de datos utilizados
-En los siguientes ejemplos y ejercicios, se utilizarán dos conjuntos de datos, los cuales se cargan en data frames con la función [read.csv()](https://www.rdocumentation.org/packages/iotools/versions/0.3-1/topics/read.csv.raw) y se visualizan con la función [View()](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/View).
+# Conjuntos de datos utilizados en los ejemplos
+En los siguientes ejemplos y ejercicios, se utilizarán varios conjuntos de datos, los cuales se cargan en data frames con la función [read.csv()](https://www.rdocumentation.org/packages/iotools/versions/0.3-1/topics/read.csv.raw) y se visualizan con la función [View()](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/View).
 
 **Casos de covid en Costa Rica**  
 Este conjunto de datos es publicado por el [Ministerio de Salud de Costa Rica](http://geovision.uned.ac.cr/oges/). Contiene un registro por día con las estadísticas de casos positivos, fallecidos, activos y recuperados.
@@ -84,14 +84,19 @@ lst_ndvi_ndbi <-
 View(lst_ndvi_ndbi)
 ```
 
-## Paquetes de R para graficación
+# Paquetes de R para graficación
 R provee varios paquetes para generar gráficos. Aquí se estudiarán tres:  
 
-* [graphics](http://search.r-project.org/R/library/graphics/html/graphics-package.html): es un paquete para gráficos relativamente sencillos y forma parte de la instalación base de R.
-* [ggplot2](https://ggplot2.tidyverse.org/): es parte de [Tidyverse](https://www.tidyverse.org/), una colección de paquetes de R diseñada para utilizarse en [ciencia de datos](https://en.wikipedia.org/wiki/Data_science). Este paquete está basado en el libro [_The Grammar of Graphics_, de Leland Wilkinson et al.](https://www.springer.com/gp/book/9780387245447).
-* [plotly](https://plotly.com/): biblioteca de graficación disponible para JavaScript, Python, R y Julia.
+## graphics
+[graphics](http://search.r-project.org/R/library/graphics/html/graphics-package.html): es un paquete para gráficos relativamente sencillos y forma parte de la instalación base de R.
 
-### Instalación, carga y ayuda
+## ggplot2
+[ggplot2](https://ggplot2.tidyverse.org/): es parte de [Tidyverse](https://www.tidyverse.org/), una colección de paquetes de R diseñada para utilizarse en [ciencia de datos](https://en.wikipedia.org/wiki/Data_science). Este paquete está basado en el libro [_The Grammar of Graphics_, de Leland Wilkinson et al.](https://www.springer.com/gp/book/9780387245447).
+
+## plotly
+[plotly](https://plotly.com/): biblioteca de graficación disponible para JavaScript, Python, R y Julia.
+
+## Instalación, carga y ayuda
 En R, los paquetes pueden instarlarse con la función [install.packages()](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/install.packages):
 
 ```{r eval = FALSE}
@@ -142,12 +147,12 @@ Para obtener información sobre un paquete, puede utilizarse el parámetro ```he
 library(help="ggplot2")
 ```
 
-## Algunos tipos de gráficos
+# Tipos de gráficos
 
-### Gráficos de dispersión
+## Gráficos de dispersión
 Un [diagrama o gráfico de dispersión (_scatter plot_)](https://www.data-to-viz.com/graph/scatter.html) muestra la relación entre dos variables numéricas. Para cada punto de datos, el valor de la primera variable se representa en el eje X y el de la segunda variable en el eje Y.
 
-#### graphics
+### graphics
 La función [plot()](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot) del paquete graphics recibe como argumentos los vectores de las variables que se desean graficar. El siguiente ejemplo usa las variables de casos positivos y casos activos de covid en Costa Rica.
 
 ```{r}
@@ -186,7 +191,7 @@ plot(
 axis(1, cr_covid19$FECHA, format(cr_covid19$FECHA, "%d %b"), tick = FALSE)
 ```
 
-#### ggplot2
+### ggplot2
 Con la función [ggplot()](https://ggplot2.tidyverse.org/reference/ggplot.html), del paquete ggplot2, puede obtenerse un resultado similar:
 
 ```{r warning=FALSE}
@@ -219,10 +224,10 @@ ggplot(lst_ndvi_ndbi, aes(x = ndvi_promedio)) +
   theme_ipsum()
 ```
 
-### Gráficos de líneas
+## Gráficos de líneas
 Un [gráfico de líneas (_line graph_ o _line chart_)](https://www.data-to-viz.com/graph/line.html) muestra la evolución de una o varias variables numéricas. Los puntos de datos se conectan mediante segmentos de líneas rectas. Los gráficos de líneas son usados frecuentemente para visualizar tendencias de los datos en intervalos de tiempo (i.e. en series temporales).
 
-#### graphics
+### graphics
 Puede hacerse un gráfico de líneas con la función ```plot()``` al pasarle como argumento ```type="l"```.
 
 ```{r}
@@ -263,7 +268,7 @@ lines(cr_covid19$FECHA, cr_covid19$RECUPERADOS, col="green")
 lines(cr_covid19$FECHA, cr_covid19$fallecidos, col="violet")
 ```
 
-#### ggplot2
+### ggplot2
 Con las funciones de ggplot2 puede conseguirse un resultado similar al crear el gráfico base con ```ggplot()``` y agregar las series de líneas y puntos con [geom_line()](https://ggplot2.tidyverse.org/reference/geom_path.html) y [geom_point()](https://ggplot2.tidyverse.org/reference/geom_point.html).
 
 ```{r warning=FALSE}
@@ -287,7 +292,7 @@ Ejercicio:
 a. Modifique el gráfico anterior y aumente el tamaño de los puntos.  
 **
 
-#### plotly
+### plotly
 Versión del gráfico en plotly:
 
 ```{r warning=FALSE}
@@ -323,7 +328,7 @@ Ejercicio:
 a. Modifique el gráfico anterior y muestre las etiquetas de los controles en español.  
 **
 
-### Gráficos de barras
+## Gráficos de barras
 Los [gráficos de barras (_barcharts_ o _barplots_)](https://www.data-to-viz.com/graph/barplot.html) muestran la relación entre una variable categórica y una variable numérica. Cada entidad de la variable categórica es representada mediante una barra, en la que su altura representa el valor correspondiente de la variable numérica.
 
 Para algunos ejemplos de esta sección, se utilizará el conjunto de datos de casos de covid de Centroamérica. Para facilitar su visualización, se ordenan los registros de acuerdo con la columna de casos confirmados, mediante la función [order()](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/order).
@@ -336,10 +341,10 @@ ca_positivos.ordenado <- order(ca_covid19$positivos, decreasing=TRUE)
 ca_covid19.positivos <- ca_covid19[ca_positivos.ordenado,]
 ```
 
-#### graphics
+### graphics
 La función [barplot()](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/barplot), del paquete graphics, se utiliza en el siguiente ejemplo para generar un gráfico de barras de los casos confirmados.
 
-##### Barras simples
+#### Barras simples
 
 ```{r}
 barplot(
@@ -445,7 +450,7 @@ barplot(
 **Ejercicio:  
 Haga un gráfico de barras que muestre la cantidad de registros por especie de felinos o de caninos.**
 
-#### ggplot2
+### ggplot2
 La función [geom_col()](https://ggplot2.tidyverse.org/reference/geom_bar.html), en combinación con ```ggplot()```, puede utilizarse para generar gráficos de barras.
 
 ```{r}
@@ -459,7 +464,7 @@ ggplot(ca_covid19, aes(x=reorder(pais, -positivos), y=positivos)) +
 
 Note el uso de la función [reorder()](https://www.r-graph-gallery.com/267-reorder-a-variable-in-ggplot2.html) en el ejemplo anterior, para ordenar el orden de las barras (i.e. los países) en el eje X y el de  [geom_text()](https://ggplot2.tidyverse.org/reference/geom_text.html) para desplegar etiquetas sobre las barras.
 
-##### Barras apiladas
+#### Barras apiladas
 
 **Cantidad de registros de felinos por especie y tipo de registro (*basis or record*)**
 
@@ -479,7 +484,7 @@ ggplot(
   coord_flip()
 ```
 
-##### Barras agrupadas
+#### Barras agrupadas
 
 **Cantidad de registros de felinos por especie y tipo de registro (*basis or record*)**
 
@@ -499,10 +504,10 @@ Para los dos últimos gráficos:
 - Coloque las etiquetas de cantidades (n) al final de cada barra.  
 - Agregue títulos para los gráficos y para los ejes x e y.**
 
-### Histogramas
+## Histogramas
 Un [histograma](https://www.data-to-viz.com/graph/histogram.html) es una representación gráfica de la distribución de una variable numérica en forma de barras (*bins*). La altura de cada barra representa la frecuencia de un rango de valores de la variable.
 
-#### ggplot2
+### ggplot2
 
 ```{r}
 # Histograma de LST
@@ -544,10 +549,10 @@ ggplot(lst_ndvi_ndbi) +
 
 **Ejercicio: grafique las variables de NDVI y NDBI en un mismo histograma.**
 
-### Gráficos de densidad
+## Gráficos de densidad
 Un [gráfico de densidad](https://www.data-to-viz.com/graph/density.html) representa mediante una curva la distribución de una variable numérica. Utiliza una estimación de densidad de kernel para mostrar la función de densidad de probabilidad de una variable.
 
-#### ggplot2
+### ggplot2
 
 ```{r}
 # Gráfico de densidad de NDVI
@@ -566,10 +571,10 @@ ggplot(lst_ndvi_ndbi) +
 
 **Ejercicio: agregue un histograma al gráfico de densidad de NDVI.**
 
-### Gráficos de *lollipops*
+## Gráficos de *lollipops*
 Un [gráfico de *lollipop*](https://www.data-to-viz.com/graph/lollipop.html) es similar a un gráfico de barras, en el cual las barras se transforman en líneas que finalizan en un círculo. Muestran la relación entre una variable categórica y una variable numérica.
 
-#### ggplot2
+### ggplot2
 
 ```{r}
 # Gráfico de lollipop que muestra el promedio de NDVI en cada cantón de la GAM
@@ -600,11 +605,11 @@ lst_ndvi_ndbi %>%
 **Ejercicio: genere un gráfico de *lollipop* que muestre el LST promedio en cada cantón.**  
 **Ejercicio: genere un gráfico de *lollipop* que muestre conjuntamente el NDVI promedio y el NDBI promedio en cada cantón.** 
 
-### Otros
+## Otros
 
-#### Gráfico de doble eje
+### Gráficos de doble eje
 
-##### plotly
+#### plotly
 
 ```{r}
 library(plotly)
