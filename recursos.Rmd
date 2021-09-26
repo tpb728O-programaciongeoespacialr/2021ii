@@ -32,15 +32,16 @@ knitr::opts_chunk$set(echo = FALSE)
 # R - Graficación
 - [The R Graphics Package](http://search.r-project.org/R/library/graphics/html/graphics-package.html)  
 - [Create Elegant Data Visualisations Using the Grammar of Graphics - ggplot2](https://ggplot2.tidyverse.org/)  
-- [Plotly: The front end for ML and data science models](https://plotly.com/)  
-
-- [_R Graphics Cookbook_, de Winston Chang](https://r-graphics.org/)  
-- [_The Grammar of Graphics_, de Leland Wilkinson et al.](https://www.springer.com/gp/book/9780387245447)  
+- [Plotly: The front end for ML and data science models](https://plotly.com/)
+- [R Graphics Cookbook, 2nd edition](https://r-graphics.org/)  
+- [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447)
+- [A Layered Grammar of Graphics](http://vita.had.co.nz/papers/layered-grammar.pdf)
 - [From data to Viz | Find the graphic you need](https://www.data-to-viz.com/)
 
 # R - Tidyverse
 - [Tidyverse](https://www.tidyverse.org/)
 - [R for Data Science](https://r4ds.had.co.nz/)
+- [R para ciencia de datos](https://es.r4ds.hadley.nz/)
 - [R-Ladies Chicago (English) - An Antarctic Tour of the Tidyverse - Silvia Canelón](https://www.youtube.com/watch?v=m_ZoMmAIx-o&t=3289s)
 
 # R - Geoespacial
