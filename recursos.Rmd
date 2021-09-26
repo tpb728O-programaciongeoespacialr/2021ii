@@ -44,6 +44,8 @@ knitr::opts_chunk$set(echo = FALSE)
 - [R for Data Science](https://r4ds.had.co.nz/)
 - [R para ciencia de datos](https://es.r4ds.hadley.nz/)
 - [R-Ladies Chicago (English) - An Antarctic Tour of the Tidyverse - Silvia Canelón](https://www.youtube.com/watch?v=m_ZoMmAIx-o&t=3289s)
+- [Data transformation with dplyr : : CHEAT SHEET](https://raw.githubusercontent.com/rstudio/cheatsheets/master/data-transformation.pdf)
+- [Data visualization with ggplot2 : : CHEAT SHEET](https://raw.githubusercontent.com/rstudio/cheatsheets/master/data-visualization.pdf)
 
 # R - Geoespacial
 ## Paquetes
