@@ -31,6 +31,7 @@ library(dplyr)
 
 **Datos hidrológicos**  
 Este conjunto de datos contiene mediciones de caudal en varios ríos de Costa Rica.
+
 ```{r}
 # Carga de datos desde un archivo CSV
 rios <-
