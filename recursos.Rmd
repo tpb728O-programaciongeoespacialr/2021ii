@@ -18,6 +18,7 @@ knitr::opts_chunk$set(echo = FALSE)
 - [(Tutorial) How to Install R on Windows, Mac OS X, and Ubuntu](https://www.datacamp.com/community/tutorials/installing-R-windows-mac-ubuntu)
 - [R Packages: A Beginner’s Guide](https://www.datacamp.com/community/tutorials/r-packages-guide)
 - [Style guide - Advanced R](http://adv-r.had.co.nz/Style.html)
+- [RStudio Cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
 
 # Markdown y R Markdown
 - [Daring Fireball: Markdown](https://daringfireball.net/projects/markdown/)
