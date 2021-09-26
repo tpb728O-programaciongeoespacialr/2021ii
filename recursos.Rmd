@@ -38,7 +38,7 @@ knitr::opts_chunk$set(echo = FALSE)
 - [A Layered Grammar of Graphics](http://vita.had.co.nz/papers/layered-grammar.pdf)
 - [From data to Viz | Find the graphic you need](https://www.data-to-viz.com/)
 
-# R - Tidyverse
+# Tidyverse
 - [Tidyverse](https://www.tidyverse.org/)
 - [R for Data Science](https://r4ds.had.co.nz/)
 - [R para ciencia de datos](https://es.r4ds.hadley.nz/)
