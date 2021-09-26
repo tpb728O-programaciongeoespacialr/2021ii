@@ -57,6 +57,13 @@
       "last_modified": "2021-09-26T00:29:58-06:00"
     },
     {
+      "path": "leccion-06-tidyverse.html",
+      "title": "Tidyverse",
+      "author": [],
+      "contents": "\n\nContents\nIntroducción\nDatos tidy\n\nIntroducción\nTidyverse es una colección de paquetes de R enfocados en ciencia de datos, los cuales “comparten filosofía de diseño, gramática y estructuras de datos”, de acuerdo con el sitio web de la iniciativa. El concepto de Tidyverse fue introducido por Hadley Wickham, quien también programó varios de sus paquetes.\nEl núcleo de Tidyverse está compuesto por ocho paquetes base, los cuales proveen las funcionalidades utilizadas más frecuentemente en análisis de datos. Hay otros paquetes para tareas más especifícas relacionadas con importación, limpieza y modelado de datos, entre otras áreas. Los paquetes de Tidyverse son de los más descargados, entre la totalidad de paquetes de R.\nDatos tidy\nLos paquetes de Tidyverse trabajan con datos tidy (i.e. ordenados, organizados), un concepto también introducido por Hadley Wickham y que se está relacionado con la organización de los datos en estructuras rectangulares de filas y columnas, similares a las tablas o matrices.\nSegún Wickham, los datos tidy deben cumplir con tres características:\nCada variable debe tener su propia columna.\nCada observación debe tener su propia fila.\nCada valor debe tener su propia celda.\nEstas características se ilustran en la figura 1.\nFigura 1: Datos tidy. Imagen de Hadley Wickham (https://r4ds.had.co.nz/tidy-data.html)El empleo de este modelo de datos uniforme en todos los paquetes de Tidyverse posibilita aprender y usar sus funciones con mayor facilidad. Además, permite invertir menos esfuerzo en lidiar con diferentes modelos de datos y así dedicar más tiempo y esfuerzo en los problemas de análisis a resolver.\n\n\n\n",
+      "last_modified": "2021-09-26T11:11:17-06:00"
+    },
+    {
       "path": "recursos.html",
       "title": "Recursos",
       "description": "Recursos adicionales a los mencionados en la bibliografía del curso.\n",

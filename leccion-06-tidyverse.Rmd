@@ -1,0 +1,31 @@
+---
+title: "Tidyverse"
+output: 
+  distill::distill_article:
+    toc: true
+    toc_depth: 4
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introducción
+[Tidyverse](https://www.tidyverse.org/) es una colección de paquetes de R enfocados en [ciencia de datos](https://es.wikipedia.org/wiki/Ciencia_de_datos), los cuales *"comparten filosofía de diseño, gramática y estructuras de datos"*, de acuerdo con el sitio web de la iniciativa. El concepto de Tidyverse fue introducido por [Hadley Wickham](http://hadley.nz/), quien también programó varios de sus paquetes.
+
+El núcleo de Tidyverse está compuesto por [ocho paquetes base](https://www.tidyverse.org/packages/#core-tidyverse), los cuales proveen las funcionalidades utilizadas más frecuentemente en análisis de datos. Hay [otros paquetes](https://www.tidyverse.org/packages/) para tareas más especifícas relacionadas con importación, limpieza y modelado de datos, entre otras áreas. Los paquetes de Tidyverse son de los [más descargados](https://www.r-pkg.org/downloaded), entre la totalidad de paquetes de R.
+
+# Datos *tidy*
+Los paquetes de Tidyverse trabajan con [datos *tidy*](https://www.jstatsoft.org/article/view/v059i10) (i.e. ordenados, organizados), un concepto también introducido por Hadley Wickham y que se está relacionado con la organización de los datos en estructuras rectangulares de filas y columnas, similares a las tablas o matrices.
+
+Según Wickham, los datos *tidy* deben cumplir con tres características:
+
+1. Cada variable debe tener su propia columna.
+2. Cada observación debe tener su propia fila.
+3. Cada valor debe tener su propia celda.
+
+Estas características se ilustran en la figura 1.
+
+![Figura 1: Datos *tidy*. Imagen de Hadley Wickham (https://r4ds.had.co.nz/tidy-data.html)](img/tidydata.png)
+
+El empleo de este modelo de datos uniforme en todos los paquetes de Tidyverse posibilita aprender y usar sus funciones con mayor facilidad. Además, permite invertir menos esfuerzo en lidiar con diferentes modelos de datos y así dedicar más tiempo y esfuerzo en los problemas de análisis a resolver.
