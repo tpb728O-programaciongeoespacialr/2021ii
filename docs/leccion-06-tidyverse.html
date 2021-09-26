@@ -2469,6 +2469,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p><a href="https://www.tidyverse.org/">Tidyverse</a> es una colección de paquetes de R enfocados en <a href="https://es.wikipedia.org/wiki/Ciencia_de_datos">ciencia de datos</a>, los cuales <em>“comparten filosofía de diseño, gramática y estructuras de datos”</em>, de acuerdo con el sitio web de la iniciativa. El concepto de Tidyverse fue introducido por <a href="http://hadley.nz/">Hadley Wickham</a>, quien también programó varios de sus paquetes.</p>
 <p>El núcleo de Tidyverse está compuesto por <a href="https://www.tidyverse.org/packages/#core-tidyverse">ocho paquetes base</a>, los cuales proveen las funcionalidades utilizadas más frecuentemente en análisis de datos. Hay <a href="https://www.tidyverse.org/packages/">otros paquetes</a> para tareas más especifícas relacionadas con importación, limpieza y modelado de datos, entre otras áreas. Los paquetes de Tidyverse son de los <a href="https://www.r-pkg.org/downloaded">más descargados</a>, entre la totalidad de paquetes de R.</p>
 <h1 id="trabajo-previo">Trabajo previo</h1>
+<ul>
+<li>Lea los capítulos del 1 al 21 de <a href="https://r4ds.had.co.nz/">Wickhan, H. &amp; Grolemund, G. (2018). R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</a>.</li>
+</ul>
 <h1 id="preparativos">Preparativos</h1>
 <h2 id="carga-de-paquetes">Carga de paquetes</h2>
 <div class="layout-chunk" data-layout="l-body">
@@ -2480,22 +2483,32 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <h2 id="conjuntos-de-datos-utilizados-en-los-ejemplos">Conjuntos de datos utilizados en los ejemplos</h2>
 <strong>Datos hidrológicos</strong><br />
-
+Este conjunto de datos contiene mediciones de caudal en varios ríos de Costa Rica.
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Carga de datos desde un archivo CSV</span>
 <span class='va'>rios</span> <span class='op'>&lt;-</span>
-  <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span>file <span class='op'>=</span> <span class='st'>'https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2021i-datos/main/hidrologia/fdc/FDC.csv'</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span>file <span class='op'>=</span> <span class='st'>'https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/hidrologia/fdc/fdc.csv'</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
-<strong>Casos de covid en Costa Rica</strong><br />
-
+<p><strong>Casos de covid en Costa Rica</strong><br />
+Este conjunto de datos es publicado por el <a href="http://geovision.uned.ac.cr/oges/">Ministerio de Salud de Costa Rica</a>. Contiene un registro por día con las estadísticas de casos positivos, fallecidos, activos y recuperados.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Carga de datos desde un archivo CSV</span>
-<span class='va'>covid</span> <span class='op'>&lt;-</span>
-  <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span>file <span class='op'>=</span> <span class='st'>'https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2021i-datos/main/ministerio-salud/covid/ultimafecha_CSV_GENERAL.csv'</span><span class='op'>)</span>
+<span class='va'>covid</span> <span class='op'>&lt;-</span> 
+  <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span>
+    file<span class='op'>=</span><span class='st'>'https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/minsalud/covid/ultimafecha_CSV_GENERAL.csv'</span>, 
+    sep <span class='op'>=</span> <span class='st'>","</span>
+  <span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Despliegue de los datos</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/View.html'>View</a></span><span class='op'>(</span><span class='va'>cr_covid19</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
@@ -2610,11 +2623,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </code></pre>
 </div>
 <pre><code>       fecha positivos_mujeres positivos_hombres
-1 2020-08-13             12024             14105
-2 2020-11-28             67203             71045
-3 2020-05-08               364               409
-4 2021-01-09             87729             90920
-5 2020-08-24             15988             18475</code></pre>
+1 2021-04-16            113244            115333
+2 2020-05-15               384               459
+3 2021-05-21            149286            149933
+4 2021-06-28            181776            182528
+5 2020-07-20              5060              6474</code></pre>
 </div>
 <h2 id="la-función-filter">La función <code>filter()</code></h2>
 <p>La función <a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a> selecciona observaciones (i.e. filas) de un data frame con base en sus valores.</p>
@@ -2633,12 +2646,31 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span class='va'>covid_filtrado</span>
 </code></pre>
 </div>
-<pre><code>       fecha positivos_nuevos
-1 2021-04-29             2781
-2 2021-04-30             2609
-3 2021-05-05             2555
-4 2021-05-06             2559
-5 2021-05-12             3173</code></pre>
+<pre><code>        fecha positivos_nuevos
+1  2021-04-29             2781
+2  2021-04-30             2609
+3  2021-05-05             2555
+4  2021-05-06             2559
+5  2021-05-12             3173
+6  2021-05-13             3039
+7  2021-05-14             2815
+8  2021-05-15             2795
+9  2021-05-19             2900
+10 2021-05-20             2812
+11 2021-05-21             2587
+12 2021-05-26             2587
+13 2021-08-25             2619
+14 2021-08-26             2706
+15 2021-08-27             2787
+16 2021-08-31             2581
+17 2021-09-01             2848
+18 2021-09-02             2991
+19 2021-09-03             2750
+20 2021-09-07             2956
+21 2021-09-08             2884
+22 2021-09-09             2975
+23 2021-09-10             2825
+24 2021-09-11             2546</code></pre>
 </div>
 <h2 id="la-función-arrange">La función <code>arrange()</code></h2>
 <p>La función <a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a> cambia el orden de las observaciones (i.e. filas) de un dataframe.</p>
@@ -2658,12 +2690,31 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span class='va'>covid_filtrado_ordenado_x_positivos_nuevos</span>
 </code></pre>
 </div>
-<pre><code>       fecha positivos_nuevos
-1 2021-05-12             3173
-2 2021-04-29             2781
-3 2021-04-30             2609
-4 2021-05-06             2559
-5 2021-05-05             2555</code></pre>
+<pre><code>        fecha positivos_nuevos
+1  2021-05-12             3173
+2  2021-05-13             3039
+3  2021-09-02             2991
+4  2021-09-09             2975
+5  2021-09-07             2956
+6  2021-05-19             2900
+7  2021-09-08             2884
+8  2021-09-01             2848
+9  2021-09-10             2825
+10 2021-05-14             2815
+11 2021-05-20             2812
+12 2021-05-15             2795
+13 2021-08-27             2787
+14 2021-04-29             2781
+15 2021-09-03             2750
+16 2021-08-26             2706
+17 2021-08-25             2619
+18 2021-04-30             2609
+19 2021-05-21             2587
+20 2021-05-26             2587
+21 2021-08-31             2581
+22 2021-05-06             2559
+23 2021-05-05             2555
+24 2021-09-11             2546</code></pre>
 </div>
 <h2 id="la-función-summarise">La función <code>summarise()</code></h2>
 <p>La función <a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a> agrupa y resume valores de un data frame. Generalmente, se utiliza conjuntamente con <a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a>, para agrupar antes los datos.</p>
@@ -2683,7 +2734,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span class='va'>covid_positivos_nuevos_sumarizado_x_mes</span>
 </code></pre>
 </div>
-<pre><code># A tibble: 15 × 3
+<pre><code># A tibble: 19 × 3
 # Groups:   anio [2]
    anio  mes   suma_positivos
    &lt;chr&gt; &lt;chr&gt;          &lt;int&gt;
@@ -2701,7 +2752,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 12 2021  02             10626
 13 2021  03             12440
 14 2021  04             33645
-15 2021  05             25896</code></pre>
+15 2021  05             67995
+16 2021  06             48952
+17 2021  07             40262
+18 2021  08             55526
+19 2021  09             33010</code></pre>
 </div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
