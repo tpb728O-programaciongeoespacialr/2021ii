@@ -15,8 +15,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 El núcleo de Tidyverse está compuesto por [ocho paquetes base](https://www.tidyverse.org/packages/#core-tidyverse), los cuales proveen las funcionalidades utilizadas más frecuentemente en análisis de datos. Hay [otros paquetes](https://www.tidyverse.org/packages/) para tareas más especifícas relacionadas con importación, limpieza y modelado de datos, entre otras áreas. Los paquetes de Tidyverse son de los [más descargados](https://www.r-pkg.org/downloaded), entre la totalidad de paquetes de R.
 
+En esta lección, se explican algunos de los principales paquetes de Tidyverse.
+
 # Trabajo previo
-- Lea los capítulos del 1 al 21 de [Wickhan, H. & Grolemund, G. (2018). R for Data Science: Import, Tidy, Transform, Visualize, and Model Data](https://r4ds.had.co.nz/).
+Lea los capítulos del 1 al 21 de [Wickhan, H. & Grolemund, G. (2018). R for Data Science: Import, Tidy, Transform, Visualize, and Model Data](https://r4ds.had.co.nz/).
 
 # Preparativos
 
@@ -201,3 +203,4 @@ covid_positivos_nuevos_sumarizado_x_mes <-
 # Despliegue del data frame con los resultados
 covid_positivos_nuevos_sumarizado_x_mes
 ```
+

@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 La elaboración de gráficos estadísticos es una de las funcionalidades más utilizadas del lenguaje de programación R, el cual proporciona varios paquetes para estos efectos. En esta lección, se presentan ejemplos de varios tipos de gráficos generados mediante estos paquetes.
 
 # Trabajo previo
-- Lea los capítulos del 2 al 5 de [Chang, W. (2018). R graphics cookbook: Practical recipes for visualizing data (Second edition)](https://r-graphics.org/).
+Lea los capítulos del 2 al 5 de [Chang, W. (2018). R graphics cookbook: Practical recipes for visualizing data (Second edition)](https://r-graphics.org/).
 
 # Conjuntos de datos utilizados en los ejemplos
 En los siguientes ejemplos y ejercicios, se utilizarán varios conjuntos de datos, los cuales se cargan en data frames con la función [read.csv()](https://www.rdocumentation.org/packages/iotools/versions/0.3-1/topics/read.csv.raw) y se visualizan con la función [View()](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/View).
