@@ -2446,14 +2446,59 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#introducción">Introducción</a></li>
+<li><a href="#resumen">Resumen</a></li>
+<li><a href="#trabajo-previo">Trabajo previo</a></li>
+<li><a href="#preparativos">Preparativos</a>
+<ul>
+<li><a href="#carga-de-paquetes">Carga de paquetes</a></li>
+<li><a href="#conjuntos-de-datos-utilizados-en-los-ejemplos">Conjuntos de datos utilizados en los ejemplos</a></li>
+</ul></li>
 <li><a href="#datos-tidy">Datos <em>tidy</em></a></li>
+<li><a href="#el-paquete-dplyr">El paquete dplyr</a>
+<ul>
+<li><a href="#la-función-mutate">La función <code>mutate()</code></a></li>
+<li><a href="#la-función-select">La función <code>select()</code></a></li>
+<li><a href="#la-función-filter">La función <code>filter()</code></a></li>
+<li><a href="#la-función-arrange">La función <code>arrange()</code></a></li>
+<li><a href="#la-función-summarise">La función <code>summarise()</code></a></li>
+</ul></li>
 </ul>
 </nav>
 </div>
-<h1 id="introducción">Introducción</h1>
+<h1 id="resumen">Resumen</h1>
 <p><a href="https://www.tidyverse.org/">Tidyverse</a> es una colección de paquetes de R enfocados en <a href="https://es.wikipedia.org/wiki/Ciencia_de_datos">ciencia de datos</a>, los cuales <em>“comparten filosofía de diseño, gramática y estructuras de datos”</em>, de acuerdo con el sitio web de la iniciativa. El concepto de Tidyverse fue introducido por <a href="http://hadley.nz/">Hadley Wickham</a>, quien también programó varios de sus paquetes.</p>
 <p>El núcleo de Tidyverse está compuesto por <a href="https://www.tidyverse.org/packages/#core-tidyverse">ocho paquetes base</a>, los cuales proveen las funcionalidades utilizadas más frecuentemente en análisis de datos. Hay <a href="https://www.tidyverse.org/packages/">otros paquetes</a> para tareas más especifícas relacionadas con importación, limpieza y modelado de datos, entre otras áreas. Los paquetes de Tidyverse son de los <a href="https://www.r-pkg.org/downloaded">más descargados</a>, entre la totalidad de paquetes de R.</p>
+<h1 id="trabajo-previo">Trabajo previo</h1>
+<h1 id="preparativos">Preparativos</h1>
+<h2 id="carga-de-paquetes">Carga de paquetes</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># dplyr</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<h2 id="conjuntos-de-datos-utilizados-en-los-ejemplos">Conjuntos de datos utilizados en los ejemplos</h2>
+<strong>Datos hidrológicos</strong><br />
+
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Carga de datos desde un archivo CSV</span>
+<span class='va'>rios</span> <span class='op'>&lt;-</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span>file <span class='op'>=</span> <span class='st'>'https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2021i-datos/main/hidrologia/fdc/FDC.csv'</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<strong>Casos de covid en Costa Rica</strong><br />
+
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Carga de datos desde un archivo CSV</span>
+<span class='va'>covid</span> <span class='op'>&lt;-</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span>file <span class='op'>=</span> <span class='st'>'https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2021i-datos/main/ministerio-salud/covid/ultimafecha_CSV_GENERAL.csv'</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
 <h1 id="datos-tidy">Datos <em>tidy</em></h1>
 <p>Los paquetes de Tidyverse trabajan con <a href="https://www.jstatsoft.org/article/view/v059i10">datos <em>tidy</em></a> (i.e. ordenados, organizados), un concepto también introducido por Hadley Wickham y que se está relacionado con la organización de los datos en estructuras rectangulares de filas y columnas, similares a las tablas o matrices.</p>
 <p>Según Wickham, los datos <em>tidy</em> deben cumplir con tres características:</p>
@@ -2467,7 +2512,198 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <img src="img/tidydata.png" alt="Figura 1: Datos tidy. Imagen de Hadley Wickham (https://r4ds.had.co.nz/tidy-data.html)" /><figcaption aria-hidden="true">Figura 1: Datos <em>tidy</em>. Imagen de Hadley Wickham (<a href="https://r4ds.had.co.nz/tidy-data.html" class="uri">https://r4ds.had.co.nz/tidy-data.html</a>)</figcaption>
 </figure>
 <p>El empleo de este modelo de datos uniforme en todos los paquetes de Tidyverse posibilita aprender y usar sus funciones con mayor facilidad. Además, permite invertir menos esfuerzo en lidiar con diferentes modelos de datos y así dedicar más tiempo y esfuerzo en los problemas de análisis a resolver.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h1 id="el-paquete-dplyr">El paquete dplyr</h1>
+<p>El paquete <a href="https://dplyr.tidyverse.org/">dplyr</a> de <a href="https://www.tidyverse.org/">Tidyverse</a> es descrito como una <em>“gramática para la manipulación de datos, la cual proporciona un conjunto consistente de verbos que ayuda a solucionar los retos de manipulación de datos más comunes”</em>. Los principales “verbos” (i.e. funciones) de esta gramática son:</p>
+<ul>
+<li><p><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a>: crea nuevas variables, las cuales se expresan como funciones de variables existentes.</p></li>
+<li><p><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a>: selecciona variables con base en sus nombres.</p></li>
+<li><p><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a>: selecciona observaciones con base en sus valores.</p></li>
+<li><p><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a>: cambia el orden de las filas.</p></li>
+<li><p><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a>: agrupa y resume valores.</p></li>
+</ul>
+<p>Todas estas operaciones pueden combinarse con la función <a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a>, la cual ejecuta cualquiera de las operaciones anteriores “en grupo”. Además, dplyr proporciona <a href="https://dplyr.tidyverse.org/reference/index.html">funciones adicionales</a> para tareas más específicas.</p>
+<p>Todas las funciones de dplyr trabajan de manera similar:</p>
+<ol type="1">
+<li>El primer argumento es un data frame. Puede omitirse si la función recibe el data frame a través del operador <em>pipe</em>.</li>
+<li>Los argumentos siguientes describen que hacer con el data frame, utilizando los nombres de las variables (sin comillas).<br />
+</li>
+<li>El resultado es un nuevo data frame.</li>
+</ol>
+<p>Las funciones de dplyr pueden encadenarse a través del operador <a href="https://magrittr.tidyverse.org/reference/pipe.html"><em>pipe</em> (%&gt;%)</a> (tubo), para formar <em>pipelines</em> (tuberías). En este contexto, un <em>pipeline</em> consiste de una cadena de procesos conectados de forma tal que la salida de cada proceso de la cadena es la entrada del próximo. Esto permite la comunicación y sincronización entre los procesos.</p>
+<h2 id="la-función-mutate">La función <code>mutate()</code></h2>
+<p>La función <a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a> crea nuevas variables en un data frame, las cuales se expresan como funciones de variables existentes. También puede utilizarse para recalcular una variable ya existente.</p>
+<p>En el siguiente bloque de código, se utiliza <code>mutate()</code> para crear una nueva variable en el data frame de ríos. Se utilizan también otras funciones para renombrar las columnas y desplegar los datos.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Despliegue de la estructura del data frame</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>rios</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>&#39;data.frame&#39;:   3845 obs. of  3 variables:
+ $ Tiempo             : chr  &quot;6/22/1973&quot; &quot;6/23/1973&quot; &quot;6/24/1973&quot; &quot;6/25/1973&quot; ...
+ $ Pandora.mm..637km2.: num  7.46 6.17 6.32 7.8 7.72 7.83 5.02 3.84 3.21 2.77 ...
+ $ Banano.mm..90km2.  : num  21 14.8 27.6 19.7 15.2 ...</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Despliegue de los primeros registros</span>
+<span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice_head</a></span><span class='op'>(</span><span class='va'>rios</span>, n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>     Tiempo Pandora.mm..637km2. Banano.mm..90km2.
+1 6/22/1973                7.46             21.02
+2 6/23/1973                6.17             14.78
+3 6/24/1973                6.32             27.65
+4 6/25/1973                7.80             19.68
+5 6/26/1973                7.72             15.17</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Cambio de nombre de las columnas mediante rename()</span>
+<span class='va'>rios</span> <span class='op'>&lt;-</span>
+  <span class='va'>rios</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span>fecha <span class='op'>=</span> <span class='va'>Tiempo</span>,
+         pandora <span class='op'>=</span> <span class='va'>Pandora.mm..637km2.</span>,
+         banano <span class='op'>=</span> <span class='va'>Banano.mm..90km2.</span><span class='op'>)</span>
+
+<span class='co'># Conversión de una columna a tipo Date y creación de una nueva columna</span>
+<span class='va'>rios</span> <span class='op'>&lt;-</span>
+  <span class='va'>rios</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>fecha <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span><span class='op'>(</span><span class='va'>fecha</span>, format <span class='op'>=</span> <span class='st'>"%m/%d/%Y"</span><span class='op'>)</span>,
+         promedio <span class='op'>=</span> <span class='op'>(</span><span class='va'>pandora</span> <span class='op'>+</span> <span class='va'>banano</span><span class='op'>)</span> <span class='op'>/</span> <span class='fl'>2</span><span class='op'>)</span>
+
+<span class='co'># Verificación de los cambios en la estructura del data frame</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>rios</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>&#39;data.frame&#39;:   3845 obs. of  4 variables:
+ $ fecha   : Date, format: &quot;1973-06-22&quot; ...
+ $ pandora : num  7.46 6.17 6.32 7.8 7.72 7.83 5.02 3.84 3.21 2.77 ...
+ $ banano  : num  21 14.8 27.6 19.7 15.2 ...
+ $ promedio: num  14.2 10.5 17 13.7 11.4 ...</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Visualización de los valores de la nueva columna</span>
+<span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice_head</a></span><span class='op'>(</span><span class='va'>rios</span>, n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>       fecha pandora banano promedio
+1 1973-06-22    7.46  21.02   14.240
+2 1973-06-23    6.17  14.78   10.475
+3 1973-06-24    6.32  27.65   16.985
+4 1973-06-25    7.80  19.68   13.740
+5 1973-06-26    7.72  15.17   11.445</code></pre>
+</div>
+<h2 id="la-función-select">La función <code>select()</code></h2>
+<p>La función <a href="https://dplyr.tidyverse.org/reference/select.html">select()</a> selecciona variables (i.e. columnas) de un data frame con base en sus nombres.</p>
+<p>En el siguiente bloque de código, se utiiza <code>select()</code> para seleccionar un conjunto de variables del data frame de COVID-19 en Costa Rica. El resultado se guarda en un nuevo data frame.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Selección, renombramiento y conversión de columnas</span>
+<span class='va'>covid_columnas_seleccionadas</span> <span class='op'>&lt;-</span>
+  <span class='va'>covid</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>FECHA</span>, <span class='va'>muj_posi</span>, <span class='va'>hom_posi</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span>
+    fecha <span class='op'>=</span> <span class='va'>FECHA</span>,
+    positivos_mujeres <span class='op'>=</span> <span class='va'>muj_posi</span>,
+    positivos_hombres <span class='op'>=</span> <span class='va'>hom_posi</span>
+  <span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>fecha <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span><span class='op'>(</span><span class='va'>fecha</span>, format <span class='op'>=</span> <span class='st'>"%d/%m/%Y"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># Despliegue de una muestra aleatoria de los registros</span>
+<span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice_sample</a></span><span class='op'>(</span><span class='va'>covid_columnas_seleccionadas</span>, n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>       fecha positivos_mujeres positivos_hombres
+1 2020-08-13             12024             14105
+2 2020-11-28             67203             71045
+3 2020-05-08               364               409
+4 2021-01-09             87729             90920
+5 2020-08-24             15988             18475</code></pre>
+</div>
+<h2 id="la-función-filter">La función <code>filter()</code></h2>
+<p>La función <a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a> selecciona observaciones (i.e. filas) de un data frame con base en sus valores.</p>
+<p>En el siguiente bloque de código, se utiliza <code>filter()</code> para filtrar el data frame de COVID-19 en Costa Rica. El resultado se guarda en un nuevo data frame.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Selección, renombramiento, conversión de columnas y filtrado</span>
+<span class='va'>covid_filtrado</span> <span class='op'>&lt;-</span>
+  <span class='va'>covid</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>FECHA</span>, <span class='va'>nue_posi</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span>fecha <span class='op'>=</span> <span class='va'>FECHA</span>, positivos_nuevos <span class='op'>=</span> <span class='va'>nue_posi</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>fecha <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span><span class='op'>(</span><span class='va'>fecha</span>, format <span class='op'>=</span> <span class='st'>"%d/%m/%Y"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>positivos_nuevos</span> <span class='op'>&gt;=</span> <span class='fl'>2500</span><span class='op'>)</span>
+
+<span class='co'># Despliegue del data frame con los resultados</span>
+<span class='va'>covid_filtrado</span>
+</code></pre>
+</div>
+<pre><code>       fecha positivos_nuevos
+1 2021-04-29             2781
+2 2021-04-30             2609
+3 2021-05-05             2555
+4 2021-05-06             2559
+5 2021-05-12             3173</code></pre>
+</div>
+<h2 id="la-función-arrange">La función <code>arrange()</code></h2>
+<p>La función <a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a> cambia el orden de las observaciones (i.e. filas) de un dataframe.</p>
+<p>En el siguiente bloque de código, se utiliza <code>arrange()</code> para ordenar el data frame de COVID-19 en Costa Rica, después de filtrarlo. El resultado se guarda en un nuevo data frame.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Selección, renombramiento, filtrado y conversión de columnas</span>
+<span class='va'>covid_filtrado_ordenado_x_positivos_nuevos</span> <span class='op'>&lt;-</span>
+  <span class='va'>covid</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>FECHA</span>, <span class='va'>nue_posi</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span>fecha <span class='op'>=</span> <span class='va'>FECHA</span>, positivos_nuevos <span class='op'>=</span> <span class='va'>nue_posi</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>fecha <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span><span class='op'>(</span><span class='va'>fecha</span>, format <span class='op'>=</span> <span class='st'>"%d/%m/%Y"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>positivos_nuevos</span> <span class='op'>&gt;=</span> <span class='fl'>2500</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>positivos_nuevos</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># Despliegue del data frame con los resultados</span>
+<span class='va'>covid_filtrado_ordenado_x_positivos_nuevos</span>
+</code></pre>
+</div>
+<pre><code>       fecha positivos_nuevos
+1 2021-05-12             3173
+2 2021-04-29             2781
+3 2021-04-30             2609
+4 2021-05-06             2559
+5 2021-05-05             2555</code></pre>
+</div>
+<h2 id="la-función-summarise">La función <code>summarise()</code></h2>
+<p>La función <a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a> agrupa y resume valores de un data frame. Generalmente, se utiliza conjuntamente con <a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a>, para agrupar antes los datos.</p>
+<p>En el siguiente bloque de código, se utiliza <code>summarise()</code> para generar un nuevo data frame con los nuevos casos de COVID-19 sumarizados por mes.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Selección, renombramiento, filtrado y conversión de columnas</span>
+<span class='va'>covid_positivos_nuevos_sumarizado_x_mes</span> <span class='op'>&lt;-</span>
+  <span class='va'>covid</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>FECHA</span>, <span class='va'>nue_posi</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/rename.html'>rename</a></span><span class='op'>(</span>fecha <span class='op'>=</span> <span class='va'>FECHA</span>, positivos_nuevos <span class='op'>=</span> <span class='va'>nue_posi</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>fecha <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span><span class='op'>(</span><span class='va'>fecha</span>, format <span class='op'>=</span> <span class='st'>"%d/%m/%Y"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span>anio <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span><span class='op'>(</span><span class='va'>fecha</span>,<span class='st'>"%Y"</span><span class='op'>)</span>, mes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span><span class='op'>(</span><span class='va'>fecha</span>,<span class='st'>"%m"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span>suma_positivos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>positivos_nuevos</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># Despliegue del data frame con los resultados</span>
+<span class='va'>covid_positivos_nuevos_sumarizado_x_mes</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 15 × 3
+# Groups:   anio [2]
+   anio  mes   suma_positivos
+   &lt;chr&gt; &lt;chr&gt;          &lt;int&gt;
+ 1 2020  03               347
+ 2 2020  04               372
+ 3 2020  05               337
+ 4 2020  06              2403
+ 5 2020  07             14361
+ 6 2020  08             23467
+ 7 2020  09             34473
+ 8 2020  10             34211
+ 9 2020  11             29667
+10 2020  12             29683
+11 2021  01             24959
+12 2021  02             10626
+13 2021  03             12440
+14 2021  04             33645
+15 2021  05             25896</code></pre>
+</div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
