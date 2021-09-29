@@ -48,7 +48,9 @@ knitr::opts_chunk$set(echo = FALSE)
 - [Data visualization with ggplot2 : : CHEAT SHEET](https://raw.githubusercontent.com/rstudio/cheatsheets/master/data-visualization.pdf)
 
 # R - Geoespacial
-## Paquetes
+- [CRAN Task View: Analysis of Spatial Data](https://cran.r-project.org/web/views/Spatial.html)
+- [r-spatial](http://r-spatial.org/)
+- [Spatial Data Science with R - R Spatial](https://rspatial.org/)
 - [Simple Features for R - sf](https://r-spatial.github.io/sf/)
 - [The raster package - R Spatial](https://rspatial.org/raster/pkg/)
 - [The terra package - R Spatial](https://rspatial.org/terra/pkg/)
@@ -56,19 +58,9 @@ knitr::opts_chunk$set(echo = FALSE)
 - [tmap - R package for thematic maps](https://github.com/mtennekes/tmap)
 - [Interactive viewing of spatial data in R - mapview](https://r-spatial.github.io/mapview/)
 - [Spatiotemporal Arrays: Raster and Vector Datacubes - stars](https://r-spatial.github.io/stars/)
-- [CRAN - Package satellite](https://cran.r-project.org/web/packages/satellite/)
-
-## Libros
-- [_Geocomputation with R_, de Robin Lovelace et al.](https://geocompr.robinlovelace.net/)
-- [_Spatial Data Science with applications in R_, de Edzer Pebesma y Roger Bivand](https://keen-swartz-3146c4.netlify.app/)
-
-## Tutoriales
+- [Geocomputation with R](https://geocompr.robinlovelace.net/)
+- [R for Geographic Data Science](https://sdesabbata.github.io/r-for-geographic-data-science/)
+- [Spatial Data Science with applications in R](https://keen-swartz-3146c4.netlify.app/)
 - [Drawing beautiful maps programmatically with R, sf and ggplot2](http://r-spatial.org/r/2018/10/25/ggplot2-sf.html)
-
-## Otros
-- [r-spatial](http://r-spatial.org/)
-- [Spatial Data Science with R - R Spatial](https://rspatial.org/)
-
-
-
-
+- [R-Ladies Madrid (español) - Analiza datos espaciales](https://www.youtube.com/watch?v=59tO2ARvVVU&t=5680s)
+- [Materiales del taller "R-Ladies Madrid (español) - Analiza datos espaciales"](https://github.com/sporella/datos_espaciales_madrid)
