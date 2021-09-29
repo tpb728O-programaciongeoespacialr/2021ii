@@ -40,7 +40,8 @@ Este sitio web corresponde al curso impartido durante el segundo ciclo lectivo d
 [06 Tidyverse](leccion-06-tidyverse.html)  
 
 # Tareas
-[01 R Markdown](tarea-01-rmarkdown.html)
+[01 R Markdown](tarea-01-rmarkdown.html)  
+[02 Tidyverse](tarea-02-tidyverse.html)  
 
 # Recursos
 [Recursos adicionales a la bibliografía del curso](recursos.html)

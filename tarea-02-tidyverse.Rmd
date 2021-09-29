@@ -1,0 +1,27 @@
+---
+title: "Tarea 01 - R Markdown"
+output: 
+  distill::distill_article:
+    toc: true
+    toc_depth: 4
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Fecha de entrega y entregables
+La fecha y hora límite para la entrega de esta tarea es el **miércoles 6 de octubre de 2021 a las 16:59**.
+
+Debe entregar un sitio web publicado en Netlify o en GitHub Pages.
+
+La tarea debe realizarse de manera individual.
+
+# Calificación
+
+Entre paréntesis, se muestra el porcentaje correspondiente a cada aspecto que se calificará:
+
+- (%) ...
+- (%) ...
+- (%) ...
+- (%) ...
