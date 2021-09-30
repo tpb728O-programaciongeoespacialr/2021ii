@@ -10,18 +10,16 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### Fecha de entrega y entregables
-La fecha y hora límite para la entrega de esta tarea es el **miércoles 6 de octubre de 2021 a las 16:59**.
-
-Debe entregar un sitio web publicado en Netlify o en GitHub Pages.
+## Fecha de entrega y entregables
+La fecha y hora límite para la entrega de esta tarea es el **miércoles 6 de octubre de 2021 a las 16:59**. Debe crear un sitio web, publicarlo en Netlify o en GitHub Pages, y enviarle la dirección al profesor por correo electrónico.
 
 La tarea debe realizarse de manera individual.
 
-# Calificación
+## Desarrollo y calificación
+El sitio web debe contener un conjunto de gráficos estadísticos creados con los paquetes [dplyr](https://dplyr.tidyverse.org/) y [ggplot2](https://ggplot2.tidyverse.org/) para los conjuntos de datos de [caudales de ríos](https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/hidrologia/fdc/fdc.csv) y [covid en Costa Rica](https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/minsalud/covid/ultimafecha_CSV_GENERAL.csv).
 
-Entre paréntesis, se muestra el porcentaje correspondiente a cada aspecto que se calificará:
+Los gráficos que deben construirse son los siguientes (entre paréntesis, se muestra el porcentaje correspondiente de la nota final):
 
-- (%) ...
-- (%) ...
-- (%) ...
-- (%) ...
+- (40%) Gráfico de barras apiladas que muestre el caudal de los ríos Pandora y Bananito por cada uno de los 12 meses del año.
+- (20%) Histograma que muestre la distribución de los casos nuevos de covid en Costa Rica. Elija cuidadosamente el tamaño de los "bins".
+- (40%) Gráfico de barras agrupadas que muestre la cantidad de hombres y mujeres fallecidos por covid en Costa Rica por cada uno de los 12 meses del año.
