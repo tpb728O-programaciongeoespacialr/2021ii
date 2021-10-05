@@ -167,7 +167,7 @@ provincias <-
 
 La función [plot()](https://r-spatial.github.io/sf/reference/plot.html) muestra objetos sf en un mapa. 
 
-```{r plot-01}
+```{r sf-plot-01}
 # Mapeo de las geometrías del objeto provincias
 plot(provincias$geometry)
 
@@ -183,7 +183,7 @@ plot(
 
 Los argumentos ```reset``` y ```add``` de ```plot()``` permiten generar un mapa con varias capas.
 
-```{r plot-02}
+```{r sf-plot-02}
 # Primera capa del mapa
 plot(
   provincias$geometry,
@@ -263,4 +263,14 @@ Los mapas raster generalmente almacenan fenómenos continuos como elevación, pr
 ## El paquete terra
 El paquete [terra](https://cran.r-project.org/web/packages/terra/) implementa un conjunto de funciones para la lectura, escritura, manipulación, análisis y modelado de datos raster.
 
+```{r rast}
+# Lectura de una capa raster de altitud
+altitud <-
+  rast(
+    "/vsicurl/https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/master/datos/worldclim/altitud.tif"
+  )
+```
 
+```{r terra-plot-01}
+plot(altitud)
+```
