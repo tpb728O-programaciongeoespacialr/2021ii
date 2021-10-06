@@ -25,8 +25,9 @@ library(dplyr)
 # Paquete para manejo de datos vectoriales
 library(sf)
 
-# Paquete para manejo de datos raster
+# Paquetes para manejo de datos raster
 library(terra)
+library(raster)
 
 # Paquete para mapas interactivos
 library(leaflet)
@@ -34,9 +35,9 @@ library(leaflet)
 
 ## Conjuntos de datos
 
-- [Provincias de Costa Rica](https://github.com/tpb728O-programaciongeoespacialr/2021ii/blob/main/datos/ign/delimitacion-territorial-administrativa/provincias.geojson)
-- [Registros de presencia de *Felidae* (felinos) en Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2021i-datos/blob/main/gbif/leopardus_pardalis-cr-registros.csv)
-- [WorldClim](https://www.worldclim.org/)
+- [Provincias de Costa Rica (Instituto Geográfico Nacional)](https://github.com/tpb728O-programaciongeoespacialr/2021ii/blob/main/datos/ign/delimitacion-territorial-administrativa/provincias.geojson)
+- [Registros de presencia de *Felidae* (felinos) en Costa Rica (consulta al portal de GBIF)](https://github.com/gf0604-procesamientodatosgeograficos/2021i-datos/blob/main/gbif/leopardus_pardalis-cr-registros.csv)
+- [Altitud de Costa Rica (WorldClim)](https://github.com/tpb728O-programaciongeoespacialr/2021ii/blob/main/datos/worldclim/altitud.tif)
 
 # Introducción
 
@@ -48,7 +49,7 @@ La comunidad de programadores de R ha desarrollado un conjunto de paquetes para 
 
 * El paquete [leaflet](https://cran.r-project.org/web/packages/leaflet/). Es una implementación en R de la biblioteca [Leaflet para el lenguaje JavaScript](https://leafletjs.com/) para la programación de mapas interactivos en páginas web.
 
-Algunos paquetes de graficación, como [ggplot2](https://cran.r-project.org/web/packages/ggplot2/), también cuentan con algunas capacidades para procesamiento de datos geoespaciales.
+Algunos paquetes de graficación, como [ggplot2](https://cran.r-project.org/web/packages/ggplot2/), también cuentan también con capacidades para procesamiento de datos geoespaciales.
 
 En [CRAN Task View: Analysis of Spatial Data](https://cran.r-project.org/web/views/Spatial.html), puede encontrarse un resumen detallado de los paquetes geoespaciales de R.
 
@@ -82,7 +83,7 @@ En sf, los conjuntos de datos geoespaciales se almacenan en objetos de una clase
 
 La lista de métodos de la clase ```sf``` puede obtenerse a través de la función [methods()](https://rdrr.io/r/utils/methods.html):
 
-```{r metodos}
+```{r metodos-sf}
 # Métodos de la clase sf
 methods(class = "sf")
 ```
@@ -108,8 +109,7 @@ provincias <-
 # Lectura de un archivo CSV con registros de presencia de felinos en Costa Rica
 felidae <-
   st_read(
-    "/home/mfvargas/tpb728O-programaciongeoespacialr/2021ii/datos/gbif/felidae.csv",
-    drivers = "CSV", # esta opción parece ser necesario en las últimas versiones de GDAL cuando se lee a través de HTTP
+    "/vsicurl/https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/gbif/felidae.csv",
     options = c(
       "X_POSSIBLE_NAMES=decimalLongitude",
       "Y_POSSIBLE_NAMES=decimalLatitude"
@@ -117,6 +117,8 @@ felidae <-
     quiet = TRUE
   )
 ```
+
+Nótese el uso de [/vsicurl](https://gdal.org/user/virtual_file_systems.html) para acceder a sistemas de archivos virtuales.
 
 Tanto ```provincias``` como ```felidae``` son objetos de la clase ```sf ``` (y además de ```data.frame```).
 
@@ -135,7 +137,7 @@ Al escribirse el nombre de un objeto ```sf``` en la consola de R, se despliega i
 provincias
 ```
 
-#### st_crs() y st_transform - manejo de sistemas de coordenadas
+#### st_crs() y st_transform() - manejo de sistemas de coordenadas
 
 La función [st_crs()](https://r-spatial.github.io/sf/reference/st_crs.html) retorna el CRS de un objeto ```sf```.
 
@@ -203,7 +205,7 @@ plot(felidae$geometry,
 
 Para conocer los valores de pch, puede consultar [R plot pch symbols](http://www.sthda.com/english/wiki/r-plot-pch-symbols-the-different-point-shapes-available-in-r).
 
-#### st_write - escritura de datos
+#### st_write() - escritura de datos
 
 La función [st_write()](https://r-spatial.github.io/sf/reference/st_write.html) guarda en el disco un objeto ```sf``` en los diferentes [formatos vectoriales de GDAL](https://gdal.org/drivers/vector/).
 
@@ -216,8 +218,21 @@ provincias %>%
   st_write("provincias.shp")
 
 # Escritura del objeto felidae
-manigordos %>%
+felidae %>%
   st_write("felidae.kml")
+```
+
+#### Otros
+
+```{r sf-otros}
+# Cantidad de filas de un objeto sf
+nrow(provincias)
+
+# Cantidad de columnas de un objeto sf
+ncol(provincias)
+
+# Resumen de la columna de geometría
+summary(provincias$geometry)
 ```
 
 ### Mapeo de objetos sf con otros paquetes
@@ -261,7 +276,22 @@ Los mapas raster generalmente almacenan fenómenos continuos como elevación, pr
 ![**Figura 3**. Ejemplos de mapas raster continuos y categóricos. Imagen de Robin Lovelace et al. (https://geocompr.robinlovelace.net/spatial-class.html#raster-data)](img/raster_continuo_categorico.png)
 
 ## El paquete terra
-El paquete [terra](https://cran.r-project.org/web/packages/terra/) implementa un conjunto de funciones para la lectura, escritura, manipulación, análisis y modelado de datos raster.
+El paquete [terra](https://cran.r-project.org/web/packages/terra/) implementa un conjunto de funciones para la lectura, escritura, manipulación, análisis y modelado de datos raster y vectoriales. Implementa la clase [SpatRaster](https://rdrr.io/cran/terra/man/SpatRaster-class.html) para manejar los objetos raster.
+
+### Métodos del paquete terra
+
+La función [help()](https://rdrr.io/r/utils/help.html) presenta la documentación del paquete terra, incluyendo sus métodos.
+
+```{r metodos-terra, eval=FALSE}
+# Ayuda sobre el paquete terra
+help("terra-package")
+```
+
+Seguidamente, se describen y ejemplifican algunos de los métodos básicos para manejo de datos raster del paquete terra.
+
+#### rast() - lectura de datos
+
+La función [rast()](https://rdrr.io/pkg/terra/man/rast.html) lee datos raster.
 
 ```{r rast}
 # Lectura de una capa raster de altitud
@@ -271,6 +301,136 @@ altitud <-
   )
 ```
 
+```altitud``` es un objeto de la clase ```SpatRaster```.
+
+```{r clase-terra}
+# Clase del objeto altitud
+class(altitud)
+```
+
+Al escribirse el nombre de un objeto ```SpatRaster``` en la consola de R, se despliega información general sobre este.
+
+```{r consola-terra}
+# Información general sobre el objeto altitud
+altitud
+```
+
+#### crs() y project() - manejo de sistemas de coordenadas
+
+La función [crs()](https://rdrr.io/pkg/terra/man/crs.html) retorna el CRS de un objeto ```SpatRaster```.
+
+```{r crs-1}
+# CRS del objeto altitud
+crs(altitud)
+```
+
+```crs()``` también puede asignar un CRS a un objeto ```SpatRaster```.
+
+```{r crs-2}
+# Asignación de un CRS a una copia del objeto altitud
+altitud_crtm05 <- altitud
+crs(altitud_crtm05) <- "EPSG:5367"
+
+# Consulta
+crs(altitud_crtm05)
+```
+
+La función [project()](https://rdrr.io/pkg/terra/man/project.html) reproyecta un objeto ```SpatRaster``` a un nuevo CRS.
+
+```{r project}
+# Transformación del CRS del objeto altitud
+altitud_utm17N <-
+  altitud %>%
+  project("EPSG:8910")
+
+# Consulta
+crs(altitud_utm17N)
+```
+
+#### plot() - mapeo
+
+La función [plot()](https://rdrr.io/cran/terra/man/plot.html) muestra objetos ```SpatRaster``` en un mapa. 
+
 ```{r terra-plot-01}
+# Mapa de la capa de altitud
 plot(altitud)
+```
+
+Los argumentos ```reset``` y ```add``` de ```plot()``` permiten generar un mapa con varias capas.
+
+```{r terra-plot-02}
+# Primera capa del mapa (raster)
+plot(
+  altitud,
+  main = "Distribución de registros de presencia de Felidae (felinos) en Costa Rica",
+  axes = TRUE,
+  reset = FALSE
+)
+
+# Segunda capa (vectorial)
+plot(felidae$geometry,
+     add = TRUE,     
+     pch = 16,
+     col = "black")
+
+```
+
+#### writeRaster() - escritura de datos
+
+La función [write_raster()](https://rdrr.io/cran/terra/man/writeRaster.html) guarda en el disco un objeto ```SpatRaster``` en los diferentes [formatos raster de GDAL](https://gdal.org/drivers/raster/).
+
+```{r write_raster, eval=FALSE}
+# Especificación del directorio de trabajo (debe utilizarse una ruta existente)
+setwd("/home/mfvargas")
+
+# Escritura del objeto altitud
+altitud %>%
+  writeRaster("altitud.asc")
+```
+
+
+#### Otros
+
+```{r terra-otros}
+# Cantidad de filas de un objeto SpatRaster
+nrow(altitud)
+
+# Cantidad de columnas de un objeto SpatRaster
+ncol(altitud)
+
+# Resolución de un objeto SpatRaster
+res(altitud)
+```
+
+### Mapeo de objetos SpatRaster con otros paquetes
+
+#### leaflet
+
+A la fecha de escritura de este documento (2021-10-05), el paquete ```leaflet``` no cuenta con un método para mapear objetos de tipo ```SpatRaster```. Por eso se utiliza la función [raster()]() para realizar la conversión a la clase ```RasterLayer``` y así mapear el objeto ```altitud``` con el método [addRasterImage()](https://rdrr.io/pkg/leaflet/man/addRasterImage.html). Con respecto al tema de conversiones entre las diferentes clases espaciales de R, puede consultarse [Conversions between different spatial classes in R](https://www.r-bloggers.com/2021/06/conversions-between-different-spatial-classes-in-r/).
+
+```{r leaflet-raster}
+# Conversión del objeto altitud a la clase RasterLayer
+altitud_rl <- raster(altitud)
+
+# Mapa leaflet básico con capas de provincias y registros de presencia de felinos
+leaflet() %>%
+  addTiles() %>%
+  addRasterImage(
+    altitud_rl, 
+    opacity = 0.6
+  ) %>%    
+  addPolygons(
+    data = provincias,
+    color = "black",
+    fillColor = "transparent",
+    stroke = TRUE,
+    weight = 1.0,
+  ) %>%
+  addCircleMarkers(
+    data = felidae,
+    stroke = F,
+    radius = 4,
+    fillColor = 'orange',
+    fillOpacity = 1
+  )
 ```
