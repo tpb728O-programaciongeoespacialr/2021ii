@@ -64,3 +64,8 @@ knitr::opts_chunk$set(echo = FALSE)
 - [Drawing beautiful maps programmatically with R, sf and ggplot2](http://r-spatial.org/r/2018/10/25/ggplot2-sf.html)
 - [R-Ladies Madrid (español) - Analiza datos espaciales](https://www.youtube.com/watch?v=59tO2ARvVVU&t=5680s)
 - [Materiales del taller "R-Ladies Madrid (español) - Analiza datos espaciales"](https://github.com/sporella/datos_espaciales_madrid)
+
+# flexdashboard
+- [R Markdown Format for Flexible Dashboards - flexdashboard](https://pkgs.rstudio.com/flexdashboard/)
+- [Building an interactive dashboard to visualize spatial data](https://www.paulamoraga.com/tutorial-flexdashboard/)
+- [Geospatial Health Data: Modeling and Visualization with R-INLA and Shiny - Building a dashboard to visualize spatial data with flexdashboard](https://www.paulamoraga.com/book-geospatial/sec-flexdashboard.html)
