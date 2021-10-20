@@ -368,7 +368,7 @@ Las operaciones con atributos en datos raster incluyen:
 Seguidamente, se explicará como maneja estas operaciones el paquete terra.
 
 ## Manejo de datos de atributos con el paquete terra
-### Funciones básicas para manejo de objetos terra
+### Funciones básicas para manejo de objetos SpatRaster
 El siguiente bloque de código crea y mapea un objeto ```SpatRaster``` llamado ```elevacion```.
 
 ```{r rast-creacion-1}
