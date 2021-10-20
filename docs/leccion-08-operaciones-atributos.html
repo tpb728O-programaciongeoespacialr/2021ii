@@ -3117,12 +3117,12 @@ Projected CRS: CR05 / CRTM05
 <span class='va'>lista_granos</span>
 </code></pre>
 </div>
-<pre><code> [1] &quot;arcilla&quot; &quot;arcilla&quot; &quot;arcilla&quot; &quot;limo&quot;    &quot;arcilla&quot; &quot;arena&quot;  
- [7] &quot;limo&quot;    &quot;limo&quot;    &quot;limo&quot;    &quot;arena&quot;   &quot;arena&quot;   &quot;arcilla&quot;
-[13] &quot;arcilla&quot; &quot;arcilla&quot; &quot;limo&quot;    &quot;arena&quot;   &quot;limo&quot;    &quot;arena&quot;  
-[19] &quot;arena&quot;   &quot;limo&quot;    &quot;arcilla&quot; &quot;arena&quot;   &quot;arena&quot;   &quot;arcilla&quot;
-[25] &quot;arcilla&quot; &quot;arena&quot;   &quot;limo&quot;    &quot;arena&quot;   &quot;arcilla&quot; &quot;arena&quot;  
-[31] &quot;limo&quot;    &quot;limo&quot;    &quot;limo&quot;    &quot;arena&quot;   &quot;arcilla&quot; &quot;limo&quot;   </code></pre>
+<pre><code> [1] &quot;arena&quot;   &quot;arena&quot;   &quot;arcilla&quot; &quot;limo&quot;    &quot;arena&quot;   &quot;arcilla&quot;
+ [7] &quot;arcilla&quot; &quot;arcilla&quot; &quot;arena&quot;   &quot;limo&quot;    &quot;limo&quot;    &quot;limo&quot;   
+[13] &quot;arena&quot;   &quot;arcilla&quot; &quot;arcilla&quot; &quot;arena&quot;   &quot;arena&quot;   &quot;arcilla&quot;
+[19] &quot;arcilla&quot; &quot;limo&quot;    &quot;arena&quot;   &quot;arcilla&quot; &quot;arena&quot;   &quot;limo&quot;   
+[25] &quot;arcilla&quot; &quot;arcilla&quot; &quot;limo&quot;    &quot;arcilla&quot; &quot;arcilla&quot; &quot;limo&quot;   
+[31] &quot;arena&quot;   &quot;arena&quot;   &quot;limo&quot;    &quot;arena&quot;   &quot;limo&quot;    &quot;arcilla&quot;</code></pre>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Factor de tipos de granos</span>
 <span class='va'>grano_factor</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>lista_granos</span>, levels <span class='op'>=</span> <span class='va'>grano_tipo</span><span class='op'>)</span>
@@ -3152,7 +3152,7 @@ Projected CRS: CR05 / CRTM05
 <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>setwd</a></span><span class='op'>(</span><span class='st'>"/home/mfvargas"</span><span class='op'>)</span>
 
 <span class='co'># Escritura de los objetos raster</span>
-<span class='fu'><a href='https://rdrr.io/pkg/terra/man/writeRaster.html'>writeRaster</a></span><span class='op'>(</span><span class='va'>grano</span>, <span class='st'>"elevacion.asc"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/terra/man/writeRaster.html'>writeRaster</a></span><span class='op'>(</span><span class='va'>elevacion</span>, <span class='st'>"elevacion.asc"</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/pkg/terra/man/writeRaster.html'>writeRaster</a></span><span class='op'>(</span><span class='va'>grano</span>, <span class='st'>"grano.asc"</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -3276,41 +3276,41 @@ max values  :    36,    seco </code></pre>
 </div>
 <pre><code>      lyr.1 lyr.1
  [1,]     0     4
- [2,]     2     0
+ [2,]     2     2
  [3,]     3     0
  [4,]     4     1
- [5,]     5     0
- [6,]     6     2
- [7,]     7     1
- [8,]     8     1
- [9,]     9     1
-[10,]    10     2
-[11,]    11     2
-[12,]    12     0
-[13,]    13     0
+ [5,]     5     2
+ [6,]     6     0
+ [7,]     7     0
+ [8,]     8     0
+ [9,]     9     2
+[10,]    10     1
+[11,]    11     1
+[12,]    12     1
+[13,]    13     2
 [14,]    14     0
-[15,]    15     1
+[15,]    15     0
 [16,]    16     2
-[17,]    17     1
-[18,]    18     2
-[19,]    19     2
+[17,]    17     2
+[18,]    18     0
+[19,]    19     0
 [20,]    20     1
-[21,]    21     0
-[22,]    22     2
+[21,]    21     2
+[22,]    22     0
 [23,]    23     2
-[24,]    24     0
+[24,]    24     1
 [25,]    25     0
-[26,]    26     2
+[26,]    26     0
 [27,]    27     1
-[28,]    28     2
+[28,]    28     0
 [29,]    29     0
-[30,]    30     2
-[31,]    31     1
-[32,]    32     1
+[30,]    30     1
+[31,]    31     2
+[32,]    32     2
 [33,]    33     1
 [34,]    34     2
-[35,]    35     0
-[36,]    36     1</code></pre>
+[35,]    35     1
+[36,]    36     0</code></pre>
 </div>
 <p>Como se mostró en el ejemplo anterior, el operador <code>[</code> también puede utilizarse para modificar los valores de las celdas un objeto <code>SpatRaster</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -3446,13 +3446,13 @@ max value   :    35 </code></pre>
 <span class='fu'><a href='https://rdrr.io/pkg/terra/man/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/terra/man/c.html'>c</a></span><span class='op'>(</span><span class='va'>elevacion</span>, <span class='va'>grano</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code>     lyr.1           lyr.1  
- Min.   : 0.00   Min.   :0  
- 1st Qu.:10.00   1st Qu.:0  
- Median :15.00   Median :1  
- Mean   :15.83   Mean   :1  
- 3rd Qu.:20.00   3rd Qu.:2  
- Max.   :35.00   Max.   :2  </code></pre>
+<pre><code>     lyr.1           lyr.1       
+ Min.   : 0.00   Min.   :0.0000  
+ 1st Qu.:10.00   1st Qu.:0.0000  
+ Median :15.00   Median :1.0000  
+ Mean   :15.83   Mean   :0.9444  
+ 3rd Qu.:20.00   3rd Qu.:2.0000  
+ Max.   :35.00   Max.   :2.0000  </code></pre>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Desviación estándar</span>
 <span class='fu'><a href='https://rdrr.io/pkg/terra/man/global.html'>global</a></span><span class='op'>(</span><span class='va'>elevacion</span>, <span class='va'>sd</span><span class='op'>)</span>
@@ -3469,8 +3469,8 @@ lyr.1 10.72381</code></pre>
 </code></pre>
 </div>
 <pre><code>  layer value count   label
-1     1     0    12 arcilla
-2     1     1    12    limo
+1     1     0    14 arcilla
+2     1     1    10    limo
 3     1     2    12   arena</code></pre>
 </div>
 <p>Las estadísticas pueden ser visualizadas con funciones como <a href="https://rdrr.io/pkg/terra/man/hist.html">hist()</a> y <a href="https://rdrr.io/pkg/terra/man/density.html">density()</a>.</p>

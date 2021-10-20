@@ -424,7 +424,7 @@ Ambos objetos pueden guardados en el disco con la función [writeRaster()](https
 setwd("/home/mfvargas")
 
 # Escritura de los objetos raster
-writeRaster(grano, "elevacion.asc")
+writeRaster(elevacion, "elevacion.asc")
 writeRaster(grano, "grano.asc")
 ```
 
