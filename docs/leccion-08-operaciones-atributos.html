@@ -2488,6 +2488,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </ul>
 </nav>
 </div>
+<p>Este documento está estructurado con base en el capítulo 3 de <a href="https://geocompr.robinlovelace.net/">Lovelace, R., Nowosad, J. &amp; Muenchow, J. (2020). Geocomputation with R</a>.</p>
 <h1 id="trabajo-previo">Trabajo previo</h1>
 <p>Lea el capítulo 3 de <a href="https://geocompr.robinlovelace.net/">Lovelace, R., Nowosad, J. &amp; Muenchow, J. (2020). Geocomputation with R</a>.</p>
 <h1 id="preparativos">Preparativos</h1>
@@ -3113,12 +3114,12 @@ Projected CRS: CR05 / CRTM05
 <span class='va'>lista_granos</span>
 </code></pre>
 </div>
-<pre><code> [1] &quot;arena&quot;   &quot;limo&quot;    &quot;arena&quot;   &quot;arena&quot;   &quot;arena&quot;   &quot;arena&quot;  
- [7] &quot;limo&quot;    &quot;arcilla&quot; &quot;arena&quot;   &quot;limo&quot;    &quot;limo&quot;    &quot;limo&quot;   
-[13] &quot;arcilla&quot; &quot;limo&quot;    &quot;limo&quot;    &quot;arcilla&quot; &quot;arena&quot;   &quot;arena&quot;  
-[19] &quot;limo&quot;    &quot;arcilla&quot; &quot;arena&quot;   &quot;arcilla&quot; &quot;limo&quot;    &quot;arcilla&quot;
-[25] &quot;arcilla&quot; &quot;arcilla&quot; &quot;arcilla&quot; &quot;arcilla&quot; &quot;arena&quot;   &quot;limo&quot;   
-[31] &quot;limo&quot;    &quot;limo&quot;    &quot;arcilla&quot; &quot;arcilla&quot; &quot;arena&quot;   &quot;arena&quot;  </code></pre>
+<pre><code> [1] &quot;arena&quot;   &quot;arena&quot;   &quot;arena&quot;   &quot;arena&quot;   &quot;limo&quot;    &quot;limo&quot;   
+ [7] &quot;arena&quot;   &quot;limo&quot;    &quot;limo&quot;    &quot;arena&quot;   &quot;arena&quot;   &quot;arena&quot;  
+[13] &quot;arcilla&quot; &quot;arcilla&quot; &quot;arcilla&quot; &quot;arcilla&quot; &quot;limo&quot;    &quot;arena&quot;  
+[19] &quot;arcilla&quot; &quot;arena&quot;   &quot;arcilla&quot; &quot;arcilla&quot; &quot;limo&quot;    &quot;limo&quot;   
+[25] &quot;arena&quot;   &quot;limo&quot;    &quot;arcilla&quot; &quot;arcilla&quot; &quot;arena&quot;   &quot;arena&quot;  
+[31] &quot;arcilla&quot; &quot;arena&quot;   &quot;arcilla&quot; &quot;limo&quot;    &quot;arena&quot;   &quot;limo&quot;   </code></pre>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Factor de tipos de granos</span>
 <span class='va'>grano_factor</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>lista_granos</span>, levels <span class='op'>=</span> <span class='va'>grano_tipo</span><span class='op'>)</span>
@@ -3272,41 +3273,41 @@ max values  :    36,    seco </code></pre>
 </div>
 <pre><code>      lyr.1 lyr.1
  [1,]     0     4
- [2,]     2     1
+ [2,]     2     2
  [3,]     3     2
  [4,]     4     2
- [5,]     5     2
- [6,]     6     2
- [7,]     7     1
- [8,]     8     0
- [9,]     9     2
-[10,]    10     1
-[11,]    11     1
-[12,]    12     1
+ [5,]     5     1
+ [6,]     6     1
+ [7,]     7     2
+ [8,]     8     1
+ [9,]     9     1
+[10,]    10     2
+[11,]    11     2
+[12,]    12     2
 [13,]    13     0
-[14,]    14     1
-[15,]    15     1
+[14,]    14     0
+[15,]    15     0
 [16,]    16     0
-[17,]    17     2
+[17,]    17     1
 [18,]    18     2
-[19,]    19     1
-[20,]    20     0
-[21,]    21     2
+[19,]    19     0
+[20,]    20     2
+[21,]    21     0
 [22,]    22     0
 [23,]    23     1
-[24,]    24     0
-[25,]    25     0
-[26,]    26     0
+[24,]    24     1
+[25,]    25     2
+[26,]    26     1
 [27,]    27     0
 [28,]    28     0
 [29,]    29     2
-[30,]    30     1
-[31,]    31     1
-[32,]    32     1
+[30,]    30     2
+[31,]    31     0
+[32,]    32     2
 [33,]    33     0
-[34,]    34     0
+[34,]    34     1
 [35,]    35     2
-[36,]    36     2</code></pre>
+[36,]    36     1</code></pre>
 </div>
 <p>Como se mostró en el ejemplo anterior, el operador <code>[</code> también puede utilizarse para modificar los valores de las celdas un objeto <code>SpatRaster</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -3442,13 +3443,13 @@ max value   :    35 </code></pre>
 <span class='fu'><a href='https://rdrr.io/pkg/terra/man/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/terra/man/c.html'>c</a></span><span class='op'>(</span><span class='va'>elevacion</span>, <span class='va'>grano</span><span class='op'>)</span><span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code>     lyr.1           lyr.1  
- Min.   : 0.00   Min.   :0  
- 1st Qu.:10.00   1st Qu.:0  
- Median :15.00   Median :1  
- Mean   :15.83   Mean   :1  
- 3rd Qu.:20.00   3rd Qu.:2  
- Max.   :35.00   Max.   :2  </code></pre>
+<pre><code>     lyr.1           lyr.1      
+ Min.   : 0.00   Min.   :0.000  
+ 1st Qu.:10.00   1st Qu.:0.000  
+ Median :15.00   Median :1.000  
+ Mean   :15.83   Mean   :1.111  
+ 3rd Qu.:20.00   3rd Qu.:2.000  
+ Max.   :35.00   Max.   :2.000  </code></pre>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Desviación estándar</span>
 <span class='fu'><a href='https://rdrr.io/pkg/terra/man/global.html'>global</a></span><span class='op'>(</span><span class='va'>elevacion</span>, <span class='va'>sd</span><span class='op'>)</span>
@@ -3465,9 +3466,9 @@ lyr.1 10.72381</code></pre>
 </code></pre>
 </div>
 <pre><code>  layer value count   label
-1     1     0    12 arcilla
-2     1     1    12    limo
-3     1     2    12   arena</code></pre>
+1     1     0    11 arcilla
+2     1     1    10    limo
+3     1     2    15   arena</code></pre>
 </div>
 <p>Las estadísticas pueden ser visualizadas con funciones como <a href="https://rdrr.io/pkg/terra/man/hist.html">hist()</a> y <a href="https://rdrr.io/pkg/terra/man/density.html">density()</a>.</p>
 <div class="layout-chunk" data-layout="l-body">

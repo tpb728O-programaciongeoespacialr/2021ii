@@ -10,6 +10,8 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Este documento está estructurado con base en el capítulo 3 de [Lovelace, R., Nowosad, J. & Muenchow, J. (2020). Geocomputation with R](https://geocompr.robinlovelace.net/).
+
 # Trabajo previo
 
 Lea el capítulo 3 de [Lovelace, R., Nowosad, J. & Muenchow, J. (2020). Geocomputation with R](https://geocompr.robinlovelace.net/).
