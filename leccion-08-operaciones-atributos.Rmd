@@ -333,7 +333,7 @@ La combinación de datos ubicados en diferentes fuentes es una tarea común en a
 - La función ```left_join()```
 - La función ```inner_join()```
 - La función ```right_join()```
-- La función ```inner_join()```
+- La función ```full_join()```
 
 Seguidamente, se ejemplificarán las dos primeras.
 
