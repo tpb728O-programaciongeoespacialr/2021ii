@@ -328,10 +328,14 @@ cantones %>%
 **Ejercicio: mediante ```summarize()```, y otras funciones de dplyr, despliegue el área y la cantidad de cantones de las dos provincias más pequeñas.**
 
 ### Cruce de datos
-La combinación de datos ubicados en diferentes fuentes es una tarea común en análisis de información. Este tipo de operaciones se realizan con base en atributos que son comunes en los conjuntos de datos que se desea "cruzar" (*join*). El paquete dplyr proporciona varias [funciones para realizar cruces de datos](https://dplyr.tidyverse.org/reference/join.html), entre las que se encuentran:
+La combinación de datos ubicados en diferentes fuentes es una tarea común en análisis de información. Este tipo de operaciones se realizan con base en atributos que son comunes en los conjuntos de datos que se desea "cruzar" (*join*). El paquete dplyr proporciona varias [funciones para realizar cruces de datos](https://dplyr.tidyverse.org/reference/mutate-joins.html), entre las que se encuentran:
 
 - La función ```left_join()```
 - La función ```inner_join()```
+- La función ```right_join()```
+- La función ```inner_join()```
+
+Seguidamente, se ejemplificarán las dos primeras.
 
 #### La función left_join()
 La función ```left_join()``` mantiene todos los registros de la tabla del lado izquierdo y agrega las columnas de la tabla del lado derecho, en los registros en los que hay coincidencia.
