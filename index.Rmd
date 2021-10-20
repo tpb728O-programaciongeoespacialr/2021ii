@@ -39,6 +39,7 @@ Este sitio web corresponde al curso impartido durante el segundo ciclo lectivo d
 [05 R - Graficación](leccion-05-r-graficacion.html)  
 [06 Tidyverse](leccion-06-tidyverse.html)  
 [07 El ecosistema geoespacial de R](leccion-07-r-ecosistemageoespacial.html)  
+[08 Operaciones de datos de atributos](leccion-08-operaciones-atributos.html) 
 
 # Tareas
 [01 R Markdown](tarea-01-rmarkdown.html)  

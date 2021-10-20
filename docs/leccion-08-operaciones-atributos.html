@@ -1,0 +1,3511 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { color: #20794d; } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007ba5; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #007ba5; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #007ba5; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #20794d; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+  <!--radix_placeholder_meta_tags-->
+  <title>TPB728O Programacion de aplicaciones geoespaciales en R 2021-II: Operaciones de datos de atributos</title>
+
+
+  <link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"/>
+
+
+  <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+  <meta property="og:title" content="TPB728O Programacion de aplicaciones geoespaciales en R 2021-II: Operaciones de datos de atributos"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:site_name" content="TPB728O Programacion de aplicaciones geoespaciales en R 2021-II"/>
+
+  <!--  https://dev.twitter.com/cards/types/summary -->
+  <meta property="twitter:card" content="summary"/>
+  <meta property="twitter:title" content="TPB728O Programacion de aplicaciones geoespaciales en R 2021-II: Operaciones de datos de atributos"/>
+
+  <!--/radix_placeholder_meta_tags-->
+  <!--radix_placeholder_rmarkdown_metadata-->
+
+  <script type="text/json" id="radix-rmarkdown-metadata">
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","output"]}},"value":[{"type":"character","attributes":{},"value":["Operaciones de datos de atributos"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[4]}]}]}]}
+  </script>
+  <!--/radix_placeholder_rmarkdown_metadata-->
+  <!--radix_placeholder_navigation_in_header-->
+  <meta name="distill:offset" content=""/>
+
+  <script type="application/javascript">
+
+    window.headroom_prevent_pin = false;
+
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+
+      // initialize headroom for banner
+      var header = $('header').get(0);
+      var headerHeight = header.offsetHeight;
+      var headroom = new Headroom(header, {
+        tolerance: 5,
+        onPin : function() {
+          if (window.headroom_prevent_pin) {
+            window.headroom_prevent_pin = false;
+            headroom.unpin();
+          }
+        }
+      });
+      headroom.init();
+      if(window.location.hash)
+        headroom.unpin();
+      $(header).addClass('headroom--transition');
+
+      // offset scroll location for banner on hash change
+      // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+      window.addEventListener("hashchange", function(event) {
+        window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
+      });
+
+      // responsive menu
+      $('.distill-site-header').each(function(i, val) {
+        var topnav = $(this);
+        var toggle = topnav.find('.nav-toggle');
+        toggle.on('click', function() {
+          topnav.toggleClass('responsive');
+        });
+      });
+
+      // nav dropdowns
+      $('.nav-dropbtn').click(function(e) {
+        $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+        $(this).parent().siblings('.nav-dropdown')
+           .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
+      });
+      $("body").click(function(e){
+        $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+      });
+      $(".nav-dropdown").click(function(e){
+        e.stopPropagation();
+      });
+    });
+  </script>
+
+  <style type="text/css">
+
+  /* Theme (user-documented overrideables for nav appearance) */
+
+  .distill-site-nav {
+    color: rgba(255, 255, 255, 0.8);
+    background-color: #0F2E3D;
+    font-size: 15px;
+    font-weight: 300;
+  }
+
+  .distill-site-nav a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .distill-site-nav a:hover {
+    color: white;
+  }
+
+  @media print {
+    .distill-site-nav {
+      display: none;
+    }
+  }
+
+  .distill-site-header {
+
+  }
+
+  .distill-site-footer {
+
+  }
+
+
+  /* Site Header */
+
+  .distill-site-header {
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 3;
+  }
+
+  .distill-site-header .nav-left {
+    display: inline-block;
+    margin-left: 8px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .distill-site-header .nav-left {
+      margin-left: 0;
+    }
+  }
+
+
+  .distill-site-header .nav-right {
+    float: right;
+    margin-right: 8px;
+  }
+
+  .distill-site-header a,
+  .distill-site-header .title {
+    display: inline-block;
+    text-align: center;
+    padding: 14px 10px 14px 10px;
+  }
+
+  .distill-site-header .title {
+    font-size: 18px;
+    min-width: 150px;
+  }
+
+  .distill-site-header .logo {
+    padding: 0;
+  }
+
+  .distill-site-header .logo img {
+    display: none;
+    max-height: 20px;
+    width: auto;
+    margin-bottom: -4px;
+  }
+
+  .distill-site-header .nav-image img {
+    max-height: 18px;
+    width: auto;
+    display: inline-block;
+    margin-bottom: -3px;
+  }
+
+
+
+  @media screen and (min-width: 1000px) {
+    .distill-site-header .logo img {
+      display: inline-block;
+    }
+    .distill-site-header .nav-left {
+      margin-left: 20px;
+    }
+    .distill-site-header .nav-right {
+      margin-right: 20px;
+    }
+    .distill-site-header .title {
+      padding-left: 12px;
+    }
+  }
+
+
+  .distill-site-header .nav-toggle {
+    display: none;
+  }
+
+  .nav-dropdown {
+    display: inline-block;
+    position: relative;
+  }
+
+  .nav-dropdown .nav-dropbtn {
+    border: none;
+    outline: none;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 16px 10px;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
+    margin-top: 1px;
+    z-index: 2;
+  }
+
+  .nav-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 1;
+    margin-top: 2px;
+    white-space: nowrap;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  .nav-dropdown-content hr {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-dropdown-active {
+    display: block;
+  }
+
+  .nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
+    color: black;
+    padding: 6px 24px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  .nav-dropdown-content .nav-dropdown-header {
+    display: block;
+    padding: 5px 24px;
+    padding-bottom: 0;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #999999;
+    white-space: nowrap;
+  }
+
+  .nav-dropdown:hover .nav-dropbtn {
+    color: white;
+  }
+
+  .nav-dropdown-content a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+  .nav-right .nav-dropdown-content {
+    margin-left: -45%;
+    right: 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+    .distill-site-header a.nav-toggle {
+      float: right;
+      display: block;
+    }
+    .distill-site-header .title {
+      margin-left: 0;
+    }
+    .distill-site-header .nav-right {
+      margin-right: 0;
+    }
+    .distill-site-header {
+      overflow: hidden;
+    }
+    .nav-right .nav-dropdown-content {
+      margin-left: 0;
+    }
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .distill-site-header.responsive {position: relative; min-height: 500px; }
+    .distill-site-header.responsive a.nav-toggle {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .distill-site-header.responsive a,
+    .distill-site-header.responsive .nav-dropdown {
+      display: block;
+      text-align: left;
+    }
+    .distill-site-header.responsive .nav-left,
+    .distill-site-header.responsive .nav-right {
+      width: 100%;
+    }
+    .distill-site-header.responsive .nav-dropdown {float: none;}
+    .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+    .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+  }
+
+  /* Site Footer */
+
+  .distill-site-footer {
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    z-index: 3;
+    margin-top: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+  }
+
+  /* Headroom */
+
+  d-title {
+    padding-top: 6rem;
+  }
+
+  @media print {
+    d-title {
+      padding-top: 4rem;
+    }
+  }
+
+  .headroom {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .headroom--transition {
+    transition: all .4s ease-in-out;
+  }
+
+  .headroom--unpinned {
+    top: -100px;
+  }
+
+  .headroom--pinned {
+    top: 0;
+  }
+
+  /* adjust viewport for navbar height */
+  /* helps vertically center bootstrap (non-distill) content */
+  .min-vh-100 {
+    min-height: calc(100vh - 100px) !important;
+  }
+
+  </style>
+
+  <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
+  <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
+  <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
+
+  <script type="application/javascript">
+
+  function getMeta(metaName) {
+    var metas = document.getElementsByTagName('meta');
+    for (let i = 0; i < metas.length; i++) {
+      if (metas[i].getAttribute('name') === metaName) {
+        return metas[i].getAttribute('content');
+      }
+    }
+    return '';
+  }
+
+  function offsetURL(url) {
+    var offset = getMeta('distill:offset');
+    return offset ? offset + '/' + url : url;
+  }
+
+  function createFuseIndex() {
+
+    // create fuse index
+    var options = {
+      keys: [
+        { name: 'title', weight: 20 },
+        { name: 'categories', weight: 15 },
+        { name: 'description', weight: 10 },
+        { name: 'contents', weight: 5 },
+      ],
+      ignoreLocation: true,
+      threshold: 0
+    };
+    var fuse = new window.Fuse([], options);
+
+    // fetch the main search.json
+    return fetch(offsetURL('search.json'))
+      .then(function(response) {
+        if (response.status == 200) {
+          return response.json().then(function(json) {
+            // index main articles
+            json.articles.forEach(function(article) {
+              fuse.add(article);
+            });
+            // download collections and index their articles
+            return Promise.all(json.collections.map(function(collection) {
+              return fetch(offsetURL(collection)).then(function(response) {
+                if (response.status === 200) {
+                  return response.json().then(function(articles) {
+                    articles.forEach(function(article) {
+                      fuse.add(article);
+                    });
+                  })
+                } else {
+                  return Promise.reject(
+                    new Error('Unexpected status from search index request: ' +
+                              response.status)
+                  );
+                }
+              });
+            })).then(function() {
+              return fuse;
+            });
+          });
+
+        } else {
+          return Promise.reject(
+            new Error('Unexpected status from search index request: ' +
+                        response.status)
+          );
+        }
+      });
+  }
+
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+
+    // get search element (bail if we don't have one)
+    var searchEl = window.document.getElementById('distill-search');
+    if (!searchEl)
+      return;
+
+    createFuseIndex()
+      .then(function(fuse) {
+
+        // make search box visible
+        searchEl.classList.remove('hidden');
+
+        // initialize autocomplete
+        var options = {
+          autoselect: true,
+          hint: false,
+          minLength: 2,
+        };
+        window.autocomplete(searchEl, options, [{
+          source: function(query, callback) {
+            const searchOptions = {
+              isCaseSensitive: false,
+              shouldSort: true,
+              minMatchCharLength: 2,
+              limit: 10,
+            };
+            var results = fuse.search(query, searchOptions);
+            callback(results
+              .map(function(result) { return result.item; })
+            );
+          },
+          templates: {
+            suggestion: function(suggestion) {
+              var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
+                ? `<img src="${offsetURL(suggestion.preview)}"</img>`
+                : '';
+              var html = `
+                <div class="search-item">
+                  <h3>${suggestion.title}</h3>
+                  <div class="search-item-description">
+                    ${suggestion.description || ''}
+                  </div>
+                  <div class="search-item-preview">
+                    ${img}
+                  </div>
+                </div>
+              `;
+              return html;
+            }
+          }
+        }]).on('autocomplete:selected', function(event, suggestion) {
+          window.location.href = offsetURL(suggestion.path);
+        });
+        // remove inline display style on autocompleter (we want to
+        // manage responsive display via css)
+        $('.algolia-autocomplete').css("display", "");
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+  });
+
+  </script>
+
+  <style type="text/css">
+
+  .nav-search {
+    font-size: x-small;
+  }
+
+  /* Algolioa Autocomplete */
+
+  .algolia-autocomplete {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: sub;
+    background-color: white;
+    color: black;
+    padding: 6px;
+    padding-top: 8px;
+    padding-bottom: 0;
+    border-radius: 6px;
+    border: 1px #0F2E3D solid;
+    width: 180px;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .distill-site-nav .algolia-autocomplete {
+      display: none;
+      visibility: hidden;
+    }
+    .distill-site-nav.responsive .algolia-autocomplete {
+      display: inline-block;
+      visibility: visible;
+    }
+    .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
+      margin-left: 0;
+      width: 400px;
+      max-height: 400px;
+    }
+  }
+
+  .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+    width: 90%;
+    outline: none;
+    border: none;
+  }
+
+  .algolia-autocomplete .aa-hint {
+    color: #999;
+  }
+  .algolia-autocomplete .aa-dropdown-menu {
+    width: 550px;
+    max-height: 70vh;
+    overflow-x: visible;
+    overflow-y: scroll;
+    padding: 5px;
+    margin-top: 3px;
+    margin-left: -150px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #999;
+    border-top: none;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+    cursor: pointer;
+    padding: 5px 4px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
+    border-bottom: none;
+    margin-bottom: 2px;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
+    overflow: hidden;
+    font-size: 0.8em;
+    line-height: 1.4em;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
+    font-size: 1rem;
+    margin-block-start: 0;
+    margin-block-end: 5px;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
+    display: inline-block;
+    overflow: hidden;
+    height: 2.8em;
+    width: 80%;
+    margin-right: 4%;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
+    display: inline-block;
+    width: 15%;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
+    height: 3em;
+    width: auto;
+    display: none;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
+    display: initial;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+    background-color: #eee;
+  }
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  </style>
+
+
+  <!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+  <style type="text/css">
+
+  body {
+    background-color: white;
+  }
+
+  .pandoc-table {
+    width: 100%;
+  }
+
+  .pandoc-table>caption {
+    margin-bottom: 10px;
+  }
+
+  .pandoc-table th:not([align]) {
+    text-align: left;
+  }
+
+  .pagedtable-footer {
+    font-size: 15px;
+  }
+
+  d-byline .byline {
+    grid-template-columns: 2fr 2fr;
+  }
+
+  d-byline .byline h3 {
+    margin-block-start: 1.5em;
+  }
+
+  d-byline .byline .authors-affiliations h3 {
+    margin-block-start: 0.5em;
+  }
+
+  .authors-affiliations .orcid-id {
+    width: 16px;
+    height:16px;
+    margin-left: 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+    padding-bottom: 2px;
+  }
+
+  d-title .dt-tags {
+    margin-top: 1em;
+    grid-column: text;
+  }
+
+  .dt-tags .dt-tag {
+    text-decoration: none;
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0em 0.4em;
+    margin-right: 0.5em;
+    margin-bottom: 0.4em;
+    font-size: 70%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  d-article table.gt_table td,
+  d-article table.gt_table th {
+    border-bottom: none;
+  }
+
+  .html-widget {
+    margin-bottom: 2.0em;
+  }
+
+  .l-screen-inset {
+    padding-right: 16px;
+  }
+
+  .l-screen .caption {
+    margin-left: 10px;
+  }
+
+  .shaded {
+    background: rgb(247, 247, 247);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .html-widget {
+    margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .shaded-content {
+    background: white;
+  }
+
+  .text-output {
+    margin-top: 0;
+    line-height: 1.5em;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  d-article {
+    padding-top: 2.5rem;
+    padding-bottom: 30px;
+  }
+
+  d-appendix {
+    padding-top: 30px;
+  }
+
+  d-article>p>img {
+    width: 100%;
+  }
+
+  d-article h2 {
+    margin: 1rem 0 1.5rem 0;
+  }
+
+  d-article h3 {
+    margin-top: 1.5rem;
+  }
+
+  d-article iframe {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 2.0em;
+    width: 100%;
+  }
+
+  /* Tweak code blocks */
+
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: auto;
+  }
+
+  d-article div.sourceCode {
+    background-color: white;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 10px;
+    font-size: 12px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+  }
+
+  d-article pre {
+    font-size: 12px;
+    color: black;
+    background: none;
+    margin-top: 0;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  d-article pre a {
+    border-bottom: none;
+  }
+
+  d-article pre a:hover {
+    border-bottom: none;
+    text-decoration: underline;
+  }
+
+  d-article details {
+    grid-column: text;
+    margin-bottom: 0.8em;
+  }
+
+  @media(min-width: 768px) {
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: visible !important;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 18px;
+    font-size: 14px;
+  }
+
+  d-article pre {
+    font-size: 14px;
+  }
+
+  }
+
+  figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  /* CSS for d-contents */
+
+  .d-contents {
+    grid-column: text;
+    color: rgba(0,0,0,0.8);
+    font-size: 0.9em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    padding-left: 0.25em;
+    justify-self: start;
+  }
+
+  @media(min-width: 1000px) {
+    .d-contents.d-contents-float {
+      height: 0;
+      grid-column-start: 1;
+      grid-column-end: 4;
+      justify-self: center;
+      padding-right: 3em;
+      padding-left: 2em;
+    }
+  }
+
+  .d-contents nav h3 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+
+  .d-contents li {
+    list-style-type: none
+  }
+
+  .d-contents nav > ul {
+    padding-left: 0;
+  }
+
+  .d-contents ul {
+    padding-left: 1em
+  }
+
+  .d-contents nav ul li {
+    margin-top: 0.6em;
+    margin-bottom: 0.2em;
+  }
+
+  .d-contents nav a {
+    font-size: 13px;
+    border-bottom: none;
+    text-decoration: none
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .d-contents nav a:hover {
+    text-decoration: underline solid rgba(0, 0, 0, 0.6)
+  }
+
+  .d-contents nav > ul > li > a {
+    font-weight: 600;
+  }
+
+  .d-contents nav > ul > li > ul {
+    font-weight: inherit;
+  }
+
+  .d-contents nav > ul > li > ul > li {
+    margin-top: 0.2em;
+  }
+
+
+  .d-contents nav ul {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+  }
+
+  .d-article-with-toc h2:nth-child(2) {
+    margin-top: 0;
+  }
+
+
+  /* Figure */
+
+  .figure {
+    position: relative;
+    margin-bottom: 2.5em;
+    margin-top: 1.5em;
+  }
+
+  .figure img {
+    width: 100%;
+  }
+
+  .figure .caption {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    line-height: 1.5em;
+  }
+
+  .figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  .figure .caption a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .figure .caption b,
+  .figure .caption strong, {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 1.0);
+  }
+
+  /* Citations */
+
+  d-article .citation {
+    color: inherit;
+    cursor: inherit;
+  }
+
+  div.hanging-indent{
+    margin-left: 1em; text-indent: -1em;
+  }
+
+  /* Citation hover box */
+
+  .tippy-box[data-theme~=light-border] {
+    background-color: rgba(250, 250, 250, 0.95);
+  }
+
+  .tippy-content > p {
+    margin-bottom: 0;
+    padding: 2px;
+  }
+
+
+  /* Tweak 1000px media break to show more text */
+
+  @media(min-width: 1000px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 16px;
+    }
+
+    .grid {
+      grid-column-gap: 16px;
+    }
+
+    d-article {
+      font-size: 1.06rem;
+      line-height: 1.7em;
+    }
+    figure .caption, .figure .caption, figure figcaption {
+      font-size: 13px;
+    }
+  }
+
+  @media(min-width: 1180px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 32px;
+    }
+
+    .grid {
+      grid-column-gap: 32px;
+    }
+  }
+
+
+  /* Get the citation styles for the appendix (not auto-injected on render since
+     we do our own rendering of the citation appendix) */
+
+  d-appendix .citation-appendix,
+  .d-appendix .citation-appendix {
+    font-size: 11px;
+    line-height: 15px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 18px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.02);
+    padding: 10px 18px;
+    border-radius: 3px;
+    color: rgba(150, 150, 150, 1);
+    overflow: hidden;
+    margin-top: -12px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  /* Include appendix styles here so they can be overridden */
+
+  d-appendix {
+    contain: layout style;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-top: 60px;
+    margin-bottom: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0,0,0,0.5);
+    padding-top: 60px;
+    padding-bottom: 48px;
+  }
+
+  d-appendix h3 {
+    grid-column: page-start / text-start;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 1em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.65);
+  }
+
+  d-appendix h3 + * {
+    margin-top: 1em;
+  }
+
+  d-appendix ol {
+    padding: 0 0 0 15px;
+  }
+
+  @media (min-width: 768px) {
+    d-appendix ol {
+      padding: 0 0 0 30px;
+      margin-left: -30px;
+    }
+  }
+
+  d-appendix li {
+    margin-bottom: 1em;
+  }
+
+  d-appendix a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  d-appendix > * {
+    grid-column: text;
+  }
+
+  d-appendix > d-footnote-list,
+  d-appendix > d-citation-list,
+  d-appendix > distill-appendix {
+    grid-column: screen;
+  }
+
+  /* Include footnote styles here so they can be overridden */
+
+  d-footnote-list {
+    contain: layout style;
+  }
+
+  d-footnote-list > * {
+    grid-column: text;
+  }
+
+  d-footnote-list a.footnote-backlink {
+    color: rgba(0,0,0,0.3);
+    padding-left: 0.5em;
+  }
+
+
+
+  /* Anchor.js */
+
+  .anchorjs-link {
+    /*transition: all .25s linear; */
+    text-decoration: none;
+    border-bottom: none;
+  }
+  *:hover > .anchorjs-link {
+    margin-left: -1.125em !important;
+    text-decoration: none;
+    border-bottom: none;
+  }
+
+  /* Social footer */
+
+  .social_footer {
+    margin-top: 30px;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.67);
+  }
+
+  .disqus-comments {
+    margin-right: 30px;
+  }
+
+  .disqus-comment-count {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+
+  #disqus_thread {
+    margin-top: 30px;
+  }
+
+  .article-sharing a {
+    border-bottom: none;
+    margin-right: 8px;
+  }
+
+  .article-sharing a:hover {
+    border-bottom: none;
+  }
+
+  .sidebar-section.subscribe {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .subscribe p {
+    margin-bottom: 0.5em;
+  }
+
+
+  .article-footer .subscribe {
+    font-size: 15px;
+    margin-top: 45px;
+  }
+
+
+  .sidebar-section.custom {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .custom p {
+    margin-bottom: 0.5em;
+  }
+
+  /* Styles for listing layout (hide title) */
+  .layout-listing d-title, .layout-listing .d-title {
+    display: none;
+  }
+
+  /* Styles for posts lists (not auto-injected) */
+
+
+  .posts-with-sidebar {
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+
+  .posts-list .description h2,
+  .posts-list .description p {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .posts-list .description h2 {
+    font-weight: 700;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .posts-list h2.post-tag {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 12px;
+  }
+  .posts-list {
+    margin-top: 60px;
+    margin-bottom: 24px;
+  }
+
+  .posts-list .post-preview {
+    text-decoration: none;
+    overflow: hidden;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 24px 0;
+  }
+
+  .post-preview-last {
+    border-bottom: none !important;
+  }
+
+  .posts-list .posts-list-caption {
+    grid-column: screen;
+    font-weight: 400;
+  }
+
+  .posts-list .post-preview h2 {
+    margin: 0 0 6px 0;
+    line-height: 1.2em;
+    font-style: normal;
+    font-size: 24px;
+  }
+
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.4em;
+    font-size: 16px;
+  }
+
+  .posts-list .post-preview .thumbnail {
+    box-sizing: border-box;
+    margin-bottom: 24px;
+    position: relative;
+    max-width: 500px;
+  }
+  .posts-list .post-preview img {
+    width: 100%;
+    display: block;
+  }
+
+  .posts-list .metadata {
+    font-size: 12px;
+    line-height: 1.4em;
+    margin-bottom: 18px;
+  }
+
+  .posts-list .metadata > * {
+    display: inline-block;
+  }
+
+  .posts-list .metadata .publishedDate {
+    margin-right: 2em;
+  }
+
+  .posts-list .metadata .dt-authors {
+    display: block;
+    margin-top: 0.3em;
+    margin-right: 2em;
+  }
+
+  .posts-list .dt-tags {
+    display: block;
+    line-height: 1em;
+  }
+
+  .posts-list .dt-tags .dt-tag {
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0.3em 0.4em;
+    margin-right: 0.2em;
+    margin-bottom: 0.4em;
+    font-size: 60%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .posts-list img {
+    opacity: 1;
+  }
+
+  .posts-list img[data-src] {
+    opacity: 0;
+  }
+
+  .posts-more {
+    clear: both;
+  }
+
+
+  .posts-sidebar {
+    font-size: 16px;
+  }
+
+  .posts-sidebar h3 {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .sidebar-section {
+    margin-bottom: 30px;
+  }
+
+  .categories ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .categories li {
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 0;
+  }
+
+  .categories li>a {
+    border-bottom: none;
+  }
+
+  .categories li>a:hover {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  }
+
+  .categories .active {
+    font-weight: 600;
+  }
+
+  .categories .category-count {
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+
+  @media(min-width: 768px) {
+    .posts-list .post-preview h2 {
+      font-size: 26px;
+    }
+    .posts-list .post-preview .thumbnail {
+      float: right;
+      width: 30%;
+      margin-bottom: 0;
+    }
+    .posts-list .post-preview .description {
+      float: left;
+      width: 45%;
+    }
+    .posts-list .post-preview .metadata {
+      float: left;
+      width: 20%;
+      margin-top: 8px;
+    }
+    .posts-list .post-preview p {
+      margin: 0 0 12px 0;
+      line-height: 1.5em;
+      font-size: 16px;
+    }
+    .posts-with-sidebar .posts-list {
+      float: left;
+      width: 75%;
+    }
+    .posts-with-sidebar .posts-sidebar {
+      float: right;
+      width: 20%;
+      margin-top: 60px;
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+  }
+
+
+  /* Improve display for browsers without grid (IE/Edge <= 15) */
+
+  .downlevel {
+    line-height: 1.6em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+  }
+
+  .downlevel .d-title {
+    padding-top: 6rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .downlevel .d-title h1 {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.1em;
+    margin: 0 0 0.5rem;
+  }
+
+  .downlevel .d-title p {
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.55em;
+    margin-top: 0;
+  }
+
+  .downlevel .d-byline {
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    font-size: 0.8rem;
+    line-height: 1.8em;
+  }
+
+  .downlevel .section-separator {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .downlevel .d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+
+
+  .downlevel .d-appendix {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: none;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.5);
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+
+  .downlevel .footnotes ol {
+    padding-left: 13px;
+  }
+
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  @media(min-width: 768px) {
+    .downlevel .base-grid,
+    .downlevel .distill-header,
+    .downlevel .d-title,
+    .downlevel .d-abstract,
+    .downlevel .d-article,
+    .downlevel .d-appendix,
+    .downlevel .distill-appendix,
+    .downlevel .d-byline,
+    .downlevel .d-footnote-list,
+    .downlevel .d-citation-list,
+    .downlevel .distill-footer,
+    .downlevel .appendix-bottom,
+    .downlevel .posts-container {
+    padding-left: 150px;
+    padding-right: 150px;
+    max-width: 900px;
+  }
+  }
+
+  .downlevel pre code {
+    display: block;
+    border-left: 2px solid rgba(0, 0, 0, .1);
+    padding: 0 0 0 20px;
+    font-size: 14px;
+  }
+
+  .downlevel code, .downlevel pre {
+    color: black;
+    background: none;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  .downlevel .posts-list .post-preview {
+    color: inherit;
+  }
+
+
+
+  </style>
+
+  <script type="application/javascript">
+
+  function is_downlevel_browser() {
+    if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                   window.navigator.userAgent)) {
+      return true;
+    } else {
+      return window.load_distill_framework === undefined;
+    }
+  }
+
+  // show body when load is complete
+  function on_load_complete() {
+
+    // add anchors
+    if (window.anchors) {
+      window.anchors.options.placement = 'left';
+      window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+    }
+
+
+    // set body to visible
+    document.body.style.visibility = 'visible';
+
+    // force redraw for leaflet widgets
+    if (window.HTMLWidgets) {
+      var maps = window.HTMLWidgets.findAll(".leaflet");
+      $.each(maps, function(i, el) {
+        var map = this.getMap();
+        map.invalidateSize();
+        map.eachLayer(function(layer) {
+          if (layer instanceof L.TileLayer)
+            layer.redraw();
+        });
+      });
+    }
+
+    // trigger 'shown' so htmlwidgets resize
+    $('d-article').trigger('shown');
+  }
+
+  function init_distill() {
+
+    init_common();
+
+    // create front matter
+    var front_matter = $('<d-front-matter></d-front-matter>');
+    $('#distill-front-matter').wrap(front_matter);
+
+    // create d-title
+    $('.d-title').changeElementType('d-title');
+
+    // create d-byline
+    var byline = $('<d-byline></d-byline>');
+    $('.d-byline').replaceWith(byline);
+
+    // create d-article
+    var article = $('<d-article></d-article>');
+    $('.d-article').wrap(article).children().unwrap();
+
+    // move posts container into article
+    $('.posts-container').appendTo($('d-article'));
+
+    // create d-appendix
+    $('.d-appendix').changeElementType('d-appendix');
+
+    // flag indicating that we have appendix items
+    var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+    // replace footnotes with <d-footnote>
+    $('.footnote-ref').each(function(i, val) {
+      appendix = true;
+      var href = $(this).attr('href');
+      var id = href.replace('#', '');
+      var fn = $('#' + id);
+      var fn_p = $('#' + id + '>p');
+      fn_p.find('.footnote-back').remove();
+      var text = fn_p.html();
+      var dtfn = $('<d-footnote></d-footnote>');
+      dtfn.html(text);
+      $(this).replaceWith(dtfn);
+    });
+    // remove footnotes
+    $('.footnotes').remove();
+
+    // move refs into #references-listing
+    $('#references-listing').replaceWith($('#refs'));
+
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      var id = $(this).attr('id');
+      $('.d-contents a[href="#' + id + '"]').parent().remove();
+      appendix = true;
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+    });
+
+    // show d-appendix if we have appendix content
+    $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+    // localize layout chunks to just output
+    $('.layout-chunk').each(function(i, val) {
+
+      // capture layout
+      var layout = $(this).attr('data-layout');
+
+      // apply layout to markdown level block elements
+      var elements = $(this).children().not('details, div.sourceCode, pre, script');
+      elements.each(function(i, el) {
+        var layout_div = $('<div class="' + layout + '"></div>');
+        if (layout_div.hasClass('shaded')) {
+          var shaded_content = $('<div class="shaded-content"></div>');
+          $(this).wrap(shaded_content);
+          $(this).parent().wrap(layout_div);
+        } else {
+          $(this).wrap(layout_div);
+        }
+      });
+
+
+      // unwrap the layout-chunk div
+      $(this).children().unwrap();
+    });
+
+    // remove code block used to force  highlighting css
+    $('.distill-force-highlighting-css').parent().remove();
+
+    // remove empty line numbers inserted by pandoc when using a
+    // custom syntax highlighting theme
+    $('code.sourceCode a:empty').remove();
+
+    // load distill framework
+    load_distill_framework();
+
+    // wait for window.distillRunlevel == 4 to do post processing
+    function distill_post_process() {
+
+      if (!window.distillRunlevel || window.distillRunlevel < 4)
+        return;
+
+      // hide author/affiliations entirely if we have no authors
+      var front_matter = JSON.parse($("#distill-front-matter").html());
+      var have_authors = front_matter.authors && front_matter.authors.length > 0;
+      if (!have_authors)
+        $('d-byline').addClass('hidden');
+
+      // article with toc class
+      $('.d-contents').parent().addClass('d-article-with-toc');
+
+      // strip links that point to #
+      $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+      // add orcid ids
+      $('.authors-affiliations').find('.author').each(function(i, el) {
+        var orcid_id = front_matter.authors[i].orcidID;
+        if (orcid_id) {
+          var a = $('<a></a>');
+          a.attr('href', 'https://orcid.org/' + orcid_id);
+          var img = $('<img></img>');
+          img.addClass('orcid-id');
+          img.attr('alt', 'ORCID ID');
+          img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+          a.append(img);
+          $(this).append(a);
+        }
+      });
+
+      // hide elements of author/affiliations grid that have no value
+      function hide_byline_column(caption) {
+        $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+      }
+
+      // affiliations
+      var have_affiliations = false;
+      for (var i = 0; i<front_matter.authors.length; ++i) {
+        var author = front_matter.authors[i];
+        if (author.affiliation !== "&nbsp;") {
+          have_affiliations = true;
+          break;
+        }
+      }
+      if (!have_affiliations)
+        $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+      // published date
+      if (!front_matter.publishedDate)
+        hide_byline_column("Published");
+
+      // document object identifier
+      var doi = $('d-byline').find('h3:contains("DOI")');
+      var doi_p = doi.next().empty();
+      if (!front_matter.doi) {
+        // if we have a citation and valid citationText then link to that
+        if ($('#citation').length > 0 && front_matter.citationText) {
+          doi.html('Citation');
+          $('<a href="#citation"></a>')
+            .text(front_matter.citationText)
+            .appendTo(doi_p);
+        } else {
+          hide_byline_column("DOI");
+        }
+      } else {
+        $('<a></a>')
+           .attr('href', "https://doi.org/" + front_matter.doi)
+           .html(front_matter.doi)
+           .appendTo(doi_p);
+      }
+
+       // change plural form of authors/affiliations
+      if (front_matter.authors.length === 1) {
+        var grid = $('.authors-affiliations');
+        grid.children('h3:contains("Authors")').text('Author');
+        grid.children('h3:contains("Affiliations")').text('Affiliation');
+      }
+
+      // remove d-appendix and d-footnote-list local styles
+      $('d-appendix > style:first-child').remove();
+      $('d-footnote-list > style:first-child').remove();
+
+      // move appendix-bottom entries to the bottom
+      $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+      $('.appendix-bottom').remove();
+
+      // hoverable references
+      $('span.citation[data-cites]').each(function() {
+        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        window.tippy(this, {
+          allowHTML: true,
+          content: refHtml,
+          maxWidth: 500,
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        });
+      });
+
+      // clear polling timer
+      clearInterval(tid);
+
+      // show body now that everything is ready
+      on_load_complete();
+    }
+
+    var tid = setInterval(distill_post_process, 50);
+    distill_post_process();
+
+  }
+
+  function init_downlevel() {
+
+    init_common();
+
+     // insert hr after d-title
+    $('.d-title').after($('<hr class="section-separator"/>'));
+
+    // check if we have authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+    // manage byline/border
+    if (!have_authors)
+      $('.d-byline').remove();
+    $('.d-byline').after($('<hr class="section-separator"/>'));
+    $('.d-byline a').remove();
+
+    // remove toc
+    $('.d-contents').remove();
+
+    // move appendix elements
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+    });
+
+
+    // inject headers into references and footnotes
+    var refs_header = $('<h3></h3>');
+    refs_header.text('References');
+    $('#refs').prepend(refs_header);
+
+    var footnotes_header = $('<h3></h3');
+    footnotes_header.text('Footnotes');
+    $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // remove appendix if it's empty
+    if ($('.d-appendix').children().length === 0)
+      $('.d-appendix').remove();
+
+    // prepend separator above appendix
+    $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+    // trim code
+    $('pre>code').each(function(i, val) {
+      $(this).html($.trim($(this).html()));
+    });
+
+    // move posts-container right before article
+    $('.posts-container').insertBefore($('.d-article'));
+
+    $('body').addClass('downlevel');
+
+    on_load_complete();
+  }
+
+
+  function init_common() {
+
+    // jquery plugin to change element types
+    (function($) {
+      $.fn.changeElementType = function(newType) {
+        var attrs = {};
+
+        $.each(this[0].attributes, function(idx, attr) {
+          attrs[attr.nodeName] = attr.nodeValue;
+        });
+
+        this.replaceWith(function() {
+          return $("<" + newType + "/>", attrs).append($(this).contents());
+        });
+      };
+    })(jQuery);
+
+    // prevent underline for linked images
+    $('a > img').parent().css({'border-bottom' : 'none'});
+
+    // mark non-body figures created by knitr chunks as 100% width
+    $('.layout-chunk').each(function(i, val) {
+      var figures = $(this).find('img, .html-widget');
+      if ($(this).attr('data-layout') !== "l-body") {
+        figures.css('width', '100%');
+      } else {
+        figures.css('max-width', '100%');
+        figures.filter("[width]").each(function(i, val) {
+          var fig = $(this);
+          fig.css('width', fig.attr('width') + 'px');
+        });
+
+      }
+    });
+
+    // auto-append index.html to post-preview links in file: protocol
+    // and in rstudio ide preview
+    $('.post-preview').each(function(i, val) {
+      if (window.location.protocol === "file:")
+        $(this).attr('href', $(this).attr('href') + "index.html");
+    });
+
+    // get rid of index.html references in header
+    if (window.location.protocol !== "file:") {
+      $('.distill-site-header a[href]').each(function(i,val) {
+        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+      });
+    }
+
+    // add class to pandoc style tables
+    $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+    $('.kable-table').children('table').addClass('pandoc-table');
+
+    // add figcaption style to table captions
+    $('caption').parent('table').addClass("figcaption");
+
+    // initialize posts list
+    if (window.init_posts_list)
+      window.init_posts_list();
+
+    // implmement disqus comment link
+    $('.disqus-comment-count').click(function() {
+      window.headroom_prevent_pin = true;
+      $('#disqus_thread').toggleClass('hidden');
+      if (!$('#disqus_thread').hasClass('hidden')) {
+        var offset = $(this).offset();
+        $(window).resize();
+        $('html, body').animate({
+          scrollTop: offset.top - 35
+        });
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (is_downlevel_browser())
+      init_downlevel();
+    else
+      window.addEventListener('WebComponentsReady', init_distill);
+  });
+
+  </script>
+
+  <style type="text/css">
+  /* base variables */
+
+  /* Edit the CSS properties in this file to create a custom
+     Distill theme. Only edit values in the right column
+     for each row; values shown are the CSS defaults.
+     To return any property to the default,
+     you may set its value to: unset
+     All rows must end with a semi-colon.                      */
+
+  /* Optional: embed custom fonts here with `@import`          */
+  /* This must remain at the top of this file.                 */
+
+
+
+  html {
+    /*-- Main font sizes --*/
+    --title-size:      50px;
+    --body-size:       1.06rem;
+    --code-size:       14px;
+    --aside-size:      12px;
+    --fig-cap-size:    13px;
+    /*-- Main font colors --*/
+    --title-color:     #000000;
+    --header-color:    rgba(0, 0, 0, 0.8);
+    --body-color:      rgba(0, 0, 0, 0.8);
+    --aside-color:     rgba(0, 0, 0, 0.6);
+    --fig-cap-color:   rgba(0, 0, 0, 0.6);
+    /*-- Specify custom fonts ~~~ must be imported above   --*/
+    --heading-font:    sans-serif;
+    --mono-font:       monospace;
+    --body-font:       sans-serif;
+    --navbar-font:     sans-serif;  /* websites + blogs only */
+  }
+
+  /*-- ARTICLE METADATA --*/
+  d-byline {
+    --heading-size:    0.6rem;
+    --heading-color:   rgba(0, 0, 0, 0.5);
+    --body-size:       0.8rem;
+    --body-color:      rgba(0, 0, 0, 0.8);
+  }
+
+  /*-- ARTICLE TABLE OF CONTENTS --*/
+  .d-contents {
+    --heading-size:    18px;
+    --contents-size:   13px;
+  }
+
+  /*-- ARTICLE APPENDIX --*/
+  d-appendix {
+    --heading-size:    15px;
+    --heading-color:   rgba(0, 0, 0, 0.65);
+    --text-size:       0.8em;
+    --text-color:      rgba(0, 0, 0, 0.5);
+  }
+
+  /*-- WEBSITE HEADER + FOOTER --*/
+  /* These properties only apply to Distill sites and blogs  */
+
+  .distill-site-header {
+    --title-size:       18px;
+    --text-color:       rgba(255, 255, 255, 0.8);
+    --text-size:        15px;
+    --hover-color:      white;
+    --bkgd-color:       #0F2E3D;
+  }
+
+  .distill-site-footer {
+    --text-color:       rgba(255, 255, 255, 0.8);
+    --text-size:        15px;
+    --hover-color:      white;
+    --bkgd-color:       #0F2E3D;
+  }
+
+  /*-- Additional custom styles --*/
+  /* Add any additional CSS rules below                      */
+  </style>
+  <style type="text/css">/* base variables */
+
+  /* Edit the CSS properties in this file to create a custom
+     Distill theme. Only edit values in the right column
+     for each row; values shown are the CSS defaults.
+     To return any property to the default,
+     you may set its value to: unset
+     All rows must end with a semi-colon.                      */
+
+  /* Optional: embed custom fonts here with `@import`          */
+  /* This must remain at the top of this file.                 */
+
+  /* Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&display=swap');
+
+  html {
+    /*-- Main font sizes --*/
+    --title-size:      50px;
+    --body-size:       1.06rem;
+    --code-size:       14px;
+    --aside-size:      13px;
+    --fig-cap-size:    13px;
+    /*-- Main font colors --*/
+    --title-color:     #122140;
+    --header-color:    #122140;
+    --body-color:      rgba(0, 0, 0, 0.8);
+    --aside-color:     rgba(0, 0, 0, 0.6);
+    --fig-cap-color:   rgba(0, 0, 0, 0.6);
+    /*-- Specify custom fonts ~~~ must be imported above   --*/
+    --heading-font:    "Lora", sans-serif;
+    --mono-font:       "Fira Code", monospace;
+    --body-font:       "Source Sans Pro", sans-serif;
+    --navbar-font:     "Lora", sans-serif;  /* websites + blogs only */
+  }
+
+  /*-- ARTICLE METADATA --*/
+  d-byline {
+    --heading-size:    0.9rem;
+    --heading-color:   rgba(0, 0, 0, 0.5);
+    --body-size:       1rem;
+    --body-color:      rgba(0, 0, 0, 0.8);
+  }
+
+  /*-- ARTICLE TABLE OF CONTENTS --*/
+  .d-contents {
+    --heading-size:    20px;
+    --contents-size:   16px;
+  }
+
+  /*-- ARTICLE APPENDIX --*/
+  d-appendix {
+    --heading-size:    15px;
+    --heading-color:   rgba(0, 0, 0, 0.65);
+    --text-size:       0.8em;
+    --text-color:      rgba(0, 0, 0, 0.5);
+  }
+
+  /*-- WEBSITE HEADER + FOOTER --*/
+  /* These properties only apply to Distill sites and blogs  */
+
+  .distill-site-header {
+    --title-size:       18px;
+    --text-color:       rgba(255, 255, 255, 0.8);
+    --text-size:        16px;
+    --hover-color:      white;
+    --bkgd-color:       #122140;
+  }
+
+  .distill-site-footer {
+    --text-color:       rgba(255, 255, 255, 0.8);
+    --text-size:        15px;
+    --hover-color:      white;
+    --bkgd-color:       #0F2E3D;
+  }
+
+  /*-- Additional custom styles --*/
+  /* Add any additional CSS rules below                      */
+
+  /* Change bullets */
+  ul > li::marker {
+    font-size: 1.125em;
+    color: #e5bf00;
+  }
+
+  /* Change link appearance */
+  d-article a {
+    border-bottom: 1.5px solid #e5bf00;
+    text-decoration: none;
+  }
+
+  /* Change navbar header appearance */
+  .distill-site-header {
+    font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+
+  .distill-site-header a:hover {
+    text-decoration: underline;
+  }
+
+  /* Change site description appearance */
+  d-title p {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  /* Change site metadata appearance */
+  d-byline .byline h3 {
+    font-family: 'Lora';
+    letter-spacing: 0.07em;
+  }
+
+  d-byline a:hover {
+    text-decoration: underline;
+  }
+
+  /*-- Code --*/
+  code, pre {
+      font-family: "Source Code Pro", "Lucida Console",
+      Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }</style>
+  <style type="text/css">
+  /* base style */
+
+  /* FONT FAMILIES */
+
+  :root {
+    --heading-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    --mono-default: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    --body-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  body,
+  .posts-list .post-preview p,
+  .posts-list .description p {
+    font-family: var(--body-font), var(--body-default);
+  }
+
+  h1, h2, h3, h4, h5, h6,
+  .posts-list .post-preview h2,
+  .posts-list .description h2 {
+    font-family: var(--heading-font), var(--heading-default);
+  }
+
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: var(--mono-font), var(--mono-default);
+  }
+
+
+  /*-- TITLE --*/
+  d-title h1,
+  .posts-list > h1 {
+    color: var(--title-color, black);
+  }
+
+  d-title h1 {
+    font-size: var(--title-size, 50px);
+  }
+
+  /*-- HEADERS --*/
+  d-article h1,
+  d-article h2,
+  d-article h3,
+  d-article h4,
+  d-article h5,
+  d-article h6 {
+    color: var(--header-color, rgba(0, 0, 0, 0.8));
+  }
+
+  /*-- BODY --*/
+  d-article > p,  /* only text inside of <p> tags */
+  d-article > ul, /* lists */
+  d-article > ol {
+    color: var(--body-color, rgba(0, 0, 0, 0.8));
+    font-size: var(--body-size, 1.06rem);
+  }
+
+
+  /*-- CODE --*/
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-size: var(--code-size, 14px);
+  }
+
+  /*-- ASIDE --*/
+  d-article aside {
+    font-size: var(--aside-size, 12px);
+    color: var(--aside-color, rgba(0, 0, 0, 0.6));
+  }
+
+  /*-- FIGURE CAPTIONS --*/
+  figure .caption,
+  figure figcaption,
+  .figure .caption {
+    font-size: var(--fig-cap-size, 13px);
+    color: var(--fig-cap-color, rgba(0, 0, 0, 0.6));
+  }
+
+  /*-- METADATA --*/
+  d-byline h3 {
+    font-size: var(--heading-size, 0.6rem);
+    color: var(--heading-color, rgba(0, 0, 0, 0.5));
+  }
+
+  d-byline {
+    font-size: var(--body-size, 0.8rem);
+    color: var(--body-color, rgba(0, 0, 0, 0.8));
+  }
+
+  d-byline a,
+  d-article d-byline a {
+    color: var(--body-color, rgba(0, 0, 0, 0.8));
+  }
+
+  /*-- TABLE OF CONTENTS --*/
+  .d-contents nav h3 {
+    font-size: var(--heading-size, 18px);
+  }
+
+  .d-contents nav a {
+    font-size: var(--contents-size, 13px);
+  }
+
+  /*-- APPENDIX --*/
+  d-appendix h3 {
+    font-size: var(--heading-size, 15px);
+    color: var(--heading-color, rgba(0, 0, 0, 0.65));
+  }
+
+  d-appendix {
+    font-size: var(--text-size, 0.8em);
+    color: var(--text-color, rgba(0, 0, 0, 0.5));
+  }
+
+  d-appendix d-footnote-list a.footnote-backlink {
+    color: var(--text-color, rgba(0, 0, 0, 0.5));
+  }
+
+  /*-- WEBSITE HEADER + FOOTER --*/
+  .distill-site-header .title {
+    font-size: var(--title-size, 18px);
+    font-family: var(--navbar-font), var(--heading-default);
+  }
+
+  .distill-site-header a,
+  .nav-dropdown .nav-dropbtn {
+    font-family: var(--navbar-font), var(--heading-default);
+  }
+
+  .nav-dropdown .nav-dropbtn {
+    color: var(--text-color, rgba(255, 255, 255, 0.8));
+    font-size: var(--text-size, 15px);
+  }
+
+  .distill-site-header a:hover,
+  .nav-dropdown:hover .nav-dropbtn {
+    color: var(--hover-color, white);
+  }
+
+  .distill-site-header {
+    font-size: var(--text-size, 15px);
+    color: var(--text-color, rgba(255, 255, 255, 0.8));
+    background-color: var(--bkgd-color, #0F2E3D);
+  }
+
+  .distill-site-footer {
+    font-size: var(--text-size, 15px);
+    color: var(--text-color, rgba(255, 255, 255, 0.8));
+    background-color: var(--bkgd-color, #0F2E3D);
+  }
+
+  .distill-site-footer a:hover {
+    color: var(--hover-color, white);
+  }</style>
+  <!--/radix_placeholder_distill-->
+  <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+  <script src="site_libs/popper-2.6.0/popper.min.js"></script>
+  <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
+  <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
+  <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="site_libs/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+  <!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Operaciones de datos de atributos","authors":[]}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<header class="header header--fixed" role="banner">
+<nav class="distill-site-nav distill-site-header">
+<div class="nav-left">
+<a href="index.html" class="title">TPB728O Programacion de aplicaciones geoespaciales en R 2021-II</a>
+<a href="https://github.com/tpb728O-programaciongeoespacialr/2021ii/">
+<i class="fab fa-github" aria-hidden="true"></i>
+</a>
+<a href="https://www.youtube.com/playlist?list=PL1gEgLSwAJeJ7AQhNi4dqX7k0XoKci-ru">
+<i class="fab fa-youtube" aria-hidden="true"></i>
+</a>
+</div>
+<div class="nav-right">
+<a href="https://tpb728O-programaciongeoespacialr.github.io/">TPB728O</a>
+<a href="http://www.geo.una.ac.cr/index.php/oferta-academica/mpsigte">Maestria en Sistemas de Informacion Geografica y Teledeteccion</a>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>Operaciones de datos de atributos</h1>
+<!--radix_placeholder_categories-->
+<!--/radix_placeholder_categories-->
+
+</div>
+
+
+<div class="d-article">
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#trabajo-previo">Trabajo previo</a></li>
+<li><a href="#preparativos">Preparativos</a>
+<ul>
+<li><a href="#carga-de-paquetes">Carga de paquetes</a></li>
+<li><a href="#conjuntos-de-datos">Conjuntos de datos</a></li>
+</ul></li>
+<li><a href="#introducción">Introducción</a></li>
+<li><a href="#datos-vectoriales">Datos vectoriales</a>
+<ul>
+<li><a href="#manejo-de-datos-de-atributos-con-el-paquete-sf">Manejo de datos de atributos con el paquete sf</a>
+<ul>
+<li><a href="#funciones-básicas-para-manejo-de-data-frames-y-objetos-sf">Funciones básicas para manejo de data frames y objetos sf</a></li>
+<li><a href="#creación-de-subconjuntos">Creación de subconjuntos</a>
+<ul>
+<li><a href="#notaciones-y-funciones-del-paquete-base">Notaciones y funciones del paquete base</a></li>
+<li><a href="#funciones-del-paquete-dplyr">Funciones del paquete dplyr</a></li>
+</ul></li>
+<li><a href="#agregación-de-datos">Agregación de datos</a>
+<ul>
+<li><a href="#la-función-aggregate-de-stats">La función <code>aggregate()</code> de stats</a></li>
+<li><a href="#la-función-aggregate-de-sf">La función <code>aggregate()</code> de sf</a></li>
+<li><a href="#la-función-summarize-de-dplyr">La función <code>summarize()</code> de dplyr</a></li>
+</ul></li>
+<li><a href="#cruce-de-datos">Cruce de datos</a>
+<ul>
+<li><a href="#la-función-left_join">La función left_join()</a></li>
+<li><a href="#la-función-inner_join">La función inner_join()</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#datos-raster">Datos raster</a>
+<ul>
+<li><a href="#manejo-de-datos-de-atributos-con-el-paquete-terra">Manejo de datos de atributos con el paquete terra</a>
+<ul>
+<li><a href="#funciones-básicas-para-manejo-de-objetos-terra">Funciones básicas para manejo de objetos terra</a></li>
+<li><a href="#creación-de-subconjuntos-1">Creación de subconjuntos</a></li>
+<li><a href="#resumen-de-información">Resumen de información</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+</div>
+<h1 id="trabajo-previo">Trabajo previo</h1>
+<p>Lea el capítulo 3 de <a href="https://geocompr.robinlovelace.net/">Lovelace, R., Nowosad, J. &amp; Muenchow, J. (2020). Geocomputation with R</a>.</p>
+<h1 id="preparativos">Preparativos</h1>
+<h2 id="carga-de-paquetes">Carga de paquetes</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Paquete para manipulación de datos</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+
+<span class='co'># Paquete para manejo de datos vectoriales</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://r-spatial.github.io/sf/'>sf</a></span><span class='op'>)</span>
+
+<span class='co'># Paquete para manejo de datos raster</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rspatial.org/terra/'>terra</a></span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<h2 id="conjuntos-de-datos">Conjuntos de datos</h2>
+<strong>Provincias de Costa Rica (Instituto Geográfico Nacional)</strong><br />
+
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Carga de datos</span>
+<span class='va'>provincias</span> <span class='op'>&lt;-</span>
+  <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_read.html'>st_read</a></span><span class='op'>(</span>
+    <span class='st'>"https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/ign/delimitacion-territorial-administrativa/provincias.geojson"</span>,
+    quiet <span class='op'>=</span> <span class='cn'>TRUE</span>
+  <span class='op'>)</span>
+
+<span class='co'># Mapeo</span>
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>provincias</span><span class='op'>$</span><span class='va'>geometry</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="leccion-08-operaciones-atributos_files/figure-html5/carga-datos-provincias-1.png" width="624" /></p>
+</div>
+<strong>Cantones de Costa Rica (Instituto Geográfico Nacional)</strong><br />
+
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Carga de datos</span>
+<span class='va'>cantones</span> <span class='op'>&lt;-</span>
+  <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_read.html'>st_read</a></span><span class='op'>(</span>
+    <span class='st'>"https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/ign/delimitacion-territorial-administrativa/cantones.geojson"</span>,
+    quiet <span class='op'>=</span> <span class='cn'>TRUE</span>
+  <span class='op'>)</span>
+
+<span class='co'># Mapeo</span>
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>cantones</span><span class='op'>$</span><span class='va'>geometry</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="leccion-08-operaciones-atributos_files/figure-html5/carga-datos-cantones-1.png" width="624" /></p>
+</div>
+<p><strong>spData: Datasets for Spatial Analysis (Bivand et al.)</strong><br />
+Este paquete contiene conjuntos de datos de ejemplo para el libro <em>Geocomputation with R</em>. Su documentación está en <a href="https://nowosad.github.io/spData/">Datasets for Spatial Analysis - spData</a>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Carga del paquete</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://nowosad.github.io/spData/'>spData</a></span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<h1 id="introducción">Introducción</h1>
+<p>Se les llama atributos a los elementos de datos no espaciales o geométricos de un conjunto de datos geográficos. Estos datos pueden ser de tipos numéricos o textuales, entre otros. Un conjunto de datos vectoriales puede tener asociados varios campos de atributos, mientras que un conjunto de datos raster tiene solamente uno.</p>
+<h1 id="datos-vectoriales">Datos vectoriales</h1>
+<p>Las operaciones con atributos en datos vectoriales incluyen:</p>
+<ul>
+<li>Creación de subconjuntos (<em>subsetting</em>).<br />
+</li>
+<li>Agregación (<em>aggregation</em>).<br />
+</li>
+<li>Cruce de datos (<em>joining</em>).</li>
+</ul>
+<p>Seguidamente, se explicará como maneja estas operaciones el paquete sf.</p>
+<h2 id="manejo-de-datos-de-atributos-con-el-paquete-sf">Manejo de datos de atributos con el paquete sf</h2>
+<p>Como se mencionó, el paquete <a href="https://cran.r-project.org/web/packages/sf/">sf</a> define una clase, llamada <code>sf</code>, la cual extiende la clase <code>data.frame</code> del paquete base de R. Los objetos de la clase <code>sf</code> tienen una fila (o <em>feature</em>) por cada observación y una columna por cada atributo. También tienen una columna especial para almacenar las geometrías (puntos, líneas, polígonos, etc.), la cual generalmente se denomina <code>geometry</code> o <code>geom</code>. Esto permite que sf utilice métodos (i.e. funciones) de la clase <code>data.frame</code>, tales como <code>plot()</code> y <code>summary()</code>, entre otros.</p>
+<p>Además de <code>data.frame</code>, <code>sf</code> es compatible con clases como las del paquete <a href="https://tibble.tidyverse.org/">tibble</a>, las cuales pueden manipularse mediante los métodos de <a href="https://dplyr.tidyverse.org/">dplyr</a>. Esto que permite un manejo <em>tidy</em> (ordenado, organizado) de los datos geoespaciales, de acuerdo con el enfoque de <a href="https://www.tidyverse.org/">Tidyverse</a>.</p>
+<p>En la secciones siguientes, se explicará el manejo de datos de atributos tanto mediante funciones y operaciones del paquete base de R, como mediante Tidyverse.</p>
+<h3 id="funciones-básicas-para-manejo-de-data-frames-y-objetos-sf">Funciones básicas para manejo de data frames y objetos sf</h3>
+<p>Las siguientes son algunas de las funciones disponibles para obtener información básica de un objeto sf.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Clase de cantones</span>
+<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>cantones</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;sf&quot;         &quot;data.frame&quot;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Dimensiones (cantidad de filas y de columnas)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/terra/man/dimensions.html'>dim</a></span><span class='op'>(</span><span class='va'>cantones</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 82 11</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Cantidad de filas (i.e. observaciones)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/terra/man/dimensions.html'>nrow</a></span><span class='op'>(</span><span class='va'>cantones</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 82</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Cantidad de columnas (i.e. variables)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/terra/man/dimensions.html'>ncol</a></span><span class='op'>(</span><span class='va'>cantones</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 11</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Nombres de las columnas</span>
+<span class='fu'><a href='https://rdrr.io/pkg/terra/man/names.html'>names</a></span><span class='op'>(</span><span class='va'>cantones</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code> [1] &quot;gml_id&quot;     &quot;gmlid&quot;      &quot;cod_catalo&quot; &quot;cod_canton&quot; &quot;canton&quot;    
+ [6] &quot;ori_toponi&quot; &quot;area&quot;       &quot;cod_provin&quot; &quot;provincia&quot;  &quot;version&quot;   
+[11] &quot;geometry&quot;  </code></pre>
+</div>
+<p>La función <a href="https://r-spatial.github.io/sf/reference/st_geometry.html">st_drop_geometry()</a> puede ser útil cuando, por ejemplo, solo se necesita trabajar con los atributos y la columna con la geometría consume demasiados recursos del computador.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Remoción de la columna de geometría</span>
+<span class='va'>cantones_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_geometry.html'>st_drop_geometry</a></span><span class='op'>(</span><span class='va'>cantones</span><span class='op'>)</span>
+
+<span class='co'># Nombres de las columnas</span>
+<span class='fu'><a href='https://rdrr.io/pkg/terra/man/names.html'>names</a></span><span class='op'>(</span><span class='va'>cantones_df</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code> [1] &quot;gml_id&quot;     &quot;gmlid&quot;      &quot;cod_catalo&quot; &quot;cod_canton&quot; &quot;canton&quot;    
+ [6] &quot;ori_toponi&quot; &quot;area&quot;       &quot;cod_provin&quot; &quot;provincia&quot;  &quot;version&quot;   </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Clase de df_cantones (nótese como no se muestra ya la clase sf)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>cantones_df</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;data.frame&quot;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Tamaño del conjunto de datos original (tipo sf)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/object.size.html'>object.size</a></span><span class='op'>(</span><span class='va'>cantones</span><span class='op'>)</span>, units<span class='op'>=</span><span class='st'>"Kb"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>20420.7 Kb</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Tamaño del conjunto de datos sin geometrías (tipo data.frame)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/object.size.html'>object.size</a></span><span class='op'>(</span><span class='va'>cantones_df</span><span class='op'>)</span>, units<span class='op'>=</span><span class='st'>"Kb"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>42.5 Kb</code></pre>
+</div>
+<p>Para algunas operaciones, también es posible ocultar la columna de geometría de un conjunto de datos (sin borrarla) mediante el argumento <code>drop = TRUE</code>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Sin drop = TRUE</span>
+<span class='va'>cantones</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='fu'><a href='https://rdrr.io/pkg/terra/man/c.html'>c</a></span><span class='op'>(</span><span class='st'>"canton"</span>, <span class='st'>"area"</span><span class='op'>)</span><span class='op'>]</span>
+</code></pre>
+</div>
+<pre><code>Simple feature collection with 10 features and 2 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 439032.1 ymin: 889175.6 xmax: 658879.5 ymax: 1080261
+Projected CRS: CR05 / CRTM05
+          canton    area                       geometry
+1     Corredores  623.61 MULTIPOLYGON (((616552.4 93...
+2        Golfito 1753.42 MULTIPOLYGON (((558675.7 96...
+3      Coto Brus  944.24 MULTIPOLYGON (((620471.4 97...
+4            Osa 1932.03 MULTIPOLYGON (((517638.5 10...
+5   Buenos Aires 2382.94 MULTIPOLYGON (((574574.2 10...
+6  Pérez Zeledón 1901.08 MULTIPOLYGON (((524884 1061...
+7         Quepos  557.85 MULTIPOLYGON (((485102 1058...
+8      Talamanca 2792.23 MULTIPOLYGON (((621284.1 10...
+9        Parrita  483.22 MULTIPOLYGON (((466749.5 10...
+10       Tarrazú  291.27 MULTIPOLYGON (((501998.9 10...</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Con drop = TRUE</span>
+<span class='va'>cantones</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='fu'><a href='https://rdrr.io/pkg/terra/man/c.html'>c</a></span><span class='op'>(</span><span class='st'>"canton"</span>, <span class='st'>"area"</span><span class='op'>)</span>, drop<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>]</span>
+</code></pre>
+</div>
+<pre><code>          canton    area
+1     Corredores  623.61
+2        Golfito 1753.42
+3      Coto Brus  944.24
+4            Osa 1932.03
+5   Buenos Aires 2382.94
+6  Pérez Zeledón 1901.08
+7         Quepos  557.85
+8      Talamanca 2792.23
+9        Parrita  483.22
+10       Tarrazú  291.27</code></pre>
+</div>
+<h3 id="creación-de-subconjuntos">Creación de subconjuntos</h3>
+<p>Frecuentemente, es necesario extrer subconjuntos del conjunto de datos original, para facilidad de manejo y para atender requerimientos específicos de un análisis. En esta sección, se explican las diferentes opciones para creación de subconjuntos, tanto con el paquete base de R como con dplyr. En resumen, estas son:</p>
+<ul>
+<li>Con el paquete base:
+<ul>
+<li>La notación de <code>[]</code> y <code>$</code></li>
+<li>La función <code>subset()</code></li>
+</ul></li>
+<li>Con el paquete dplyr:
+<ul>
+<li>La función <code>select()</code></li>
+<li>La función <code>slice()</code></li>
+<li>La función <code>filter()</code></li>
+</ul></li>
+</ul>
+<h4 id="notaciones-y-funciones-del-paquete-base">Notaciones y funciones del paquete base</h4>
+<h5 id="la-notación-de-y">La notación de <code>[]</code> y <code>$</code></h5>
+<p>La notación de paréntesis cuadrados (<code>[]</code>) y el signo de dólar (<code>$</code>) permite crear subconjuntos con base en la posición de filas y de columnas, por medio de nombres de columnas y a través de la especificación de condiciones (i.e. expresiones lógicas).</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Subconjunto especificado por posiciones de filas</span>
+<span class='va'>cantones</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, <span class='op'>]</span>
+
+<span class='co'># Subconjunto especificado por posiciones de columnas</span>
+<span class='va'>cantones</span><span class='op'>[</span>, <span class='fl'>8</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>]</span>
+
+<span class='co'># Subconjunto especificado por nombres de columnas</span>
+<span class='va'>cantones</span><span class='op'>[</span>, <span class='fu'><a href='https://rdrr.io/pkg/terra/man/c.html'>c</a></span><span class='op'>(</span><span class='st'>"canton"</span>, <span class='st'>"area"</span>, <span class='st'>"provincia"</span><span class='op'>)</span><span class='op'>]</span>
+</code></pre>
+</div>
+</div>
+<p>Especificación mediante una condición (i.e. expresión lógica):</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Cantones de la provincia de Cartago</span>
+<span class='va'>cantones</span><span class='op'>[</span><span class='va'>cantones</span><span class='op'>$</span><span class='va'>provincia</span> <span class='op'>==</span> <span class='st'>"Cartago"</span>, <span class='fu'><a href='https://rdrr.io/pkg/terra/man/c.html'>c</a></span><span class='op'>(</span><span class='st'>"canton"</span>, <span class='st'>"provincia"</span><span class='op'>)</span>, drop <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>]</span>
+</code></pre>
+</div>
+<pre><code>      canton provincia
+19 El Guarco   Cartago
+20   Cartago   Cartago
+22   Paraíso   Cartago
+23   Jiménez   Cartago
+24 Turrialba   Cartago
+26  Oreamuno   Cartago
+29  La Unión   Cartago
+34  Alvarado   Cartago</code></pre>
+</div>
+<h5 id="la-función-subset">La función subset()</h5>
+<p>La función <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/subset">subset()</a> también retorna un subconjunto cuyos registros cumplen una condición.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Cantones con área &gt;= 2000 km2</span>
+<span class='fu'><a href='https://rdrr.io/pkg/terra/man/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>cantones</span><span class='op'>[</span>, <span class='fu'><a href='https://rdrr.io/pkg/terra/man/c.html'>c</a></span><span class='op'>(</span><span class='st'>"canton"</span>, <span class='st'>"area"</span><span class='op'>)</span>, drop <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>]</span>,
+       <span class='va'>area</span> <span class='op'>&gt;=</span> <span class='fl'>2000</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>         canton    area
+5  Buenos Aires 2382.94
+8     Talamanca 2792.23
+70       Pococí 2408.76
+71   San Carlos 3352.33
+74    Sarapiquí 2144.38</code></pre>
+</div>
+<p>Los operadores lógicos y de comparación que pueden utilizarse en las condiciones de la función <code>subset()</code>, y en expresiones lógicas en general, se listan en la siguiente tabla:</p>
+<div class="layout-chunk" data-layout="l-body">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Operador</th>
+<th style="text-align: left;">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">==</td>
+<td style="text-align: left;">igual a</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">!=</td>
+<td style="text-align: left;">distinto de</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&gt;, &lt;</td>
+<td style="text-align: left;">mayor que, menor que</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&gt;=, &lt;=</td>
+<td style="text-align: left;">mayor o igual que, menor o igual que</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&amp;, |, !</td>
+<td style="text-align: left;">Operadores lógicos: y, o, no</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="funciones-del-paquete-dplyr">Funciones del paquete dplyr</h4>
+<p>Las funciones del paquete base de R son confiables y ampliamente usadas. Sin embargo, el enfoque más moderno de dplyr permite flujos de trabajo más intuitivos y es más rápido, debido a que se apoya en código escrito en el lenguaje C++. Esto es útil, por ejemplo, cuando se trabaja con conjuntos de datos grandes (<em>big data</em>) y cuando se necesita integración con bases de datos. Las principales funciones de dplyr para creación de subconjuntos son <code>select()</code>, <code>slice()</code> y <code>filter()</code>.</p>
+<h5 id="la-función-select">La función select()</h5>
+<p>La función <a href="https://dplyr.tidyverse.org/reference/select.html">select()</a> permite seleccionar y renombrar columnas de un conjunto de datos.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Selección de columnas</span>
+<span class='va'>cantones</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>canton</span>, <span class='va'>provincia</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Simple feature collection with 82 features and 2 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 156152 ymin: 608833.8 xmax: 658879.5 ymax: 1241118
+Projected CRS: CR05 / CRTM05
+First 10 features:
+          canton  provincia                       geometry
+1     Corredores Puntarenas MULTIPOLYGON (((616552.4 93...
+2        Golfito Puntarenas MULTIPOLYGON (((558675.7 96...
+3      Coto Brus Puntarenas MULTIPOLYGON (((620471.4 97...
+4            Osa Puntarenas MULTIPOLYGON (((517638.5 10...
+5   Buenos Aires Puntarenas MULTIPOLYGON (((574574.2 10...
+6  Pérez Zeledón   San José MULTIPOLYGON (((524884 1061...
+7         Quepos Puntarenas MULTIPOLYGON (((485102 1058...
+8      Talamanca      Limón MULTIPOLYGON (((621284.1 10...
+9        Parrita Puntarenas MULTIPOLYGON (((466749.5 10...
+10       Tarrazú   San José MULTIPOLYGON (((501998.9 10...</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Selección y cambio de nombre de columnas</span>
+<span class='va'>cantones</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>canton</span>, area_km2 <span class='op'>=</span> <span class='va'>area</span>, <span class='va'>provincia</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Simple feature collection with 82 features and 3 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 156152 ymin: 608833.8 xmax: 658879.5 ymax: 1241118
+Projected CRS: CR05 / CRTM05
+First 10 features:
+          canton area_km2  provincia                       geometry
+1     Corredores   623.61 Puntarenas MULTIPOLYGON (((616552.4 93...
+2        Golfito  1753.42 Puntarenas MULTIPOLYGON (((558675.7 96...
+3      Coto Brus   944.24 Puntarenas MULTIPOLYGON (((620471.4 97...
+4            Osa  1932.03 Puntarenas MULTIPOLYGON (((517638.5 10...
+5   Buenos Aires  2382.94 Puntarenas MULTIPOLYGON (((574574.2 10...
+6  Pérez Zeledón  1901.08   San José MULTIPOLYGON (((524884 1061...
+7         Quepos   557.85 Puntarenas MULTIPOLYGON (((485102 1058...
+8      Talamanca  2792.23      Limón MULTIPOLYGON (((621284.1 10...
+9        Parrita   483.22 Puntarenas MULTIPOLYGON (((466749.5 10...
+10       Tarrazú   291.27   San José MULTIPOLYGON (((501998.9 10...</code></pre>
+</div>
+<h5 id="la-función-slice">La función slice()</h5>
+<p><a href="https://dplyr.tidyverse.org/reference/slice.html">slice()</a> es el equivalente de <code>select()</code> para filas. Crea un subconjunto con base en las posiciones de las filas.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Subconjunto especificado mediante un rango de filas</span>
+<span class='va'>cantones</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<h5 id="la-función-filter">La función filter()</h5>
+<p>La función <a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a> es el equivalente en dplyr de la función <code>subset()</code> del paquete <code>base</code>. Retorna los registros que cumplen con una condición.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Androides de "La Guerra de las Galaxias"</span>
+<span class='va'>starwars</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>species</span> <span class='op'>==</span> <span class='st'>"Droid"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 6 × 14
+  name   height  mass hair_color skin_color eye_color birth_year sex  
+  &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;
+1 C-3PO     167    75 &lt;NA&gt;       gold       yellow           112 none 
+2 R2-D2      96    32 &lt;NA&gt;       white, bl… red               33 none 
+3 R5-D4      97    32 &lt;NA&gt;       white, red red               NA none 
+4 IG-88     200   140 none       metal      red               15 none 
+5 R4-P17     96    NA none       silver, r… red, blue         NA none 
+6 BB8        NA    NA none       none       black             NA none 
+# … with 6 more variables: gender &lt;chr&gt;, homeworld &lt;chr&gt;,
+#   species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+</div>
+<p>Las funciones del paquete dplyr suelen ser utilizadas conjuntamente con el <a href="http://r4ds.had.co.nz/pipes.html">operador <em>pipe</em> (%&gt;%)</a>, el cual posibilita el “encadenamiento” (<em>chaining</em>) de funciones: la salida de la función previa se convierte en el primer argumento de la siguiente función. En el siguiente ejemplo, el conjunto de datos <a href="https://dplyr.tidyverse.org/reference/starwars.html">starwars</a> se pasa como entrada a la función <code>filter()</code>, para filtrar los personajes humanos. Seguidamente, el resultado se pasa a la función <code>select()</code>, para seleccionar las columnas <code>name</code>, <code>homeworld</code> y <code>species</code>. Finalmente, la función <code>slice()</code> reduce el resultado a las 10 primeras filas.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Encadenamiento de funciones mediante pipes (%&gt;%)</span>
+<span class='va'>starwars</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>species</span> <span class='op'>==</span> <span class='st'>"Human"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>name</span>, <span class='va'>homeworld</span>, <span class='va'>species</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 10 × 3
+   name               homeworld species
+   &lt;chr&gt;              &lt;chr&gt;     &lt;chr&gt;  
+ 1 Luke Skywalker     Tatooine  Human  
+ 2 Darth Vader        Tatooine  Human  
+ 3 Leia Organa        Alderaan  Human  
+ 4 Owen Lars          Tatooine  Human  
+ 5 Beru Whitesun lars Tatooine  Human  
+ 6 Biggs Darklighter  Tatooine  Human  
+ 7 Obi-Wan Kenobi     Stewjon   Human  
+ 8 Anakin Skywalker   Tatooine  Human  
+ 9 Wilhuff Tarkin     Eriadu    Human  
+10 Han Solo           Corellia  Human  </code></pre>
+</div>
+<p>Una alternativa al uso de <em>pipes</em> es el “anidamiento” (<em>nesting</em>) de las funciones:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Anidamiento de funciones</span>
+<span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice</a></span><span class='op'>(</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span>
+    <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span>
+      <span class='va'>starwars</span>,
+      <span class='va'>species</span><span class='op'>==</span><span class='st'>"Human"</span>
+    <span class='op'>)</span>,
+    <span class='va'>name</span>, <span class='va'>homeworld</span>, <span class='va'>species</span>
+  <span class='op'>)</span>,
+  <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 10 × 3
+   name               homeworld species
+   &lt;chr&gt;              &lt;chr&gt;     &lt;chr&gt;  
+ 1 Luke Skywalker     Tatooine  Human  
+ 2 Darth Vader        Tatooine  Human  
+ 3 Leia Organa        Alderaan  Human  
+ 4 Owen Lars          Tatooine  Human  
+ 5 Beru Whitesun lars Tatooine  Human  
+ 6 Biggs Darklighter  Tatooine  Human  
+ 7 Obi-Wan Kenobi     Stewjon   Human  
+ 8 Anakin Skywalker   Tatooine  Human  
+ 9 Wilhuff Tarkin     Eriadu    Human  
+10 Han Solo           Corellia  Human  </code></pre>
+</div>
+<p><strong>Ejercicio: mediante las funciones <code>select()</code> y <code>filter()</code> de dplyr, cree un nuevo objeto <code>sf</code> que contenga los cantones de Puntarenas y Guanacaste con área mayor o igual a 2000 km2. Incluya las columnas de provincia, cantón y área.</strong></p>
+<h3 id="agregación-de-datos">Agregación de datos</h3>
+<p>Las operaciones de agregación realizan cálculos (suma, promedio, etc.) a partir de la agrupación de valores de variables. En esta sección, se explican funciones de agregación contenidas en los paquetes <code>stats</code>, <code>sf</code> y <code>dplyr</code>, las cuales son:</p>
+<ul>
+<li>Del paquete stats:
+<ul>
+<li>La función <code>aggregate()</code></li>
+</ul></li>
+<li>Del paquete sf:
+<ul>
+<li>La función <code>aggregate()</code><br />
+</li>
+</ul></li>
+<li>Del paquete dplyr:
+<ul>
+<li>La función <code>summarize()</code></li>
+</ul></li>
+</ul>
+<h4 id="la-función-aggregate-de-stats">La función <code>aggregate()</code> de stats</h4>
+<p>La función <a href="https://rdrr.io/r/stats/aggregate.html">aggregate()</a> del paquete <a href="https://rdrr.io/r/#stats">stats</a> aplica una función de agregación (ej. suma, promedio, mínimo, máximo) sobre una columna. El resultado es un objeto de tipo <code>data.frame</code>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Suma de áreas de cantones por provincia</span>
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/aggregate.sf.html'>aggregate</a></span><span class='op'>(</span>
+  data <span class='op'>=</span> <span class='va'>cantones</span>, 
+  <span class='va'>area</span> <span class='op'>~</span> <span class='va'>provincia</span>, 
+  FUN <span class='op'>=</span> <span class='va'>sum</span>, 
+  na.rm <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>   provincia     area
+1   Alajuela  9772.26
+2    Cartago  3093.23
+3 Guanacaste 10196.30
+4    Heredia  2663.45
+5      Limón  9176.97
+6 Puntarenas 11298.51
+7   San José  4969.73</code></pre>
+</div>
+<h4 id="la-función-aggregate-de-sf">La función <code>aggregate()</code> de sf</h4>
+<p><code>aggregate()</code> es una <a href="https://adv-r.hadley.nz/s3.html#s3-methods">función genérica</a>, lo que significa que pueden comportarse de manera diferente, dependiendo de los valores de entrada. El paquete <code>sf</code> también provee una versión de <a href="https://r-spatial.github.io/sf/reference/aggregate.sf.html">aggregate()</a>, la cual se activa cuando recibe un objeto <code>sf</code> y se usa el argumento <code>by</code>. El resultado es un objeto de tipo <code>sf</code>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Suma de áreas de cantones por provincia</span>
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/aggregate.sf.html'>aggregate</a></span><span class='op'>(</span>
+  <span class='va'>cantones</span><span class='op'>[</span><span class='st'>"area"</span><span class='op'>]</span>, 
+  by <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>cantones</span><span class='op'>$</span><span class='va'>provincia</span><span class='op'>)</span>, 
+  FUN <span class='op'>=</span> <span class='va'>sum</span>, 
+  na.rm <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Simple feature collection with 7 features and 2 fields
+Attribute-geometry relationship: 0 constant, 1 aggregate, 1 identity
+Geometry type: GEOMETRY
+Dimension:     XY
+Bounding box:  xmin: 156152 ymin: 608833.8 xmax: 658879.5 ymax: 1241118
+Projected CRS: CR05 / CRTM05
+     Group.1     area                       geometry
+1   Alajuela  9772.26 POLYGON ((459624 1098009, 4...
+2    Cartago  3093.23 POLYGON ((524765.7 1112776,...
+3 Guanacaste 10196.30 MULTIPOLYGON (((369535 1113...
+4    Heredia  2663.45 POLYGON ((480807.3 1106290,...
+5      Limón  9176.97 POLYGON ((623921.9 1079716,...
+6 Puntarenas 11298.51 MULTIPOLYGON (((159835.5 60...
+7   San José  4969.73 POLYGON ((526109.4 1059469,...</code></pre>
+</div>
+<h4 id="la-función-summarize-de-dplyr">La función <code>summarize()</code> de dplyr</h4>
+<p>La función <a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a> es el equivalente de <code>aggregate()</code> en el paquete dplyr. Suele utilizarse conjuntamente con <a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a>, que especifica la variable a agrupar.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Suma de áreas de cantones por provincia</span>
+<span class='va'>cantones</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>provincia</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>area_km2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>area</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Simple feature collection with 7 features and 2 fields
+Geometry type: GEOMETRY
+Dimension:     XY
+Bounding box:  xmin: 156152 ymin: 608833.8 xmax: 658879.5 ymax: 1241118
+Projected CRS: CR05 / CRTM05
+# A tibble: 7 × 3
+  provincia  area_km2                                         geometry
+  &lt;chr&gt;         &lt;dbl&gt;                                   &lt;GEOMETRY [m]&gt;
+1 Alajuela      9772. POLYGON ((459624 1098009, 459559.2 1097982, 459…
+2 Cartago       3093. POLYGON ((524765.7 1112776, 530118.9 1110214, 5…
+3 Guanacaste   10196. MULTIPOLYGON (((369535 1113024, 369537.7 111302…
+4 Heredia       2663. POLYGON ((480807.3 1106290, 480819.4 1106299, 4…
+5 Limón         9177. POLYGON ((623921.9 1079716, 623929.5 1079700, 6…
+6 Puntarenas   11299. MULTIPOLYGON (((159835.5 609410.8, 159829.1 609…
+7 San José      4970. POLYGON ((526109.4 1059469, 526127.6 1059409, 5…</code></pre>
+</div>
+<p><code>summarize()</code> permite renombrar las variables, como se muestra seguidamente.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Suma total de las áreas de cantones</span>
+<span class='va'>cantones</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>area_km2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>area</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,
+            cantidad_cantones <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Simple feature collection with 1 feature and 2 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 156152 ymin: 608833.8 xmax: 658879.5 ymax: 1241118
+Projected CRS: CR05 / CRTM05
+  area_km2 cantidad_cantones                       geometry
+1 51170.45                82 MULTIPOLYGON (((159829.1 60...</code></pre>
+</div>
+<p>El siguiente ejemplo utiliza otras funciones del paquete dplyr para encontrar las tres provincias más grandes y sus respectivas áreas, con base en los datos disponibles en la capa de cantones.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Área y cantidad de cantones de las tres provincias más grandes</span>
+<span class='va'>cantones</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_geometry.html'>st_drop_geometry</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>  
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>area</span>, <span class='va'>provincia</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>provincia</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>area <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>area</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,
+            cantidad_cantones <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>area</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/top_n.html'>top_n</a></span><span class='op'>(</span>n <span class='op'>=</span> <span class='fl'>3</span>, wt <span class='op'>=</span> <span class='va'>area</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 3 × 3
+  provincia    area cantidad_cantones
+  &lt;chr&gt;       &lt;dbl&gt;             &lt;int&gt;
+1 Puntarenas 11299.                11
+2 Guanacaste 10196.                11
+3 Alajuela    9772.                16</code></pre>
+</div>
+<p><strong>Ejercicio: mediante <code>summarize()</code>, y otras funciones de dplyr, despliegue el área y la cantidad de cantones de las dos provincias más pequeñas.</strong></p>
+<h3 id="cruce-de-datos">Cruce de datos</h3>
+<p>La combinación de datos ubicados en diferentes fuentes es una tarea común en análisis de información. Este tipo de operaciones se realizan con base en atributos que son comunes en los conjuntos de datos que se desea “cruzar” (<em>join</em>). El paquete dplyr proporciona varias <a href="https://dplyr.tidyverse.org/reference/join.html">funciones para realizar cruces de datos</a>, entre las que se encuentran:</p>
+<ul>
+<li>La función <code>left_join()</code></li>
+<li>La función <code>inner_join()</code></li>
+</ul>
+<h4 id="la-función-left_join">La función left_join()</h4>
+<p>La función <code>left_join()</code> mantiene todos los registros de la tabla del lado izquierdo y agrega las columnas de la tabla del lado derecho, en los registros en los que hay coincidencia.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># "Join" de los datos de producción de café. Ambas tablas comparten la columna name_long.</span>
+<span class='va'>productores_cafe_1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>left_join</a></span><span class='op'>(</span><span class='va'>world</span>, <span class='va'>coffee_data</span><span class='op'>)</span>
+
+<span class='co'># Mapeo de la producción de café en 2017</span>
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>productores_cafe_1</span><span class='op'>[</span><span class='st'>"coffee_production_2017"</span><span class='op'>]</span>, main <span class='op'>=</span> <span class='st'>"Producción mundial de café en 2017"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="leccion-08-operaciones-atributos_files/figure-html5/left-join-1.png" width="624" /></p>
+</div>
+<h4 id="la-función-inner_join">La función inner_join()</h4>
+<p>La función <code>inner_join()</code> retorna solamente aquellos registros que coinciden en ambas tablas.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># "Join" de los datos de producción de café. Ambas tablas comparten la columna name_long.</span>
+<span class='va'>productores_cafe_2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>inner_join</a></span><span class='op'>(</span><span class='va'>world</span>, <span class='va'>coffee_data</span><span class='op'>)</span>
+
+<span class='co'># Mapeo de la producción de café en 2017</span>
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>productores_cafe_2</span><span class='op'>[</span><span class='st'>"coffee_production_2017"</span><span class='op'>]</span>, main <span class='op'>=</span> <span class='st'>"Producción mundial de café en 2017"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="leccion-08-operaciones-atributos_files/figure-html5/inner-join-1.png" width="624" /></p>
+</div>
+<h1 id="datos-raster">Datos raster</h1>
+<p>Las operaciones con atributos en datos raster incluyen:</p>
+<ul>
+<li>Creación de subconjuntos (<em>subsetting</em>).<br />
+</li>
+<li>Resumen de información (<em>summarizing</em>).</li>
+</ul>
+<p>Seguidamente, se explicará como maneja estas operaciones el paquete terra.</p>
+<h2 id="manejo-de-datos-de-atributos-con-el-paquete-terra">Manejo de datos de atributos con el paquete terra</h2>
+<h3 id="funciones-básicas-para-manejo-de-objetos-terra">Funciones básicas para manejo de objetos terra</h3>
+<p>El siguiente bloque de código crea y mapea un objeto <code>SpatRaster</code> llamado <code>elevacion</code>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Creación de objeto SpatRaster</span>
+<span class='va'>elevacion</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/rast.html'>rast</a></span><span class='op'>(</span>
+  nrows <span class='op'>=</span> <span class='fl'>6</span>,
+  ncols <span class='op'>=</span> <span class='fl'>6</span>,
+  resolution <span class='op'>=</span> <span class='fl'>0.5</span>,
+  xmin <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1.5</span>,
+  xmax <span class='op'>=</span> <span class='fl'>1.5</span>,
+  ymin <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1.5</span>,
+  ymax <span class='op'>=</span> <span class='fl'>1.5</span>,
+  vals <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>36</span>
+<span class='op'>)</span>
+
+<span class='co'># Mapeo</span>
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>elevacion</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="leccion-08-operaciones-atributos_files/figure-html5/rast-creacion-1-1.png" width="624" /></p>
+</div>
+<p>Los objetos <code>SpatRaster</code> también pueden contener valores categóricos de tipo <code>logical</code> o <code>factor</code>. El siguiente bloque de código crea y mapea un objeto <code>SpatRaster</code> con información sobre tipos de granos de una porción de suelo.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Tipos de granos</span>
+<span class='va'>grano_tipo</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/c.html'>c</a></span><span class='op'>(</span><span class='st'>"arcilla"</span>, <span class='st'>"limo"</span>, <span class='st'>"arena"</span><span class='op'>)</span>
+
+<span class='co'># Lista de granos generada aleatoriamente</span>
+<span class='va'>lista_granos</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>grano_tipo</span>, <span class='fl'>36</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>lista_granos</span>
+</code></pre>
+</div>
+<pre><code> [1] &quot;arena&quot;   &quot;limo&quot;    &quot;arena&quot;   &quot;arena&quot;   &quot;arena&quot;   &quot;arena&quot;  
+ [7] &quot;limo&quot;    &quot;arcilla&quot; &quot;arena&quot;   &quot;limo&quot;    &quot;limo&quot;    &quot;limo&quot;   
+[13] &quot;arcilla&quot; &quot;limo&quot;    &quot;limo&quot;    &quot;arcilla&quot; &quot;arena&quot;   &quot;arena&quot;  
+[19] &quot;limo&quot;    &quot;arcilla&quot; &quot;arena&quot;   &quot;arcilla&quot; &quot;limo&quot;    &quot;arcilla&quot;
+[25] &quot;arcilla&quot; &quot;arcilla&quot; &quot;arcilla&quot; &quot;arcilla&quot; &quot;arena&quot;   &quot;limo&quot;   
+[31] &quot;limo&quot;    &quot;limo&quot;    &quot;arcilla&quot; &quot;arcilla&quot; &quot;arena&quot;   &quot;arena&quot;  </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Factor de tipos de granos</span>
+<span class='va'>grano_factor</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>lista_granos</span>, levels <span class='op'>=</span> <span class='va'>grano_tipo</span><span class='op'>)</span>
+
+<span class='co'># Objeto SpatRaster de tipos de granos</span>
+<span class='va'>grano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/rast.html'>rast</a></span><span class='op'>(</span>
+  nrows <span class='op'>=</span> <span class='fl'>6</span>,
+  ncols <span class='op'>=</span> <span class='fl'>6</span>,
+  resolution <span class='op'>=</span> <span class='fl'>0.5</span>,
+  xmin <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1.5</span>,
+  xmax <span class='op'>=</span> <span class='fl'>1.5</span>,
+  ymin <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1.5</span>,
+  ymax <span class='op'>=</span> <span class='fl'>1.5</span>,
+  vals <span class='op'>=</span> <span class='va'>grano_factor</span>
+<span class='op'>)</span>
+
+<span class='co'># Mapeo</span>
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>grano</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="leccion-08-operaciones-atributos_files/figure-html5/rast-creacion-2-1.png" width="624" /></p>
+</div>
+<p>Ambos objetos pueden guardados en el disco con la función <a href="https://rdrr.io/cran/terra/man/writeRaster.html">writeRaster()</a>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Especificación del directorio de trabajo (debe ser una ruta existente)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>setwd</a></span><span class='op'>(</span><span class='st'>"/home/mfvargas"</span><span class='op'>)</span>
+
+<span class='co'># Escritura de los objetos raster</span>
+<span class='fu'><a href='https://rdrr.io/pkg/terra/man/writeRaster.html'>writeRaster</a></span><span class='op'>(</span><span class='va'>grano</span>, <span class='st'>"elevacion.asc"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/terra/man/writeRaster.html'>writeRaster</a></span><span class='op'>(</span><span class='va'>grano</span>, <span class='st'>"grano.asc"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>La función <a href="https://rdrr.io/pkg/raster/man/factor.html">levels()</a> puede utilizarse para consultar la <em>Raster Attribute Table</em> (RAT) de un objeto <code>SpatRaster</code>, la cual contiene información sobre sus factores y niveles. También puede emplearse para asignar nuevos factores a un objeto.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Consulta de la RAT</span>
+<span class='fu'><a href='https://rdrr.io/pkg/terra/man/factors.html'>levels</a></span><span class='op'>(</span><span class='va'>grano</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[[1]]
+[1] &quot;arcilla&quot; &quot;limo&quot;    &quot;arena&quot;  </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Nuevo factor</span>
+<span class='fu'><a href='https://rdrr.io/pkg/terra/man/factors.html'>levels</a></span><span class='op'>(</span><span class='va'>grano</span><span class='op'>)</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/terra/man/factors.html'>levels</a></span><span class='op'>(</span><span class='va'>grano</span><span class='op'>)</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>, humedad <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/c.html'>c</a></span><span class='op'>(</span><span class='st'>"mojado"</span>, <span class='st'>"húmedo"</span>, <span class='st'>"seco"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># Consulta de la RAT</span>
+<span class='fu'><a href='https://rdrr.io/pkg/terra/man/factors.html'>levels</a></span><span class='op'>(</span><span class='va'>grano</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[[1]]
+[1] &quot;arcilla&quot; &quot;limo&quot;    &quot;arena&quot;   &quot;mojado&quot;  &quot;húmedo&quot;  &quot;seco&quot;   </code></pre>
+</div>
+<h3 id="creación-de-subconjuntos-1">Creación de subconjuntos</h3>
+<p>Los subconjuntos se crean en objetos <code>SpatRaster</code> con el operador <code>[</code>, el cual acepta una variedad de entradas.</p>
+<ul>
+<li>Índices de filas y columnas.</li>
+<li>ID de celdas.</li>
+<li>Coordenadas.</li>
+<li>Otros objetos espaciales.</li>
+</ul>
+<p>En esta lección, solo se tratarán las dos primeras opciones. Las restantes se cubrirán en las secciones sobre operaciones espaciales.</p>
+<p>Las dos primeras opciones se ilustran en el siguiente bloque de código, en el que se consulta la celda (también llamada pixel) ubicada en la esquina superior izquierda del objeto de elevación.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Celda en la fila 1, columna 1</span>
+<span class='va'>elevacion</span><span class='op'>[</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>]</span>
+</code></pre>
+</div>
+<pre><code>  lyr.1
+1     1</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Celda con ID = 1</span>
+<span class='va'>elevacion</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>
+</code></pre>
+</div>
+<pre><code>  lyr.1
+1     1</code></pre>
+</div>
+<p>La totalidad de los valores del objeto <code>SpatRaster</code> puede consultarse con las función <a href="https://rdrr.io/pkg/raster/man/getValues.html">values()</a>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Valores de un objeto raster</span>
+<span class='fu'><a href='https://rdrr.io/pkg/terra/man/values.html'>values</a></span><span class='op'>(</span><span class='va'>elevacion</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>      lyr.1
+ [1,]     1
+ [2,]     2
+ [3,]     3
+ [4,]     4
+ [5,]     5
+ [6,]     6
+ [7,]     7
+ [8,]     8
+ [9,]     9
+[10,]    10
+[11,]    11
+[12,]    12
+[13,]    13
+[14,]    14
+[15,]    15
+[16,]    16
+[17,]    17
+[18,]    18
+[19,]    19
+[20,]    20
+[21,]    21
+[22,]    22
+[23,]    23
+[24,]    24
+[25,]    25
+[26,]    26
+[27,]    27
+[28,]    28
+[29,]    29
+[30,]    30
+[31,]    31
+[32,]    32
+[33,]    33
+[34,]    34
+[35,]    35
+[36,]    36</code></pre>
+</div>
+<p>Estas funciones también pueden utilizarse en objetos de múltiples capas.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Creación de un objeto SpatRaster de dos capas</span>
+<span class='va'>multiples_capas</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/c.html'>c</a></span><span class='op'>(</span><span class='va'>elevacion</span>, <span class='va'>grano</span><span class='op'>)</span>
+<span class='va'>multiples_capas</span>
+</code></pre>
+</div>
+<pre><code>class       : SpatRaster 
+dimensions  : 6, 6, 2  (nrow, ncol, nlyr)
+resolution  : 0.5, 0.5  (x, y)
+extent      : -1.5, 1.5, -1.5, 1.5  (xmin, xmax, ymin, ymax)
+coord. ref. : +proj=longlat +datum=WGS84 +no_defs 
+sources     : memory  
+              memory  
+names       : lyr.1,   lyr.1 
+min values  :     1, arcilla 
+max values  :    36,    seco </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Modificación de valores de celdas</span>
+<span class='va'>multiples_capas</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/terra/man/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/pkg/terra/man/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='co'># Consulta de todos los valores</span>
+<span class='va'>multiples_capas</span><span class='op'>[</span><span class='op'>]</span>
+</code></pre>
+</div>
+<pre><code>      lyr.1 lyr.1
+ [1,]     0     4
+ [2,]     2     1
+ [3,]     3     2
+ [4,]     4     2
+ [5,]     5     2
+ [6,]     6     2
+ [7,]     7     1
+ [8,]     8     0
+ [9,]     9     2
+[10,]    10     1
+[11,]    11     1
+[12,]    12     1
+[13,]    13     0
+[14,]    14     1
+[15,]    15     1
+[16,]    16     0
+[17,]    17     2
+[18,]    18     2
+[19,]    19     1
+[20,]    20     0
+[21,]    21     2
+[22,]    22     0
+[23,]    23     1
+[24,]    24     0
+[25,]    25     0
+[26,]    26     0
+[27,]    27     0
+[28,]    28     0
+[29,]    29     2
+[30,]    30     1
+[31,]    31     1
+[32,]    32     1
+[33,]    33     0
+[34,]    34     0
+[35,]    35     2
+[36,]    36     2</code></pre>
+</div>
+<p>Como se mostró en el ejemplo anterior, el operador <code>[</code> también puede utilizarse para modificar los valores de las celdas un objeto <code>SpatRaster</code>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Modificación de una celda</span>
+<span class='va'>elevacion</span><span class='op'>[</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>]</span> <span class='op'>=</span> <span class='fl'>0</span>
+
+<span class='co'># Consulta de todos los valores del raster (equivalente a values())</span>
+<span class='va'>elevacion</span><span class='op'>[</span><span class='op'>]</span>
+</code></pre>
+</div>
+<pre><code>      lyr.1
+ [1,]     0
+ [2,]     2
+ [3,]     3
+ [4,]     4
+ [5,]     5
+ [6,]     6
+ [7,]     7
+ [8,]     8
+ [9,]     9
+[10,]    10
+[11,]    11
+[12,]    12
+[13,]    13
+[14,]    14
+[15,]    15
+[16,]    16
+[17,]    17
+[18,]    18
+[19,]    19
+[20,]    20
+[21,]    21
+[22,]    22
+[23,]    23
+[24,]    24
+[25,]    25
+[26,]    26
+[27,]    27
+[28,]    28
+[29,]    29
+[30,]    30
+[31,]    31
+[32,]    32
+[33,]    33
+[34,]    34
+[35,]    35
+[36,]    36</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Modificación de rangos de celdas</span>
+<span class='va'>elevacion</span><span class='op'>[</span><span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/pkg/terra/man/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>]</span> <span class='op'>=</span> <span class='fl'>0</span>
+
+<span class='va'>elevacion</span><span class='op'>[</span><span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>]</span> <span class='op'>=</span> <span class='fl'>0</span>
+<span class='va'>elevacion</span><span class='op'>[</span><span class='fl'>2</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>]</span> <span class='op'>=</span> <span class='fl'>10</span>
+<span class='va'>elevacion</span><span class='op'>[</span><span class='fl'>3</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>]</span> <span class='op'>=</span> <span class='fl'>15</span>
+<span class='va'>elevacion</span><span class='op'>[</span><span class='fl'>4</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>]</span> <span class='op'>=</span> <span class='fl'>15</span>
+<span class='va'>elevacion</span><span class='op'>[</span><span class='fl'>5</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>]</span> <span class='op'>=</span> <span class='fl'>20</span>
+<span class='va'>elevacion</span><span class='op'>[</span><span class='fl'>6</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span><span class='op'>]</span> <span class='op'>=</span> <span class='fl'>35</span>
+
+<span class='co'># Consulta de los valores</span>
+<span class='va'>elevacion</span><span class='op'>[</span><span class='op'>]</span>
+</code></pre>
+</div>
+<pre><code>      lyr.1
+ [1,]     0
+ [2,]     0
+ [3,]     0
+ [4,]     0
+ [5,]     0
+ [6,]     0
+ [7,]    10
+ [8,]    10
+ [9,]    10
+[10,]    10
+[11,]    10
+[12,]    10
+[13,]    15
+[14,]    15
+[15,]    15
+[16,]    15
+[17,]    15
+[18,]    15
+[19,]    15
+[20,]    15
+[21,]    15
+[22,]    15
+[23,]    15
+[24,]    15
+[25,]    20
+[26,]    20
+[27,]    20
+[28,]    20
+[29,]    20
+[30,]    20
+[31,]    35
+[32,]    35
+[33,]    35
+[34,]    35
+[35,]    35
+[36,]    35</code></pre>
+</div>
+<h3 id="resumen-de-información">Resumen de información</h3>
+<p>La escritura del nombre de un objeto <code>SpatRaster</code> en la consola imprime información general sobre ese objeto. La función <a href="https://rdrr.io/r/base/summary.html">summary()</a> proporciona algunas estadísticas descriptivas (mínimo, máximo, cuartiles, etc.). Otras estadísticas pueden ser calculadas con <a href="https://rdrr.io/pkg/terra/man/global.html">global()</a>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Información general</span>
+<span class='va'>elevacion</span>
+</code></pre>
+</div>
+<pre><code>class       : SpatRaster 
+dimensions  : 6, 6, 1  (nrow, ncol, nlyr)
+resolution  : 0.5, 0.5  (x, y)
+extent      : -1.5, 1.5, -1.5, 1.5  (xmin, xmax, ymin, ymax)
+coord. ref. : +proj=longlat +datum=WGS84 +no_defs 
+source      : memory 
+name        : lyr.1 
+min value   :     0 
+max value   :    35 </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Resumen de un raster de una capa</span>
+<span class='fu'><a href='https://rdrr.io/pkg/terra/man/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>elevacion</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>     lyr.1      
+ Min.   : 0.00  
+ 1st Qu.:10.00  
+ Median :15.00  
+ Mean   :15.83  
+ 3rd Qu.:20.00  
+ Max.   :35.00  </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Resumen de varias capas</span>
+<span class='fu'><a href='https://rdrr.io/pkg/terra/man/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/terra/man/c.html'>c</a></span><span class='op'>(</span><span class='va'>elevacion</span>, <span class='va'>grano</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>     lyr.1           lyr.1  
+ Min.   : 0.00   Min.   :0  
+ 1st Qu.:10.00   1st Qu.:0  
+ Median :15.00   Median :1  
+ Mean   :15.83   Mean   :1  
+ 3rd Qu.:20.00   3rd Qu.:2  
+ Max.   :35.00   Max.   :2  </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Desviación estándar</span>
+<span class='fu'><a href='https://rdrr.io/pkg/terra/man/global.html'>global</a></span><span class='op'>(</span><span class='va'>elevacion</span>, <span class='va'>sd</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>            sd
+lyr.1 10.72381</code></pre>
+</div>
+<p>Adicionalmente, la función <a href="https://rdrr.io/pkg/terra/man/freq.html">freq()</a> retorna la tabla de frecuencias de valores categóricos.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Tabla de frecuencias</span>
+<span class='fu'><a href='https://rdrr.io/pkg/terra/man/freq.html'>freq</a></span><span class='op'>(</span><span class='va'>grano</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>  layer value count   label
+1     1     0    12 arcilla
+2     1     1    12    limo
+3     1     2    12   arena</code></pre>
+</div>
+<p>Las estadísticas pueden ser visualizadas con funciones como <a href="https://rdrr.io/pkg/terra/man/hist.html">hist()</a> y <a href="https://rdrr.io/pkg/terra/man/density.html">density()</a>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Histograma</span>
+<span class='fu'><a href='https://rdrr.io/pkg/terra/man/hist.html'>hist</a></span><span class='op'>(</span><span class='va'>elevacion</span><span class='op'>)</span>
+</code></pre>
+</div>
+<img src="leccion-08-operaciones-atributos_files/figure-html5/unnamed-chunk-1-1.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Densidad</span>
+<span class='fu'><a href='https://rdrr.io/pkg/terra/man/density.html'>density</a></span><span class='op'>(</span><span class='va'>elevacion</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="leccion-08-operaciones-atributos_files/figure-html5/unnamed-chunk-1-2.png" width="624" /></p>
+</div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<!--radix_placeholder_article_footer-->
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom">
+<h3 id="updates-and-corrections">Corrections</h3>
+<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/tpb728O-programaciongeoespacialr/2021ii/issues/new">create an issue</a> on the source repository.</p>
+<h3 id="reuse">Reuse</h3>
+<p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Source code is available at <a href="https://github.com/tpb728O-programaciongeoespacialr/2021ii/">https://github.com/tpb728O-programaciongeoespacialr/2021ii/</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+</div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>

@@ -377,7 +377,7 @@ plot(felidae$geometry,
 
 #### writeRaster() - escritura de datos
 
-La función [write_raster()](https://rdrr.io/cran/terra/man/writeRaster.html) guarda en el disco un objeto ```SpatRaster``` en los diferentes [formatos raster de GDAL](https://gdal.org/drivers/raster/).
+La función [writeRaster()](https://rdrr.io/cran/terra/man/writeRaster.html) guarda en el disco un objeto ```SpatRaster``` en los diferentes [formatos raster de GDAL](https://gdal.org/drivers/raster/).
 
 ```{r write_raster, eval=FALSE}
 # Especificación del directorio de trabajo (debe utilizarse una ruta existente)

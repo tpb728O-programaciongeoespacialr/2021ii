@@ -1,0 +1,535 @@
+---
+title: "Operaciones de datos de atributos"
+output: 
+  distill::distill_article:
+    toc: true
+    toc_depth: 4
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Trabajo previo
+
+Lea el capítulo 3 de [Lovelace, R., Nowosad, J. & Muenchow, J. (2020). Geocomputation with R](https://geocompr.robinlovelace.net/).
+
+# Preparativos
+
+## Carga de paquetes
+
+```{r paquetes, message=FALSE}
+# Paquete para manipulación de datos
+library(dplyr)
+
+# Paquete para manejo de datos vectoriales
+library(sf)
+
+# Paquete para manejo de datos raster
+library(terra)
+```
+
+## Conjuntos de datos
+
+**Provincias de Costa Rica (Instituto Geográfico Nacional)**  
+```{r carga-datos-provincias}
+# Carga de datos
+provincias <-
+  st_read(
+    "https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/ign/delimitacion-territorial-administrativa/provincias.geojson",
+    quiet = TRUE
+  )
+
+# Mapeo
+plot(provincias$geometry)
+```
+
+**Cantones de Costa Rica (Instituto Geográfico Nacional)**  
+```{r carga-datos-cantones}
+# Carga de datos
+cantones <-
+  st_read(
+    "https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/ign/delimitacion-territorial-administrativa/cantones.geojson",
+    quiet = TRUE
+  )
+
+# Mapeo
+plot(cantones$geometry)
+```
+
+**spData: Datasets for Spatial Analysis (Bivand et al.)**  
+Este paquete contiene conjuntos de datos de ejemplo para el libro *Geocomputation with R*. Su documentación está en [Datasets for Spatial Analysis - spData](https://nowosad.github.io/spData/).
+
+```{r carga-datos-spdata}
+# Carga del paquete
+library(spData)
+```
+
+# Introducción
+Se les llama atributos a los elementos de datos no espaciales o geométricos de un conjunto de datos geográficos. Estos datos pueden ser de tipos numéricos o textuales, entre otros. Un conjunto de datos vectoriales puede tener asociados varios campos de atributos, mientras que un conjunto de datos raster tiene solamente uno.
+
+# Datos vectoriales
+Las operaciones con atributos en datos vectoriales incluyen:
+
+- Creación de subconjuntos (_subsetting_).  
+- Agregación (_aggregation_).  
+- Cruce de datos (_joining_). 
+
+Seguidamente, se explicará como maneja estas operaciones el paquete sf.
+
+## Manejo de datos de atributos con el paquete sf
+Como se mencionó, el paquete [sf](https://cran.r-project.org/web/packages/sf/) define una clase, llamada ```sf```, la cual extiende la clase ```data.frame``` del paquete base de R. Los objetos de la clase ```sf``` tienen una fila (o _feature_) por cada observación y una columna por cada atributo. También tienen una columna especial para almacenar las geometrías (puntos, líneas, polígonos, etc.), la cual generalmente se denomina ```geometry``` o ```geom```. Esto permite que sf utilice métodos (i.e. funciones) de la clase ```data.frame```, tales como ```plot()``` y ```summary()```, entre otros.
+
+Además de ```data.frame```, ```sf``` es compatible con clases como las del paquete [tibble](https://tibble.tidyverse.org/), las cuales pueden manipularse mediante los métodos de [dplyr](https://dplyr.tidyverse.org/). Esto que permite un manejo _tidy_ (ordenado, organizado) de los datos geoespaciales, de acuerdo con el enfoque de [Tidyverse](https://www.tidyverse.org/).
+
+En la secciones siguientes, se explicará el manejo de datos de atributos tanto mediante funciones y operaciones del paquete base de R, como mediante Tidyverse.
+
+### Funciones básicas para manejo de data frames y objetos sf
+
+Las siguientes son algunas de las funciones disponibles para obtener información básica de un objeto sf.
+
+```{r funciones-basicas}
+# Clase de cantones
+class(cantones)
+
+# Dimensiones (cantidad de filas y de columnas)
+dim(cantones)
+
+# Cantidad de filas (i.e. observaciones)
+nrow(cantones)
+
+# Cantidad de columnas (i.e. variables)
+ncol(cantones)
+
+# Nombres de las columnas
+names(cantones)
+```
+
+La función [st_drop_geometry()](https://r-spatial.github.io/sf/reference/st_geometry.html) puede ser útil cuando, por ejemplo, solo se necesita trabajar con los atributos y la columna con la geometría consume demasiados recursos del computador.
+
+```{r st_drop_geometry}
+# Remoción de la columna de geometría
+cantones_df <- st_drop_geometry(cantones)
+
+# Nombres de las columnas
+names(cantones_df)
+
+# Clase de df_cantones (nótese como no se muestra ya la clase sf)
+class(cantones_df)
+
+# Tamaño del conjunto de datos original (tipo sf)
+print(object.size(cantones), units="Kb")
+
+# Tamaño del conjunto de datos sin geometrías (tipo data.frame)
+print(object.size(cantones_df), units="Kb")
+```
+
+Para algunas operaciones, también es posible ocultar la columna de geometría de un conjunto de datos (sin borrarla) mediante el argumento ```drop = TRUE```.
+
+```{r drop-true}
+# Sin drop = TRUE
+cantones[1:10, c("canton", "area")]
+
+# Con drop = TRUE
+cantones[1:10, c("canton", "area"), drop=TRUE]
+```
+
+### Creación de subconjuntos
+Frecuentemente, es necesario extrer subconjuntos del conjunto de datos original, para facilidad de manejo y para atender requerimientos específicos de un análisis. En esta sección, se explican las diferentes opciones para creación de subconjuntos, tanto con el paquete base de R como con dplyr. En resumen, estas son:
+
+- Con el paquete base:
+  - La notación de ```[]``` y ```$```
+  - La función ```subset()```
+- Con el paquete dplyr:
+  - La función ```select()```
+  - La función ```slice()```
+  - La función ```filter()```
+  
+#### Notaciones y funciones del paquete base
+##### La notación de ```[]``` y ```$```
+La notación de paréntesis cuadrados (```[]```) y el signo de dólar (```$```) permite crear subconjuntos con base en la posición de filas y de columnas, por medio de nombres de columnas y a través de la especificación de condiciones (i.e. expresiones lógicas).
+
+```{r subconjuntos-notacion-base, message=FALSE, warning=FALSE, results='hide'}
+# Subconjunto especificado por posiciones de filas
+cantones[1:10, ]
+
+# Subconjunto especificado por posiciones de columnas
+cantones[, 8:10]
+
+# Subconjunto especificado por nombres de columnas
+cantones[, c("canton", "area", "provincia")]
+```
+
+Especificación mediante una condición (i.e. expresión lógica):
+
+```{r subconjuntos-expresion-logica}
+# Cantones de la provincia de Cartago
+cantones[cantones$provincia == "Cartago", c("canton", "provincia"), drop = TRUE]
+```
+
+##### La función subset()
+La función [subset()](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/subset) también retorna un subconjunto cuyos registros cumplen una condición.
+
+```{r subset}
+# Cantones con área >= 2000 km2
+subset(cantones[, c("canton", "area"), drop = TRUE],
+       area >= 2000)
+```
+
+Los operadores lógicos y de comparación que pueden utilizarse en las condiciones de la función ```subset()```, y en expresiones lógicas en general, se listan en la siguiente tabla:
+
+```{r operadores-logicos, echo=FALSE}
+knitr::kable(data.frame(
+  c("==",      "!=",          ">, <",                 ">=, <=",                               "&, |, !"),
+  c(
+    "igual a",
+    "distinto de",
+    "mayor que, menor que",
+    "mayor o igual que, menor o igual que",
+    "Operadores lógicos: y, o, no"
+  )
+),
+col.names = c("Operador", "Descripción"))
+```
+
+#### Funciones del paquete dplyr
+Las funciones del paquete base de R son confiables y ampliamente usadas. Sin embargo, el enfoque más moderno de dplyr permite flujos de trabajo más intuitivos y es más rápido, debido a que se apoya en código escrito en el lenguaje C++. Esto es útil, por ejemplo, cuando se trabaja con conjuntos de datos grandes (_big data_) y cuando se necesita integración con bases de datos. Las principales funciones de dplyr para creación de subconjuntos son ```select()```, ```slice()``` y ```filter()```.
+
+##### La función select()
+La función [select()](https://dplyr.tidyverse.org/reference/select.html) permite seleccionar y renombrar columnas de un conjunto de datos.
+
+```{r select}
+# Selección de columnas
+cantones %>%
+  select(canton, provincia)
+
+# Selección y cambio de nombre de columnas
+cantones %>%
+  select(canton, area_km2 = area, provincia)
+```
+
+##### La función slice()
+[slice()](https://dplyr.tidyverse.org/reference/slice.html) es el equivalente de ```select()``` para filas. Crea un subconjunto con base en las posiciones de las filas.
+
+```{r slice, results='hide'}
+# Subconjunto especificado mediante un rango de filas
+cantones %>%
+  slice(1:10)
+```
+
+##### La función filter()
+La función [filter()](https://dplyr.tidyverse.org/reference/filter.html) es el equivalente en dplyr de la función ```subset()``` del paquete ```base```. Retorna los registros que cumplen con una condición.
+
+```{r filter}
+# Androides de "La Guerra de las Galaxias"
+starwars %>%
+  filter(species == "Droid")
+```
+
+Las funciones del paquete dplyr suelen ser utilizadas conjuntamente con el [operador _pipe_ (%>%)](http://r4ds.had.co.nz/pipes.html), el cual posibilita el "encadenamiento" (*chaining*) de funciones: la salida de la función previa se convierte en el primer argumento de la siguiente función. En el siguiente ejemplo, el conjunto de datos [starwars](https://dplyr.tidyverse.org/reference/starwars.html) se pasa como entrada a la función ```filter()```, para filtrar los personajes humanos. Seguidamente, el resultado se pasa a la función ```select()```, para seleccionar las columnas  ```name ```, ```homeworld``` y ```species```. Finalmente, la función ```slice()``` reduce el resultado a las 10 primeras filas.
+
+```{r funciones-encadenamiento}
+# Encadenamiento de funciones mediante pipes (%>%)
+starwars %>%
+  filter(species == "Human") %>%
+  select(name, homeworld, species) %>%
+  slice(1:10)
+```
+
+Una alternativa al uso de _pipes_ es el "anidamiento" (*nesting*) de las funciones:
+
+```{r funciones-anidamiento}
+# Anidamiento de funciones
+slice(
+  select(
+    filter(
+      starwars,
+      species=="Human"
+    ),
+    name, homeworld, species
+  ),
+  1:10
+)
+```
+
+**Ejercicio: mediante las funciones ```select()``` y ```filter()``` de dplyr, cree un nuevo objeto ```sf``` que contenga los cantones de Puntarenas y Guanacaste con área mayor o igual a 2000 km2. Incluya las columnas de provincia, cantón y área.**
+
+### Agregación de datos
+Las operaciones de agregación realizan cálculos (suma, promedio, etc.) a partir de la agrupación de valores de variables. En esta sección, se explican funciones de agregación contenidas en los paquetes  ```stats ```, ```sf``` y ```dplyr```, las cuales son:
+
+- Del paquete stats:
+  - La función ```aggregate()```
+- Del paquete sf:
+  - La función ```aggregate()```  
+- Del paquete dplyr:
+  - La función ```summarize()```
+
+#### La función ```aggregate()``` de stats
+La función [aggregate()](https://rdrr.io/r/stats/aggregate.html) del paquete [stats](https://rdrr.io/r/#stats) aplica una función de agregación (ej. suma, promedio, mínimo, máximo) sobre una columna. El resultado es un objeto de tipo ```data.frame```.
+
+```{r aggregate-stats}
+# Suma de áreas de cantones por provincia
+aggregate(
+  data = cantones, 
+  area ~ provincia, 
+  FUN = sum, 
+  na.rm = TRUE
+)
+```
+
+#### La función ```aggregate()``` de sf
+```aggregate()``` es una [función genérica](https://adv-r.hadley.nz/s3.html#s3-methods), lo que significa que pueden comportarse de manera diferente, dependiendo de los valores de entrada. El paquete ```sf``` también provee una versión de [aggregate()](https://r-spatial.github.io/sf/reference/aggregate.sf.html), la cual se activa cuando recibe un objeto  ```sf ``` y se usa el argumento  ```by```. El resultado es un objeto de tipo ```sf```.
+
+```{r aggregate-sf}
+# Suma de áreas de cantones por provincia
+aggregate(
+  cantones["area"], 
+  by = list(cantones$provincia), 
+  FUN = sum, 
+  na.rm = TRUE
+)
+```
+
+#### La función ```summarize()``` de dplyr
+La función [summarize()](https://dplyr.tidyverse.org/reference/summarise.html) es el equivalente de ```aggregate()``` en el paquete dplyr. Suele utilizarse conjuntamente con [group_by()](https://dplyr.tidyverse.org/reference/group_by.html), que especifica la variable a agrupar.
+
+```{r summarize}
+# Suma de áreas de cantones por provincia
+cantones %>%
+  group_by(provincia) %>%
+  summarize(area_km2 = sum(area, na.rm = TRUE))
+```
+
+```summarize()``` permite renombrar las variables, como se muestra seguidamente.
+
+```{r summarize-renombramiento}
+# Suma total de las áreas de cantones
+cantones %>%
+  summarize(area_km2 = sum(area, na.rm = TRUE),
+            cantidad_cantones = n())
+```
+
+El siguiente ejemplo utiliza otras funciones del paquete dplyr para encontrar las tres provincias más grandes y sus respectivas áreas, con base en los datos disponibles en la capa de cantones.
+
+```{r subconjuntos-ejemplo-dplyr}
+# Área y cantidad de cantones de las tres provincias más grandes
+cantones %>%
+  st_drop_geometry() %>%  
+  select(area, provincia) %>%
+  group_by(provincia) %>%
+  summarize(area = sum(area, na.rm = TRUE),
+            cantidad_cantones = n()) %>%
+  arrange(desc(area)) %>%
+  top_n(n = 3, wt = area)
+```
+
+**Ejercicio: mediante ```summarize()```, y otras funciones de dplyr, despliegue el área y la cantidad de cantones de las dos provincias más pequeñas.**
+
+### Cruce de datos
+La combinación de datos ubicados en diferentes fuentes es una tarea común en análisis de información. Este tipo de operaciones se realizan con base en atributos que son comunes en los conjuntos de datos que se desea "cruzar" (*join*). El paquete dplyr proporciona varias [funciones para realizar cruces de datos](https://dplyr.tidyverse.org/reference/join.html), entre las que se encuentran:
+
+- La función ```left_join()```
+- La función ```inner_join()```
+
+#### La función left_join()
+La función ```left_join()``` mantiene todos los registros de la tabla del lado izquierdo y agrega las columnas de la tabla del lado derecho, en los registros en los que hay coincidencia.
+
+```{r left-join}
+# "Join" de los datos de producción de café. Ambas tablas comparten la columna name_long.
+productores_cafe_1 <- left_join(world, coffee_data)
+
+# Mapeo de la producción de café en 2017
+plot(productores_cafe_1["coffee_production_2017"], main = "Producción mundial de café en 2017")
+```
+
+#### La función inner_join()
+La función ```inner_join()``` retorna solamente aquellos registros que coinciden en ambas tablas.
+
+```{r inner-join}
+# "Join" de los datos de producción de café. Ambas tablas comparten la columna name_long.
+productores_cafe_2 <- inner_join(world, coffee_data)
+
+# Mapeo de la producción de café en 2017
+plot(productores_cafe_2["coffee_production_2017"], main = "Producción mundial de café en 2017")
+```
+
+# Datos raster
+Las operaciones con atributos en datos raster incluyen:
+
+- Creación de subconjuntos (_subsetting_).  
+- Resumen de información (_summarizing_).  
+
+Seguidamente, se explicará como maneja estas operaciones el paquete terra.
+
+## Manejo de datos de atributos con el paquete terra
+### Funciones básicas para manejo de objetos terra
+El siguiente bloque de código crea y mapea un objeto ```SpatRaster``` llamado ```elevacion```.
+
+```{r rast-creacion-1}
+# Creación de objeto SpatRaster
+elevacion <- rast(
+  nrows = 6,
+  ncols = 6,
+  resolution = 0.5,
+  xmin = -1.5,
+  xmax = 1.5,
+  ymin = -1.5,
+  ymax = 1.5,
+  vals = 1:36
+)
+
+# Mapeo
+plot(elevacion)
+```
+
+Los objetos ```SpatRaster``` también pueden contener valores categóricos de tipo ```logical``` o ```factor```. El siguiente bloque de código crea y mapea un objeto ```SpatRaster``` con información sobre tipos de granos de una porción de suelo.
+
+```{r rast-creacion-2, collapse=TRUE}
+# Tipos de granos
+grano_tipo <- c("arcilla", "limo", "arena")
+
+# Lista de granos generada aleatoriamente
+lista_granos <- sample(grano_tipo, 36, replace = TRUE)
+lista_granos
+
+# Factor de tipos de granos
+grano_factor <- factor(lista_granos, levels = grano_tipo)
+
+# Objeto SpatRaster de tipos de granos
+grano <- rast(
+  nrows = 6,
+  ncols = 6,
+  resolution = 0.5,
+  xmin = -1.5,
+  xmax = 1.5,
+  ymin = -1.5,
+  ymax = 1.5,
+  vals = grano_factor
+)
+
+# Mapeo
+plot(grano)
+```
+
+Ambos objetos pueden guardados en el disco con la función [writeRaster()](https://rdrr.io/cran/terra/man/writeRaster.html).
+
+```{r writeraster, eval=FALSE}
+# Especificación del directorio de trabajo (debe ser una ruta existente)
+setwd("/home/mfvargas")
+
+# Escritura de los objetos raster
+writeRaster(grano, "elevacion.asc")
+writeRaster(grano, "grano.asc")
+```
+
+La función [levels()](https://rdrr.io/pkg/raster/man/factor.html) puede utilizarse para consultar la *Raster Attribute Table* (RAT) de un objeto ```SpatRaster```, la cual contiene información sobre sus factores y niveles. También puede emplearse para asignar nuevos factores a un objeto.
+
+```{r rat, collapse=TRUE}
+# Consulta de la RAT
+levels(grano)
+
+# Nuevo factor
+levels(grano)[[1]] = c(levels(grano)[[1]], humedad = c("mojado", "húmedo", "seco"))
+
+# Consulta de la RAT
+levels(grano)
+```
+
+
+### Creación de subconjuntos
+Los subconjuntos se crean en objetos ```SpatRaster``` con el operador ```[```, el cual acepta una variedad de entradas.
+
+- Índices de filas y columnas.
+- ID de celdas.
+- Coordenadas.
+- Otros objetos espaciales.
+
+En esta lección, solo se tratarán las dos primeras opciones. Las restantes se cubrirán en las secciones sobre operaciones espaciales.
+
+Las dos primeras opciones se ilustran en el siguiente bloque de código, en el que se consulta la celda (también llamada pixel) ubicada en la esquina superior izquierda del objeto de elevación.
+
+```{r indices-id-celdas}
+# Celda en la fila 1, columna 1
+elevacion[1, 1]
+
+# Celda con ID = 1
+elevacion[1]
+```
+
+La totalidad de los valores del objeto ```SpatRaster``` puede consultarse con las función [values()](https://rdrr.io/pkg/raster/man/getValues.html).
+
+```{r values, collapse=TRUE}
+# Valores de un objeto raster
+values(elevacion)
+```
+
+Estas funciones también pueden utilizarse en objetos de múltiples capas.
+
+```{r multiples-capas, collapse=TRUE}
+# Creación de un objeto SpatRaster de dos capas
+multiples_capas = c(elevacion, grano)
+multiples_capas
+
+# Modificación de valores de celdas
+multiples_capas[1] = cbind(c(0), c(4))
+
+# Consulta de todos los valores
+multiples_capas[]
+```
+
+Como se mostró en el ejemplo anterior, el operador ```[``` también puede utilizarse para modificar los valores de las celdas un objeto ```SpatRaster```.
+
+```{r modificacion-celdas}
+# Modificación de una celda
+elevacion[1, 1] = 0
+
+# Consulta de todos los valores del raster (equivalente a values())
+elevacion[]
+
+# Modificación de rangos de celdas
+elevacion[1, c(1, 2)] = 0
+
+elevacion[1, 1:6] = 0
+elevacion[2, 1:6] = 10
+elevacion[3, 1:6] = 15
+elevacion[4, 1:6] = 15
+elevacion[5, 1:6] = 20
+elevacion[6, 1:6] = 35
+
+# Consulta de los valores
+elevacion[]
+```
+
+### Resumen de información
+La escritura del nombre de un objeto ```SpatRaster``` en la consola imprime información general sobre ese objeto. La función [summary()](https://rdrr.io/r/base/summary.html) proporciona algunas estadísticas descriptivas (mínimo, máximo, cuartiles, etc.). Otras estadísticas pueden ser calculadas con [global()](https://rdrr.io/pkg/terra/man/global.html).
+
+```{r global, collapse=TRUE}
+# Información general
+elevacion
+
+# Resumen de un raster de una capa
+summary(elevacion)
+
+# Resumen de varias capas
+summary(c(elevacion, grano))
+
+# Desviación estándar
+global(elevacion, sd)
+```
+
+Adicionalmente, la función [freq()](https://rdrr.io/pkg/terra/man/freq.html) retorna la tabla de frecuencias de valores categóricos.
+
+```{r freq}
+# Tabla de frecuencias
+freq(grano)
+```
+
+Las estadísticas pueden ser visualizadas con funciones como [hist()](https://rdrr.io/pkg/terra/man/hist.html) y [density()](https://rdrr.io/pkg/terra/man/density.html).
+
+```{r}
+# Histograma
+hist(elevacion)
+
+# Densidad
+density(elevacion)
+```
