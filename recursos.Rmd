@@ -67,10 +67,10 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # flexdashboard
 - [R Markdown Format for Flexible Dashboards - flexdashboard](https://pkgs.rstudio.com/flexdashboard/)
-- [Building an interactive dashboard to visualize spatial data](https://www.paulamoraga.com/tutorial-flexdashboard/)
-- [Geospatial Health Data: Modeling and Visualization with R-INLA and Shiny - Building a dashboard to visualize spatial data with flexdashboard](https://www.paulamoraga.com/book-geospatial/sec-flexdashboard.html)
 
 # Shiny
 - [Shiny](https://shiny.rstudio.com/)
 - [Shiny - tutorial](https://shiny.rstudio.com/tutorial/)
 - [Engineering Production-Grade Shiny Apps](https://engineering-shiny.org/)
+- [Building an interactive dashboard to visualize spatial data](https://www.paulamoraga.com/tutorial-flexdashboard/)
+- [Geospatial Health Data: Modeling and Visualization with R-INLA and Shiny - Building a dashboard to visualize spatial data with flexdashboard](https://www.paulamoraga.com/book-geospatial/sec-flexdashboard.html)
