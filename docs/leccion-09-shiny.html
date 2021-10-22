@@ -2466,9 +2466,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h1 id="estructura-de-una-aplicación-shiny">Estructura de una aplicación Shiny</h1>
 <p>Una aplicación Shiny tiene tres componentes:</p>
 <ul>
-<li>Un objeto llamado <strong><code>ui</code></strong> que despliega la interfaz de usuario (ej. controles de entrada y salida).</li>
-<li>Una función llamada <strong><code>server</code></strong> que recibe las entradas, realiza el procesamiento y genera las salidas.</li>
-<li>Un llamado a la función <strong><code>shinyApp()</code></strong> que construye la aplicación a partir de <code>ui</code> y <code>server</code>, los cuales recibe como argumentos.</li>
+<li>La definición de un objeto llamado <strong><code>ui</code></strong>, el cual despliega la interfaz de usuario (ej. controles de entrada y salida).</li>
+<li>La definición de una función llamada <strong><code>server</code></strong>, la cual recibe las entradas, realiza el procesamiento y genera las salidas.</li>
+<li>Un llamado a la función <strong><a href="https://rdrr.io/cran/shiny/man/shinyApp.html">shinyApp()</a></strong> que construye el objeto de la aplicación a partir de <code>ui</code> y <code>server</code>, los cuales recibe como argumentos.</li>
 </ul>
 <p>La definición de <code>ui</code>, la definición de <code>server</code> y el llamado a <code>shinyApp()</code> pueden almacenarse en archivos separados llamados respectivamente <code>ui.R</code>, <code>server.R</code> y <code>app.R</code>. <strong>Deben usarse exactamente los nombres mencionados, tanto para los componentes de la aplicación como para los archivos</strong>. A partir de la versión 0.10.2 de Shiny, se permite que los tres componentes residan en <code>app.R</code>.</p>
 <h1 id="ejemplo-de-aplicación-básica">Ejemplo de aplicación básica</h1>
@@ -2498,17 +2498,17 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </code></pre>
 </div>
 </div>
-<p>La aplicación puede ejecutarse copiando y pegando el código en la consola de R/RStudio. También puede guardarse el código en un archivo llamado, por ejemplo, <code>appshiny/app.R</code> y ejecutarse con:</p>
+<p>La aplicación puede ejecutarse copiando y pegando el código en la consola de R/RStudio. También puede guardarse el código en un archivo llamado, por ejemplo, <code>shinyapp/app.R</code> y ejecutarse con:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/shiny/man/runApp.html'>runApp</a></span><span class='op'>(</span><span class='st'>"appshiny"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/shiny/man/runApp.html'>runApp</a></span><span class='op'>(</span><span class='st'>"shinyapp"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
 <p>El nombre y la ruta del directorio (ej. <code>appshiny</code>) puede ser elegidos por el usuario. La ruta que se especifica en el llamado a la función debe ser relativa al directorio del trabajo del usuario. También puede especificarse una ruta absoluta, por ejemplo:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/shiny/man/runApp.html'>runApp</a></span><span class='op'>(</span><span class='st'>"/home/mfvargas/appshiny"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/shiny/man/runApp.html'>runApp</a></span><span class='op'>(</span><span class='st'>"/home/mfvargas/shinyapp"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
