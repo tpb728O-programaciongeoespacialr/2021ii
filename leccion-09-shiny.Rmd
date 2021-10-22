@@ -64,7 +64,7 @@ La aplicación puede ejecutarse copiando y pegando el código en la consola de R
 runApp("shinyapp")
 ```
 
-El nombre y la ruta del directorio (ej. `appshiny`) puede ser elegidos por el usuario. La ruta que se especifica en el llamado a la función debe ser relativa al directorio del trabajo del usuario. También puede especificarse una ruta absoluta, por ejemplo:
+El nombre y la ruta del directorio (`shinyapp`) puede ser elegidos por el programador. En el llamado a la función, la ruta debe especificarse de manera relativa al directorio del trabajo de R. También puede especificarse una ruta absoluta, por ejemplo:
 
 ```{r eval=FALSE}
 runApp("/home/mfvargas/shinyapp")
