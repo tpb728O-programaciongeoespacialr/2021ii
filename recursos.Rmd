@@ -71,6 +71,7 @@ knitr::opts_chunk$set(echo = FALSE)
 # Shiny
 - [Shiny](https://shiny.rstudio.com/)
 - [Shiny - tutorial](https://shiny.rstudio.com/tutorial/)
+- [Mastering Shiny](https://mastering-shiny.org/)
 - [Engineering Production-Grade Shiny Apps](https://engineering-shiny.org/)
 - [Building an interactive dashboard to visualize spatial data](https://www.paulamoraga.com/tutorial-flexdashboard/)
 - [Geospatial Health Data: Modeling and Visualization with R-INLA and Shiny - Building a dashboard to visualize spatial data with flexdashboard](https://www.paulamoraga.com/book-geospatial/sec-flexdashboard.html)
