@@ -27,16 +27,16 @@ Se introduce el paquete Shiny de R, para el desarrollo de aplicaciones web inter
 
 Una aplicación Shiny tiene tres componentes:
 
-- **Un objeto llamado `ui`** que despliega la interfaz de usuario (ej. controles de entrada y salida).
-- **Una función llamada `server`** que recibe las entradas, realiza el procesamiento y genera las salidas.
-- **Un llamado a la función `shinyApp()`** que construye la aplicación a partir de `ui` y `server`, los cuales recibe como argumentos.
+- Un objeto llamado **`ui`** que despliega la interfaz de usuario (ej. controles de entrada y salida).
+- Una función llamada **`server`** que recibe las entradas, realiza el procesamiento y genera las salidas.
+- Un llamado a la función **`shinyApp()`** que construye la aplicación a partir de `ui` y `server`, los cuales recibe como argumentos.
 
-La definición de `ui`, la definición de `server` y el llamado a `shinyApp()` pueden almacenarse en archivos separados llamados respectivamente `ui.R`, `server.R` y `app.R`. **Deben usarse estos nombres exactos para los componentes de la aplicación y para los archivos**. A partir de la versión 0.10.2 de Shiny, se permite que los tres componentes residan en `app.R`.
+La definición de `ui`, la definición de `server` y el llamado a `shinyApp()` pueden almacenarse en archivos separados llamados respectivamente `ui.R`, `server.R` y `app.R`. **Deben usarse exactamente los nombres mencionados, tanto para los componentes de la aplicación como para los archivos**. A partir de la versión 0.10.2 de Shiny, se permite que los tres componentes residan en `app.R`.
 
 # Ejemplo de aplicación básica
 El siguiente bloque de código muestra una aplicación Shiny trivial.
 
-```r
+```{r eval=FALSE}
 library(shiny)
 
 # Definición del objeto ui
@@ -53,17 +53,20 @@ shinyApp(ui, server)
 ```
 
 Antes de ejecutar la aplicación, debe instalarse el paquete shiny con:
-```r
+
+```{r eval=FALSE}
 install.packages("shiny")
 ```
 
 La aplicación puede ejecutarse copiando y pegando el código en la consola de R/RStudio. También puede guardarse el código en un archivo llamado, por ejemplo, `appshiny/app.R` y ejecutarse con:
-```r
+
+```{r eval=FALSE}
 runApp("appshiny")
 ```
 
 El nombre y la ruta del directorio (ej. `appshiny`) puede ser elegidos por el usuario. La ruta que se especifica en el llamado a la función debe ser relativa al directorio del trabajo del usuario. También puede especificarse una ruta absoluta, por ejemplo:
-```r
+
+```{r eval=FALSE}
 runApp("/home/mfvargas/appshiny")
 ```
 
