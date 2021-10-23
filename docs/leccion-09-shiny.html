@@ -2451,11 +2451,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <li><a href="#introducción">Introducción</a></li>
 <li><a href="#estructura-de-una-aplicación-shiny">Estructura de una aplicación Shiny</a></li>
 <li><a href="#ejemplo-de-aplicación-básica">Ejemplo de aplicación básica</a></li>
+<li><a href="#generación-y-ejecución-de-una-aplicación-básica-en-rstudio">Generación y ejecución de una aplicación básica en RStudio</a></li>
 </ul>
 </nav>
 </div>
 <h1 id="resumen">Resumen</h1>
-<p>Se introduce el paquete Shiny de R, para el desarrollo de aplicaciones web interactivas.</p>
+<p>Se introduce el paquete Shiny de R, para el desarrollo de aplicaciones web interactivas. Se presenta la estructura de una aplicación Shiny y un ejemplo de aplicación básica.</p>
 <h1 id="trabajo-previo">Trabajo previo</h1>
 <ul>
 <li>Observe y lea los tutoriales en <a href="https://shiny.rstudio.com/tutorial/">Shiny - tutorial</a>.</li>
@@ -2463,16 +2464,17 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </ul>
 <h1 id="introducción">Introducción</h1>
 <p><a href="https://shiny.rstudio.com/">Shiny</a> es un paquete de R que facilita el desarrollo de aplicaciones web interactivas.</p>
+<p>Las aplicaciones Shiny deben ejecutarse en un <a href="https://www.rstudio.com/products/shiny/shiny-server/">servidor de Shiny</a>, el cual puede estar ubicado en cualquier computador habilitado para ejecutar código en R como, por ejemplo, la estación de trabajo del programador (principalmente para efectos de pruebas), un servidor ubicado en la red de una organización o un servidor en la nube (ej. <a href="https://www.shinyapps.io/">shinyapps.io</a>).</p>
 <h1 id="estructura-de-una-aplicación-shiny">Estructura de una aplicación Shiny</h1>
-<p>Una aplicación Shiny tiene tres componentes:</p>
+<p>Una aplicación Shiny tiene tres componentes principales:</p>
 <ul>
-<li>La definición de un objeto llamado <strong><code>ui</code></strong>, el cual despliega la interfaz de usuario (ej. controles de entrada y salida).</li>
-<li>La definición de una función llamada <strong><code>server</code></strong>, la cual recibe las entradas, realiza el procesamiento y genera las salidas.</li>
+<li>La definición de un objeto llamado <strong><code>ui</code></strong>, el cual despliega la interfaz de usuario (distribución de los elementos, controles de entrada y salida, etc.) en <a href="https://es.wikipedia.org/wiki/HTML">lenguaje de marcado de hipertexto (HTML)</a>.</li>
+<li>La definición de una función llamada <strong><code>server</code></strong>, la cual recibe las entradas y realiza el procesamiento necesario para generar las salidas.</li>
 <li>Un llamado a la función <strong><a href="https://rdrr.io/cran/shiny/man/shinyApp.html">shinyApp()</a></strong> que construye el objeto de la aplicación a partir de <code>ui</code> y <code>server</code>, los cuales recibe como argumentos.</li>
 </ul>
-<p>La definición de <code>ui</code>, la definición de <code>server</code> y el llamado a <code>shinyApp()</code> pueden almacenarse en archivos separados llamados respectivamente <code>ui.R</code>, <code>server.R</code> y <code>app.R</code>. <strong>Deben usarse exactamente los nombres mencionados, tanto para los componentes de la aplicación como para los archivos</strong>. A partir de la versión 0.10.2 de Shiny, se permite que los tres componentes residan en <code>app.R</code>.</p>
+<p>La definición de <code>ui</code>, la definición de <code>server</code> y el llamado a <code>shinyApp()</code> pueden almacenarse en archivos separados llamados respectivamente <code>ui.R</code>, <code>server.R</code> y <code>app.R</code>. <strong>Deben usarse exactamente los nombres mencionados tanto para los componentes de la aplicación como para los archivos</strong>. A partir de la versión 0.10.2 de Shiny, se permite que los tres componentes residan en <code>app.R</code>.</p>
 <h1 id="ejemplo-de-aplicación-básica">Ejemplo de aplicación básica</h1>
-<p>El siguiente bloque de código muestra una aplicación Shiny trivial.</p>
+<p>El siguiente bloque de código muestra una aplicación Shiny trivial contenida en un archivo <code>app.R</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://shiny.rstudio.com/'>shiny</a></span><span class='op'>)</span>
@@ -2498,7 +2500,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </code></pre>
 </div>
 </div>
-<p>La aplicación puede ejecutarse copiando y pegando el código en la consola de R/RStudio. También puede guardarse el código en un archivo llamado, por ejemplo, <code>shinyapp/app.R</code> y ejecutarse con:</p>
+<p>La aplicación puede ejecutarse copiando y pegando el código en la consola de R/RStudio. También puede guardarse el código en un archivo llamado, por ejemplo, <code>shinyapp/app.R</code> y ejecutarse con la función <a href="https://rdrr.io/pkg/shiny/man/runApp.html">runApp()</a>, la cual recibe como argumento la ruta del directorio en el que se encuentra la aplicación:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/shiny/man/runApp.html'>runApp</a></span><span class='op'>(</span><span class='st'>"shinyapp"</span><span class='op'>)</span>
@@ -2512,7 +2514,18 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </code></pre>
 </div>
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Al ejecutarse la aplicación, se iniciará un servidor que emitirá en la consola de R/RStudio un mensaje similar a:</p>
+<pre><code>#&gt; Listening on http://127.0.0.1:5143</code></pre>
+<p>Este mensaje indica que el servidor está “escuchando” a través del <a href="https://es.wikipedia.org/wiki/Protocolo_de_transferencia_de_hipertexto">protocolo de transferencia de hipertexto (HTTP)</a> en la <a href="https://es.wikipedia.org/wiki/Direcci%C3%B3n_IP">dirección IP</a> <code>127.0.0.1</code>, la cual es interna (i.e. del computador del desarrollador), y en el <a href="https://es.wikipedia.org/wiki/Puerto_de_red">puerto de red</a> <code>5143</code> (puede ser cualquier otro que esté disponible).</p>
+<p>Mientras se ejecuta la aplicación Shiny, la consola de R/RStudio no puede ejecutar más comandos. Para detener la aplicación, puede presionarse el símbolo de <strong>stop</strong> en la barra de herramientas de la consola, hacer clic en la consola y presionar <code>Esc</code> o <code>Ctrl+C</code>, o cerrar la ventana de la aplicación.</p>
+<h1 id="generación-y-ejecución-de-una-aplicación-básica-en-rstudio">Generación y ejecución de una aplicación básica en RStudio</h1>
+<p>En <a href="https://www.rstudio.com/">RStudio</a>, puede generarse una aplicación Shiny básica de dos maneras:</p>
+<ul>
+<li>Mediante la opción de menú <strong>File | New Project | New Directory | Shiny Web Application</strong>. Crea un directorio con una aplicación de ejemplo contenida en un archivo <code>app.R</code>.</li>
+<li>Con el <em><a href="https://es.wikipedia.org/wiki/Snippet">snippet</a></em> <code>shinyapp</code>. En un archivo llamado <code>app.R</code>, debe escribirse “shinyapp” y presionar <code>Shift+Tab</code>. Esto generará una plantilla de aplicación Shiny.</li>
+</ul>
+<p>Además de la función <code>runApp()</code>, la aplicación Shiny puede ejecutarse con el botón <strong>Run App</strong> de la barra de tareas de RStudio.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

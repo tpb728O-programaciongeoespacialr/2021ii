@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Resumen
 
-Se introduce el paquete Shiny de R, para el desarrollo de aplicaciones web interactivas.
+Se introduce el paquete Shiny de R, para el desarrollo de aplicaciones web interactivas. Se presenta la estructura de una aplicación Shiny y un ejemplo de aplicación básica.
 
 # Trabajo previo
 
@@ -21,20 +21,22 @@ Se introduce el paquete Shiny de R, para el desarrollo de aplicaciones web inter
 
 # Introducción
 
-[Shiny](https://shiny.rstudio.com/) es un paquete de R que facilita el desarrollo de aplicaciones web interactivas.
+[Shiny](https://shiny.rstudio.com/) es un paquete de R que facilita el desarrollo de aplicaciones web interactivas. 
+
+Las aplicaciones Shiny deben ejecutarse en un [servidor de Shiny](https://www.rstudio.com/products/shiny/shiny-server/), el cual puede estar ubicado en cualquier computador habilitado para ejecutar código en R como, por ejemplo, la estación de trabajo del programador (principalmente para efectos de pruebas), un servidor ubicado en la red de una organización o un servidor en la nube (ej. [shinyapps.io](https://www.shinyapps.io/)).
 
 # Estructura de una aplicación Shiny
 
-Una aplicación Shiny tiene tres componentes:
+Una aplicación Shiny tiene tres componentes principales:
 
-- La definición de un objeto llamado **`ui`**, el cual despliega la interfaz de usuario (ej. controles de entrada y salida).
-- La definición de una función llamada **`server`**, la cual recibe las entradas, realiza el procesamiento y genera las salidas.
+- La definición de un objeto llamado **`ui`**, el cual despliega la interfaz de usuario (distribución de los elementos, controles de entrada y salida, etc.) en [lenguaje de marcado de hipertexto (HTML)](https://es.wikipedia.org/wiki/HTML).
+- La definición de una función llamada **`server`**, la cual recibe las entradas y realiza el procesamiento necesario para generar las salidas.
 - Un llamado a la función **[shinyApp()](https://rdrr.io/cran/shiny/man/shinyApp.html)** que construye el objeto de la aplicación a partir de `ui` y `server`, los cuales recibe como argumentos.
 
-La definición de `ui`, la definición de `server` y el llamado a `shinyApp()` pueden almacenarse en archivos separados llamados respectivamente `ui.R`, `server.R` y `app.R`. **Deben usarse exactamente los nombres mencionados, tanto para los componentes de la aplicación como para los archivos**. A partir de la versión 0.10.2 de Shiny, se permite que los tres componentes residan en `app.R`.
+La definición de `ui`, la definición de `server` y el llamado a `shinyApp()` pueden almacenarse en archivos separados llamados respectivamente `ui.R`, `server.R` y `app.R`. **Deben usarse exactamente los nombres mencionados tanto para los componentes de la aplicación como para los archivos**. A partir de la versión 0.10.2 de Shiny, se permite que los tres componentes residan en `app.R`.
 
 # Ejemplo de aplicación básica
-El siguiente bloque de código muestra una aplicación Shiny trivial.
+El siguiente bloque de código muestra una aplicación Shiny trivial contenida en un archivo `app.R`.
 
 ```{r eval=FALSE}
 library(shiny)
@@ -58,7 +60,7 @@ Antes de ejecutar la aplicación, debe instalarse el paquete shiny con:
 install.packages("shiny")
 ```
 
-La aplicación puede ejecutarse copiando y pegando el código en la consola de R/RStudio. También puede guardarse el código en un archivo llamado, por ejemplo, `shinyapp/app.R` y ejecutarse con:
+La aplicación puede ejecutarse copiando y pegando el código en la consola de R/RStudio. También puede guardarse el código en un archivo llamado, por ejemplo, `shinyapp/app.R` y ejecutarse con la función [runApp()](https://rdrr.io/pkg/shiny/man/runApp.html), la cual recibe como argumento la ruta del directorio en el que se encuentra la aplicación:
 
 ```{r eval=FALSE}
 runApp("shinyapp")
@@ -69,6 +71,26 @@ El nombre y la ruta del directorio (`shinyapp`) puede ser elegidos por el progra
 ```{r eval=FALSE}
 runApp("/home/mfvargas/shinyapp")
 ```
+
+Al ejecutarse la aplicación, se iniciará un servidor que emitirá en la consola de R/RStudio un mensaje similar a:
+
+```
+#> Listening on http://127.0.0.1:5143
+```
+
+Este mensaje indica que el servidor está "escuchando" a través del [protocolo de transferencia de hipertexto (HTTP)](https://es.wikipedia.org/wiki/Protocolo_de_transferencia_de_hipertexto) en la [dirección IP](https://es.wikipedia.org/wiki/Direcci%C3%B3n_IP) `127.0.0.1`, la cual es interna (i.e. del computador del desarrollador), y en el [puerto de red](https://es.wikipedia.org/wiki/Puerto_de_red) `5143` (puede ser cualquier otro que esté disponible).
+
+Mientras se ejecuta la aplicación Shiny, la consola de R/RStudio no puede ejecutar más comandos. Para detener la aplicación, puede presionarse el símbolo de **stop** en la barra de herramientas de la consola, hacer clic en la consola y presionar `Esc` o `Ctrl+C`, o cerrar la ventana de la aplicación.
+
+# Generación y ejecución de una aplicación básica en RStudio
+
+En [RStudio](https://www.rstudio.com/), puede generarse una aplicación Shiny básica de dos maneras:
+
+- Mediante la opción de menú **File | New Project | New Directory | Shiny Web Application**. Crea un directorio con una aplicación de ejemplo contenida en un archivo `app.R`.
+- Con el *[snippet](https://es.wikipedia.org/wiki/Snippet)* `shinyapp`. En un archivo llamado `app.R`, debe escribirse "shinyapp" y presionar `Shift+Tab`. Esto generará una plantilla de aplicación Shiny.
+
+Además de la función `runApp()`, la aplicación Shiny puede ejecutarse con el botón **Run App** de la barra de tareas de RStudio.
+
 
 
 
