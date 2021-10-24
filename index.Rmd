@@ -44,10 +44,13 @@ Este sitio web corresponde al curso impartido durante el segundo ciclo lectivo d
 
 # Aplicaciones desarrolladas como ejemplo
 
-## Distribución de la familia *Felidae* (felinos) en Costa Rica
+### Distribución de la familia *Felidae* (felinos) en Costa Rica
 - Documento R Markdown
-    - [Sitio web](https://tpb728o-programaciongeoespacialr.github.io/2021ii-documento-felidae/)
     - [Código fuente](https://github.com/tpb728O-programaciongeoespacialr/2021ii-documento-felidae)
+    - [Sitio web](https://tpb728o-programaciongeoespacialr.github.io/2021ii-documento-felidae/)
+- Tablero de control desarrollado con flexdashboard
+    - [Código fuente](https://github.com/tpb728O-programaciongeoespacialr/2021ii-flexdashboard-felidae)
+    - [Sitio web](https://tpb728o-programaciongeoespacialr.github.io/2021ii-flexdashboard-felidae/)
 
 # Tareas
 [01 R Markdown](tarea-01-rmarkdown.html)  
