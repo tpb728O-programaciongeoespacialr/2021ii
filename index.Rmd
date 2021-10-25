@@ -51,6 +51,9 @@ Este sitio web corresponde al curso impartido durante el segundo ciclo lectivo d
 - Tablero de control desarrollado con flexdashboard
     - [Código fuente](https://github.com/tpb728O-programaciongeoespacialr/2021ii-flexdashboard-felidae)
     - [Sitio web](https://tpb728o-programaciongeoespacialr.github.io/2021ii-flexdashboard-felidae/)
+- Tablero de control desarrollado con Shiny y shinydashboard
+    - [Código fuente](https://github.com/tpb728O-programaciongeoespacialr/2021ii-shiny-shinydashboard-felidae)
+    - [Sitio web](https://mfvargas.shinyapps.io/2021ii-shiny-shinydashboard-felidae/)    
 
 # Tareas
 [01 R Markdown](tarea-01-rmarkdown.html)  
