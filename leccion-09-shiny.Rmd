@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Resumen
 
-Se introduce el paquete Shiny de R, para el desarrollo de aplicaciones web interactivas. Se presenta la estructura de una aplicación Shiny y un ejemplo de aplicación básica.
+Se introduce el paquete Shiny de R, para el desarrollo de aplicaciones web interactivas. Se presenta la estructura de una aplicación Shiny y un ejemplo de aplicación básica. También se discuten algunas de las opciones disponibles para el desarrollo de tableros de control y la puesta en producción de aplicaciones Shiny.
 
 # Trabajo previo
 
@@ -33,7 +33,7 @@ Una aplicación Shiny tiene tres componentes principales:
 - La definición de una función llamada **`server`**, la cual recibe las entradas y realiza el procesamiento necesario para generar las salidas.
 - Un llamado a la función **[shinyApp()](https://rdrr.io/cran/shiny/man/shinyApp.html)** que construye el objeto de la aplicación a partir de `ui` y `server`, los cuales recibe como argumentos.
 
-La definición de `ui`, la definición de `server` y el llamado a `shinyApp()` pueden almacenarse en archivos separados llamados respectivamente `ui.R`, `server.R` y `app.R`. **Deben usarse exactamente los nombres mencionados tanto para los componentes de la aplicación como para los archivos**. A partir de la versión 0.10.2 de Shiny, se permite que los tres componentes residan en `app.R`.
+La definición de `ui` y de `server` pueden almacenarse en archivos separados llamados respectivamente `ui.R` y `server.R`. A partir de la versión 0.10.2 de Shiny, se permite que una aplicación Shiny completa esté contenida en un archivo llamado `app.R`. **Deben usarse exactamente los nombres mencionados tanto para los componentes de la aplicación como para los archivos**.
 
 # Ejemplo de aplicación básica
 El siguiente bloque de código muestra una aplicación Shiny trivial contenida en un archivo `app.R`.
@@ -91,6 +91,19 @@ En [RStudio](https://www.rstudio.com/), puede generarse una aplicación Shiny b�
 
 Además de la función `runApp()`, la aplicación Shiny puede ejecutarse con el botón **Run App** de la barra de tareas de RStudio.
 
+# Controles de entrada y salida
+La interfaz de una aplicación Shiny consiste de un conjunto de:
 
+- **[Controles (*widgets*) de entrada](https://shiny.rstudio.com/gallery/widget-gallery.html)**: campos de texto, listas de selección, botones de radio, etc.
+- **Controles de salida**: tablas, gráficos, mapas, etc. Muchos de estos controles están incluídos en los paquetes que generan los diferentes tipos de salidas (ej. DT, plotly, leaflet).
 
+# Desarrollo de tableros de control
+Shiny facilita la elaboración de tableros de control (*dashboards*) con el apoyo de dos paquetes:
 
+- [shinydashboard](https://rstudio.github.io/shinydashboard/): proporciona un conjunto de controles que permiten estructurar una aplicación Shiny como un tablero de control (ej. encabezados, barras de controles, "tabs", etc.).
+- [flexdashboard](https://rstudio.github.io/flexdashboard/articles/shiny.html): el mismo paquete que se utiliza para generar tableros de control estáticos, puede generar tableros interactivos los cuales pueden contener, por ejemplo, controles para filtrar la información o cargar datos adicionales.
+
+# Puesta en producción de aplicaciones Shiny
+Para su puesta en producción (*deploy*), una aplicación Shiny requiere un [servidor de Shiny](https://www.rstudio.com/products/shiny/shiny-server/), el cual puede estar ubicado en cualquier computador habilitado para ejecutar código en R como, por ejemplo, la estación de trabajo del programador (principalmente para efectos de pruebas), un servidor ubicado en la red de una organización o un servidor en la nube.
+
+La plataforma [shinyapps.io](https://www.shinyapps.io/) permite publicar en la red una aplicación Shiny.

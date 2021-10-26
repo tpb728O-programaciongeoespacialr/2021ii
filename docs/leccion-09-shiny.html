@@ -2452,11 +2452,14 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <li><a href="#estructura-de-una-aplicación-shiny">Estructura de una aplicación Shiny</a></li>
 <li><a href="#ejemplo-de-aplicación-básica">Ejemplo de aplicación básica</a></li>
 <li><a href="#generación-y-ejecución-de-una-aplicación-básica-en-rstudio">Generación y ejecución de una aplicación básica en RStudio</a></li>
+<li><a href="#controles-de-entrada-y-salida">Controles de entrada y salida</a></li>
+<li><a href="#desarrollo-de-tableros-de-control">Desarrollo de tableros de control</a></li>
+<li><a href="#puesta-en-producción-de-aplicaciones-shiny">Puesta en producción de aplicaciones Shiny</a></li>
 </ul>
 </nav>
 </div>
 <h1 id="resumen">Resumen</h1>
-<p>Se introduce el paquete Shiny de R, para el desarrollo de aplicaciones web interactivas. Se presenta la estructura de una aplicación Shiny y un ejemplo de aplicación básica.</p>
+<p>Se introduce el paquete Shiny de R, para el desarrollo de aplicaciones web interactivas. Se presenta la estructura de una aplicación Shiny y un ejemplo de aplicación básica. También se discuten algunas de las opciones disponibles para el desarrollo de tableros de control y la puesta en producción de aplicaciones Shiny.</p>
 <h1 id="trabajo-previo">Trabajo previo</h1>
 <ul>
 <li>Observe y lea los tutoriales en <a href="https://shiny.rstudio.com/tutorial/">Shiny - tutorial</a>.</li>
@@ -2472,7 +2475,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <li>La definición de una función llamada <strong><code>server</code></strong>, la cual recibe las entradas y realiza el procesamiento necesario para generar las salidas.</li>
 <li>Un llamado a la función <strong><a href="https://rdrr.io/cran/shiny/man/shinyApp.html">shinyApp()</a></strong> que construye el objeto de la aplicación a partir de <code>ui</code> y <code>server</code>, los cuales recibe como argumentos.</li>
 </ul>
-<p>La definición de <code>ui</code>, la definición de <code>server</code> y el llamado a <code>shinyApp()</code> pueden almacenarse en archivos separados llamados respectivamente <code>ui.R</code>, <code>server.R</code> y <code>app.R</code>. <strong>Deben usarse exactamente los nombres mencionados tanto para los componentes de la aplicación como para los archivos</strong>. A partir de la versión 0.10.2 de Shiny, se permite que los tres componentes residan en <code>app.R</code>.</p>
+<p>La definición de <code>ui</code> y de <code>server</code> pueden almacenarse en archivos separados llamados respectivamente <code>ui.R</code> y <code>server.R</code>. A partir de la versión 0.10.2 de Shiny, se permite que una aplicación Shiny completa esté contenida en un archivo llamado <code>app.R</code>. <strong>Deben usarse exactamente los nombres mencionados tanto para los componentes de la aplicación como para los archivos</strong>.</p>
 <h1 id="ejemplo-de-aplicación-básica">Ejemplo de aplicación básica</h1>
 <p>El siguiente bloque de código muestra una aplicación Shiny trivial contenida en un archivo <code>app.R</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2525,6 +2528,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <li>Con el <em><a href="https://es.wikipedia.org/wiki/Snippet">snippet</a></em> <code>shinyapp</code>. En un archivo llamado <code>app.R</code>, debe escribirse “shinyapp” y presionar <code>Shift+Tab</code>. Esto generará una plantilla de aplicación Shiny.</li>
 </ul>
 <p>Además de la función <code>runApp()</code>, la aplicación Shiny puede ejecutarse con el botón <strong>Run App</strong> de la barra de tareas de RStudio.</p>
+<h1 id="controles-de-entrada-y-salida">Controles de entrada y salida</h1>
+<p>La interfaz de una aplicación Shiny consiste de un conjunto de:</p>
+<ul>
+<li><strong><a href="https://shiny.rstudio.com/gallery/widget-gallery.html">Controles (<em>widgets</em>) de entrada</a></strong>: campos de texto, listas de selección, botones de radio, etc.</li>
+<li><strong>Controles de salida</strong>: tablas, gráficos, mapas, etc. Muchos de estos controles están incluídos en los paquetes que generan los diferentes tipos de salidas (ej. DT, plotly, leaflet).</li>
+</ul>
+<h1 id="desarrollo-de-tableros-de-control">Desarrollo de tableros de control</h1>
+<p>Shiny facilita la elaboración de tableros de control (<em>dashboards</em>) con el apoyo de dos paquetes:</p>
+<ul>
+<li><a href="https://rstudio.github.io/shinydashboard/">shinydashboard</a>: proporciona un conjunto de controles que permiten estructurar una aplicación Shiny como un tablero de control (ej. encabezados, barras de controles, “tabs”, etc.).</li>
+<li><a href="https://rstudio.github.io/flexdashboard/articles/shiny.html">flexdashboard</a>: el mismo paquete que se utiliza para generar tableros de control estáticos, puede generar tableros interactivos los cuales pueden contener, por ejemplo, controles para filtrar la información o cargar datos adicionales.</li>
+</ul>
+<h1 id="puesta-en-producción-de-aplicaciones-shiny">Puesta en producción de aplicaciones Shiny</h1>
+<p>Para su puesta en producción (<em>deploy</em>), una aplicación Shiny requiere un <a href="https://www.rstudio.com/products/shiny/shiny-server/">servidor de Shiny</a>, el cual puede estar ubicado en cualquier computador habilitado para ejecutar código en R como, por ejemplo, la estación de trabajo del programador (principalmente para efectos de pruebas), un servidor ubicado en la red de una organización o un servidor en la nube.</p>
+<p>La plataforma <a href="https://www.shinyapps.io/">shinyapps.io</a> permite publicar en la red una aplicación Shiny.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
