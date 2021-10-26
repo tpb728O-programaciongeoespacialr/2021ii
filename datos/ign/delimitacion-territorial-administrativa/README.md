@@ -5,6 +5,13 @@ $ ogr2ogr \
     provincias.geojson \
     WFS:"http://geos.snitcr.go.cr/be/IGN_5/wfs" "IGN_5:limiteprovincial_5k"
     
+# Provincias simplificadas (100 m)
+$ ogr2ogr \
+    -simplify 100 \
+    -makevalid \
+    provincias-simplificadas_100m.geojson \
+    WFS:"http://geos.snitcr.go.cr/be/IGN_5/wfs" "IGN_5:limiteprovincial_5k"   
+    
 # Cantones
 $ ogr2ogr \
     -makevalid \
