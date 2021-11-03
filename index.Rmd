@@ -61,6 +61,7 @@ Este sitio web corresponde al curso impartido durante el segundo ciclo lectivo d
 # Tareas
 [01 R Markdown](tarea-01-rmarkdown.html)  
 [02 Graficación y Tidyverse](tarea-02-tidyverse.html)  
+[03 Tablero de control desarrollado con Shiny](tarea-03-shiny.html)  
 
 # Proyectos
 [01 - Tablero de control implementado con flexdashboard](proyecto-01-flexdashboard.html)  

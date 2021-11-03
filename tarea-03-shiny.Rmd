@@ -1,0 +1,29 @@
+---
+title: "Tarea 03 - Tablero de control desarrollado con Shiny"
+output: 
+  distill::distill_article:
+    toc: true
+    toc_depth: 4
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Fecha de entrega y entregables
+La fecha y hora límite para la entrega es el **miércoles 16 de noviembre de 2021 a las 16:59**. Debe crear una aplicación shiny, publicarla en shinyapps.io, y enviarle la dirección al profesor por correo electrónico.
+
+La tarea puede realizarse en grupos de un máximo de tres estudiantes.
+
+## Desarrollo y calificación
+La aplicación shiny estará basada en el tablero de control desarrollado en el proyecto 1. Se calificarán los siguientes aspectos (entre paréntesis, se muestra el porcentaje correspondiente de la nota final):
+
+- (20%) Publicación en shinyapps.io.
+
+- (60%) Al menos dos controles de entrada para filtrar los datos (ej. listas de selección). Los componentes del tablero (tablas, gráficos, mapas) deben actualizar la información apropiadamente con base en lo especificado por el usuario en los controles de entrada.
+
+- (20%) El mapa del tablero debe contener:
+    - Un control de capas.
+    - Un control de escala.
+    - Un control de coordenadas del puntero del ratón.
+    - Un control de búsqueda en OSM.
