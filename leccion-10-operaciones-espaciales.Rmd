@@ -38,12 +38,18 @@ library(terra)
 # Carga de datos
 provincias <-
   st_read(
-    "https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/ign/delimitacion-territorial-administrativa/provincias.geojson",
+    "https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/ign/delimitacion-territorial-administrativa/provincias-simplificadas_100m.geojson",
     quiet = TRUE
-  )
+  ) %>%
+  st_transform(4326)
 
 # Mapeo
-plot(provincias$geometry)
+plot(
+  provincias$geometry,
+  main = "Provincias de Costa Rica",
+  axes = TRUE,
+  graticule = TRUE
+)
 ```
 
 **Cantones de Costa Rica (Instituto Geográfico Nacional)**  
@@ -53,10 +59,16 @@ cantones <-
   st_read(
     "https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/ign/delimitacion-territorial-administrativa/cantones.geojson",
     quiet = TRUE
-  )
+  ) %>%
+  st_transform(4326)
 
 # Mapeo
-plot(cantones$geometry)
+plot(
+  cantones$geometry,
+  main = "Cantones de Costa Rica",
+  axes = TRUE,
+  graticule = TRUE
+)
 ```
 
 **Áreas silvestres protegidas (Sistema Nacional de Áreas de Conservación)**  
@@ -66,10 +78,16 @@ asp <-
   st_read(
     "https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/sinac/areas-silvestres-protegidas.geojson",
     quiet = TRUE
-  )
+  ) %>%
+  st_transform(4326)
 
 # Mapeo
-plot(asp$geometry)
+plot(
+  asp$geometry,
+  main = "Áreas silvestres protegidas (ASP) de Costa Rica",
+  axes = TRUE,
+  graticule = TRUE
+)
 ```
 
 **spData: Datasets for Spatial Analysis (Bivand et al.)**  
