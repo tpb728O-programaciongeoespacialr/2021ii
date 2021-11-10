@@ -29,6 +29,9 @@ library(sf)
 
 # Paquete para manejo de datos raster
 library(terra)
+
+# Paquete para mapas web
+library(leaflet)
 ```
 
 ## Conjuntos de datos
@@ -148,12 +151,16 @@ plot(
 )
 ```
 
-**spData: Datasets for Spatial Analysis (Bivand et al.)**  
+**spData y spDataLarge: Datasets for Spatial Analysis (Bivand et al.)**  
 Este paquete contiene conjuntos de datos de ejemplo para el libro *Geocomputation with R*. Su documentación está en [Datasets for Spatial Analysis - spData](https://nowosad.github.io/spData/).
 
 ```{r carga-datos-spdata}
-# Carga del paquete
+# Instalación de spDataLarge
+# install.packages("spDataLarge", repos = "https://nowosad.r-universe.dev")
+
+# Carga de los paquetes
 library(spData)
+library(spDataLarge)
 ```
 
 # Introducción
@@ -402,3 +409,186 @@ plot(
 plot(centroide_sanjose$geometry, pch = 16, add = TRUE)
 plot(centroide_alajuela$geometry, pch = 16, add = TRUE)
 ```
+
+# Datos raster
+Las operaciones espaciales en datos raster incluyen:
+
+- Creación de subconjuntos espaciales (_spatial subsetting_).  
+- Álgebra de mapas (_map algebra_). 
+
+## Manejo de datos espaciales con el paquete terra
+En los siguientes ejemplos, se utilizarán los conjuntos de datos ```elev``` y ```grain``` que se crearon en la lección sobre datos de atributos, los cuales están también incluidos en el paquete ```spData```.
+
+```{r terra-plot}
+# Conversión a SpatRaster
+elev = rast(system.file("raster/elev.tif", package = "spData"))
+grain = rast(system.file("raster/grain.tif", package = "spData"))
+
+
+# Mapeo de los conjuntos de datos de ejemplo
+
+# Elevación
+plot(elev)
+
+# Tipos de granos
+plot(grain)
+```
+
+Para mayor facilidad de manipulación y visualización, ambos conjuntos de datos pueden grabarse en disco.
+
+```{r terra-writeRaster, eval=FALSE}
+# Especificación del directorio de trabajo (debe ser una ruta existente)
+setwd("/home/mfvargas/")
+
+# Escritura de los objetos raster
+writeRaster(elev, filename = "elev.asc", overwrite = TRUE)
+writeRaster(grain, filename = "grain.asc", overwrite = TRUE)
+```
+
+### Creación de subconjuntos espaciales
+En la lección sobre operaciones con atributos, se explicó como recuperar subconjuntos de objetos raster, ya sea mediante su ID o su posición en filas y columnas. Los subconjuntos de objetos raster también pueden obtenerse mediante la especificación de coordenadas o de otros objetos espaciales.
+
+```{r terra-subsets-01}
+# La función cellFromXY() retorna el ID de la celda correspondiente a una coordenada
+id <- cellFromXY(elev, xy = matrix(c(0.1, 0.1), ncol = 2))
+elev[id]
+
+# El mismo resultado puede obtenerse con raster::extract()
+terra::extract(elev, data.frame(x = 0.1, y = 0.1))
+```
+
+También es posible consultar las celdas contenidas en la extensión (i.e. los límites) otro raster.
+
+```{r terra-clip}
+clip <- rast(
+  xmin = 0.9,
+  xmax = 1.8,
+  ymin = -0.45,
+  ymax = 0.45,
+  resolution = 0.3,
+  vals = rep(1, 9)
+)
+
+# Celdas de elev contenidas en la extensión de clip
+elev[clip]
+
+# El mismo resultado puede obtenerse con raster::extract
+terra::extract(elev, ext(clip))
+```
+
+Los métodos explicados anteriormente solo retornan ID y valores de celdas. Con el operador ```[``` y el argumento ```drop = FALSE``` pueden retornarse objetos raster.
+
+```{r terra-rango}
+# Objeto raster creado a partir de un rango de ID de celdas
+elev[1:2, drop = FALSE]
+
+# Objeto raster creado a partir de posiciones de filas y columnas
+elev[1, 1:2, drop = FALSE]
+```
+
+Por último, también es posible obtener subconjuntos raster mediante la aplicación en un objeto raster de una "máscara" (*mask*) con la misma extensión y resolución, y que contenga valores lógicos o ```NA```.
+
+```{r terra-mask}
+# Creación de una "máscara"
+rmask = elev 
+values(rmask) = sample(c(NA, TRUE), 36, replace = TRUE)
+
+
+# Creación de subconjuntos espaciales mediante la máscara
+
+# Con el operador []
+elev[rmask, drop = FALSE]           
+
+# Con la función mask()
+mask(elev, rmask)                   
+
+# Con la función overlay()
+#overlay(elev, rmask, fun = "max")   
+```
+
+### Álgebra de mapas
+
+El álgebra de mapas divide las operaciones raster en cuatro clases:
+
+- **Operaciones locales o de "celda por celda"**.  
+- **Operaciones focales o de "vecindario" (*neighborhood*)**. Generalmente, el valor de salida de cada celda proviene de un bloque de entrada de 3 x 3 celdas.  
+- **Operaciones zonales**. Son similares a las focales, pero el bloque de entrada puede tener tamaños y formas irregulares.  
+- **Operaciones globales**. Los valores de salida de cada celda provienen de uno o varios objetos raster completos.
+
+Esta clasificación se basa en la cantidad o forma de las celdas utilizadas por cada pixel durante el procesamiento. Otras clasificaciones pueden estar basadas en el área de aplicación del análisis (ej. terreno, hidrología, teledetección).
+
+#### Operaciones locales
+Son operaciones realizadas celda por celda en una o varias capas raster. 
+
+```{r locales}
+# Reclasificación de una capa raster
+rcl <-
+  matrix(c(0, 12, 1, 12, 24, 2, 24, 36, 3), ncol = 3, byrow = TRUE)
+recl <- classify(elev, rcl = rcl)
+plot(recl)
+
+# Álgebra raster con operadores aritméticos
+elev_doble <- elev + elev
+plot(elev_doble)
+
+elev_cuadrado <- elev * elev
+plot(elev_cuadrado)
+
+elev_mayor_30 <- elev > 30
+plot(elev_mayor_30)
+```
+
+Cálculo del NDVI
+```{r ndvi}
+# Cálculo de NDVI
+multi_raster_file = system.file("raster/landsat.tif", package = "spDataLarge")
+multi_rast = rast(multi_raster_file)
+
+ndvi_fun = function(nir, red){
+  (nir - red) / (nir + red)
+}
+
+ndvi_rast = lapp(multi_rast[[c(4, 3)]], fun = ndvi_fun)
+
+plot(multi_rast)
+plot(ndvi_rast)
+```
+
+#### Operaciones focales
+En este tipo de operaciones, el valor de salida de cada pixel procesado depende de un bloque compuesto por una celda central y sus vecinas. Este "vecindario" (también llamado *kernel*, filtro o "ventana móvil") es típicamente de 3 x 3 celdas, pero puede tomar otras formas y tamaños. Una operación focal aplica una función de agregación (ej. promedio, mínimo, máximo) a todas las celdas del vecindario, utiliza la salida como nuevo valor de la celda central correspondiente y se mueve a la celda siguiente.
+
+```{r focales}
+# Uso de focal() para obtener el valor mínimo en un vecindario de 3 x 3
+r_focal <- focal(elev, w = matrix(1, nrow = 3, ncol = 3), fun = min)
+plot(r_focal)
+```
+
+Las operaciones focales tienen aplicaciones en áreas como procesamiento de imágenes (ej. remoción de valores extremos) o análisis de terreno (ej. cálculo de pendiente o dirección de flujo).
+
+#### Operaciones zonales
+De manera similar a las focales, las operaciones zonales aplicación de agregación a múltiples celdas raster. Sin embargo, en el caso de las zonales, generalmente se usa un raster categórico que define las zonas, a diferencia de la ventana predefinida que se emplea en las focales. Por lo tanto, las celdas que definen el filtro zonal no deben ser necesariamente vecinas.
+
+```{r zonales}
+# Uso de zonal() para encontrar la elevación promedio de cada tipo de grano
+zonal(elev, grain, fun = "mean") %>%
+  as.data.frame()
+```
+
+#### Operaciones globales
+Las operaciones globales pueden considerarse un caso particular de las operaciones zonales, en las cuales un raster completo corresponde a una zona. Las operaciones globales más comunes incluyen estadísticas descriptivas para todo un conjunto raster.
+
+```{r}
+# Lectura de una capa raster de altitud
+altitud <-
+  rast(
+    "/vsicurl/https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/master/datos/worldclim/altitud.tif"
+  )
+
+# Resumen
+summary(altitud)
+
+# Histograma
+hist(altitud)
+```
+
+Otras operaciones globales incluyen cálculos de distancia y rasters de "peso" (*weight rasters*) (ej. distancia de cada celda a una celda objetivo, costo en combustible de cada celda a una celda objetivo).
