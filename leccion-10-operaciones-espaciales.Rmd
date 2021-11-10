@@ -90,6 +90,32 @@ plot(
 )
 ```
 
+**Aeródromos (Instituto Geográfico Nacional)**  
+```{r carga-datos-aerodromos}
+# Carga de datos
+aerodromos <-
+  st_read(
+    "https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/ign/infraestructura/aerodromos.geojson",
+    quiet = TRUE
+  ) %>%
+  st_transform(4326)
+
+# Mapeo
+plot(
+  provincias$geometry,
+  main = "Aeródromos de Costa Rica",
+  axes = TRUE,
+  graticule = TRUE,
+  reset = FALSE
+)
+plot(
+  add = TRUE,
+  aerodromos$geometry,
+  pch = 4,
+  col = "black"
+)
+```
+
 **spData: Datasets for Spatial Analysis (Bivand et al.)**  
 Este paquete contiene conjuntos de datos de ejemplo para el libro *Geocomputation with R*. Su documentación está en [Datasets for Spatial Analysis - spData](https://nowosad.github.io/spData/).
 
