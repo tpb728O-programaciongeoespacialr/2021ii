@@ -2495,9 +2495,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <span class='co'># Paquete para manejo de datos raster</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rspatial.org/terra/'>terra</a></span><span class='op'>)</span>
-
-<span class='co'># Paquete para mapas web</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rstudio.github.io/leaflet/'>leaflet</a></span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
@@ -3099,24 +3096,24 @@ Este paquete contiene conjuntos de datos de ejemplo para el libro <em>Geocomputa
 4     4
 5     5
 6     6
-7    13
-8    14
-9    15
-10   16
-11   17
-12   18
+7     7
+8     8
+9     9
+10   10
+11   11
+12   12
 13   19
 14   20
 15   21
 16   22
 17   23
 18   24
-19   31
-20   32
-21   33
-22   34
-23   35
-24   36</code></pre>
+19   25
+20   26
+21   27
+22   28
+23   29
+24   30</code></pre>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Con la función mask()</span>
 <span class='fu'><a href='https://rdrr.io/pkg/terra/man/mask.html'>mask</a></span><span class='op'>(</span><span class='va'>elev</span>, <span class='va'>rmask</span><span class='op'>)</span>                   
@@ -3130,7 +3127,7 @@ coord. ref. : +proj=longlat +datum=WGS84 +no_defs
 source      : memory 
 name        : elev 
 min value   :    1 
-max value   :   35 </code></pre>
+max value   :   36 </code></pre>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Con la función overlay()</span>
 <span class='co'>#overlay(elev, rmask, fun = "max")   </span>

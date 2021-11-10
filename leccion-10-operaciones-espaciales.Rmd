@@ -29,9 +29,6 @@ library(sf)
 
 # Paquete para manejo de datos raster
 library(terra)
-
-# Paquete para mapas web
-library(leaflet)
 ```
 
 ## Conjuntos de datos
