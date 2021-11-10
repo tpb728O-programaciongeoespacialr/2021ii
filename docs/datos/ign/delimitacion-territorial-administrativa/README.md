@@ -5,7 +5,7 @@ $ ogr2ogr \
     provincias.geojson \
     WFS:"http://geos.snitcr.go.cr/be/IGN_5/wfs" "IGN_5:limiteprovincial_5k"
     
-# Provincias simplificadas (100 m)
+# Provincias con geometrías simplificadas (100 m)
 $ ogr2ogr \
     -simplify 100 \
     -makevalid \
@@ -18,9 +18,23 @@ $ ogr2ogr \
     cantones.geojson \
     WFS:"http://geos.snitcr.go.cr/be/IGN_5/wfs" "IGN_5:limitecantonal_5k"
     
+# Cantones con geometrías simplificadas (100 m)
+$ ogr2ogr \
+    -simplify 100 \
+    -makevalid \
+    cantones-simplificadas_100m.geojson \
+    WFS:"http://geos.snitcr.go.cr/be/IGN_5/wfs" "IGN_5:limitecantonal_5k"      
+    
 # Distritos
 $ ogr2ogr \
     -makevalid \
     distritos.geojson \
     WFS:"http://geos.snitcr.go.cr/be/IGN_5/wfs" "IGN_5:limitedistrital_5k"
+    
+# Distritos con geometrías simplificadas (100 m)
+$ ogr2ogr \
+    -simplify 100 \
+    -makevalid \
+    distritos-simplificadas_100m.geojson \
+    WFS:"http://geos.snitcr.go.cr/be/IGN_5/wfs" "IGN_5:limitedistrital_5k"          
 ```
