@@ -5,7 +5,7 @@ $ ogr2ogr \
     areas-silvestres-protegidas.geojson \
     WFS:"http://geos1pne.sirefor.go.cr/wfs" "PNE:areas_silvestres_protegidas"
 
-# Áreas silvestres protegidas simplificadas
+# Áreas silvestres protegidas con geometrías simplificadas (100 m)
 $ ogr2ogr \
     -simplify 100 \
     -makevalid \
