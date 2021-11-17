@@ -123,7 +123,7 @@ plot(
 **Mamíferos (datos agrupados por la Infraestructura Mundial de Información en Biodiversidad)**  
 ```{r carga-datos-mammalia}
 # Carga de datos
-mammalia <-
+mamiferos <-
   st_read(
     "/vsicurl/https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/gbif/mammalia-cr-registros.csv",
     options = c(
@@ -134,7 +134,7 @@ mammalia <-
   )
 
 # Asignación de CRS
-st_crs(mammalia) = 4326
+st_crs(mamiferos) = 4326
 
 # Mapeo
 plot(
@@ -146,7 +146,7 @@ plot(
 )
 plot(
   add = TRUE,
-  mammalia$geometry,
+  mamiferos$geometry,
   pch = 16,
   col = "brown"
 )
@@ -321,4 +321,67 @@ plot(
   add = TRUE,
   pch = 16,
   col = "green")
+```
+
+### Áreas de amortiguamiento (*buffers*)
+Los *buffers* son polígonos creados alrededor de otra geometría, ya sea otro polígono, una línea o un punto. El paquete ```sf``` incluye la función [st_buffer()]() para la generación de *buffers*.
+
+```{r st_buffer, collapse=TRUE}
+# Buffer que rodea la ruta 32
+plot(
+  st_buffer(st_union(ruta_32), 5000),
+  main = "Buffer que rodea la ruta 32",
+  axes = TRUE,
+  graticule = TRUE)
+
+plot(
+  ruta_32$geometry,
+  col = "blue",
+  add = TRUE
+)
+```
+
+Es común el uso de *buffers* en análisis de datos, para responder preguntas como, por ejemplo, "¿cuántos puntos hay alrededor de una línea?" o "¿cuáles especies pueden encontrarse en las márgenes de un río?".
+
+```{r buffer_mammalia, collapse=TRUE}
+# Registros de presencia de mamíferos no voladores ubicados alrededor de la ruta 32
+mamiferos <-
+  mamiferos %>%
+  filter(order != "Chiroptera") %>% # se excluye el orden de los murciélagos
+  st_transform(crs = 5367)
+
+buffer_ruta_32 <-
+  ruta_32 %>%
+  st_buffer(dist = 5000)
+
+mamiferos_buffer_ruta_32 <-
+  st_join(mamiferos, buffer_ruta_32) %>%
+  filter(!is.na(codigo))
+
+plot(
+  st_union(buffer_ruta_32),
+  main = "Mamíferos terrestres alrededor de la ruta 32",
+  axes = TRUE,
+  graticule = TRUE
+)
+
+plot(ruta_32$geometry,
+     col = "blue",
+     add = TRUE)
+
+plot(
+  mamiferos_buffer_ruta_32,
+  pch = 16,
+  col = "orange",
+  add = TRUE
+)
+
+# 10 especies con mayor cantidad de registros
+mamiferos_buffer_ruta_32 %>% 
+  st_drop_geometry() %>%
+  filter(!is.na(species) & species != "") %>%
+  group_by(species) %>% 
+  summarise(registros = n()) %>%
+  arrange(desc(registros)) %>%
+  slice(1:10)
 ```

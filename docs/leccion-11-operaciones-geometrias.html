@@ -2459,6 +2459,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <ul>
 <li><a href="#simplificación">Simplificación</a></li>
 <li><a href="#centroides">Centroides</a></li>
+<li><a href="#áreas-de-amortiguamiento-buffers">Áreas de amortiguamiento (<em>buffers</em>)</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -2591,7 +2592,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Carga de datos</span>
-<span class='va'>mammalia</span> <span class='op'>&lt;-</span>
+<span class='va'>mamiferos</span> <span class='op'>&lt;-</span>
   <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_read.html'>st_read</a></span><span class='op'>(</span>
     <span class='st'>"/vsicurl/https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/gbif/mammalia-cr-registros.csv"</span>,
     options <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/c.html'>c</a></span><span class='op'>(</span>
@@ -2602,7 +2603,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <span class='op'>)</span>
 
 <span class='co'># Asignación de CRS</span>
-<span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_crs.html'>st_crs</a></span><span class='op'>(</span><span class='va'>mammalia</span><span class='op'>)</span> <span class='op'>=</span> <span class='fl'>4326</span>
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_crs.html'>st_crs</a></span><span class='op'>(</span><span class='va'>mamiferos</span><span class='op'>)</span> <span class='op'>=</span> <span class='fl'>4326</span>
 
 <span class='co'># Mapeo</span>
 <span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span>
@@ -2614,7 +2615,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span class='op'>)</span>
 <span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span>
   add <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  <span class='va'>mammalia</span><span class='op'>$</span><span class='va'>geometry</span>,
+  <span class='va'>mamiferos</span><span class='op'>$</span><span class='va'>geometry</span>,
   pch <span class='op'>=</span> <span class='fl'>16</span>,
   col <span class='op'>=</span> <span class='st'>"brown"</span>
 <span class='op'>)</span>
@@ -2838,7 +2839,89 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <p><img src="leccion-11-operaciones-geometrias_files/figure-html5/st_centroid-3.png" width="624" /></p>
 </div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h3 id="áreas-de-amortiguamiento-buffers">Áreas de amortiguamiento (<em>buffers</em>)</h3>
+<p>Los <em>buffers</em> son polígonos creados alrededor de otra geometría, ya sea otro polígono, una línea o un punto. El paquete <code>sf</code> incluye la función <a href="">st_buffer()</a> para la generación de <em>buffers</em>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Buffer que rodea la ruta 32</span>
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span>
+  <span class='fu'><a href='https://r-spatial.github.io/sf/reference/geos_unary.html'>st_buffer</a></span><span class='op'>(</span><span class='fu'><a href='https://r-spatial.github.io/sf/reference/geos_combine.html'>st_union</a></span><span class='op'>(</span><span class='va'>ruta_32</span><span class='op'>)</span>, <span class='fl'>5000</span><span class='op'>)</span>,
+  main <span class='op'>=</span> <span class='st'>"Buffer que rodea la ruta 32"</span>,
+  axes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  graticule <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>ruta_32</span><span class='op'>$</span><span class='va'>geometry</span>,
+  col <span class='op'>=</span> <span class='st'>"blue"</span>,
+  add <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="leccion-11-operaciones-geometrias_files/figure-html5/st_buffer-1.png" width="624" /></p>
+</div>
+<p>Es común el uso de <em>buffers</em> en análisis de datos, para responder preguntas como, por ejemplo, “¿cuántos puntos hay alrededor de una línea?” o “¿cuáles especies pueden encontrarse en las márgenes de un río?”.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Registros de presencia de mamíferos no voladores ubicados alrededor de la ruta 32</span>
+<span class='va'>mamiferos</span> <span class='op'>&lt;-</span>
+  <span class='va'>mamiferos</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>order</span> <span class='op'>!=</span> <span class='st'>"Chiroptera"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='co'># se excluye el orden de los murciélagos</span>
+  <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_transform.html'>st_transform</a></span><span class='op'>(</span>crs <span class='op'>=</span> <span class='fl'>5367</span><span class='op'>)</span>
+
+<span class='va'>buffer_ruta_32</span> <span class='op'>&lt;-</span>
+  <span class='va'>ruta_32</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://r-spatial.github.io/sf/reference/geos_unary.html'>st_buffer</a></span><span class='op'>(</span>dist <span class='op'>=</span> <span class='fl'>5000</span><span class='op'>)</span>
+
+<span class='va'>mamiferos_buffer_ruta_32</span> <span class='op'>&lt;-</span>
+  <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_join.html'>st_join</a></span><span class='op'>(</span><span class='va'>mamiferos</span>, <span class='va'>buffer_ruta_32</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>codigo</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span>
+  <span class='fu'><a href='https://r-spatial.github.io/sf/reference/geos_combine.html'>st_union</a></span><span class='op'>(</span><span class='va'>buffer_ruta_32</span><span class='op'>)</span>,
+  main <span class='op'>=</span> <span class='st'>"Mamíferos terrestres alrededor de la ruta 32"</span>,
+  axes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  graticule <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
+
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>ruta_32</span><span class='op'>$</span><span class='va'>geometry</span>,
+     col <span class='op'>=</span> <span class='st'>"blue"</span>,
+     add <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>mamiferos_buffer_ruta_32</span>,
+  pch <span class='op'>=</span> <span class='fl'>16</span>,
+  col <span class='op'>=</span> <span class='st'>"orange"</span>,
+  add <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+<img src="leccion-11-operaciones-geometrias_files/figure-html5/buffer_mammalia-1.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># 10 especies con mayor cantidad de registros</span>
+<span class='va'>mamiferos_buffer_ruta_32</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_geometry.html'>st_drop_geometry</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>species</span><span class='op'>)</span> <span class='op'>&amp;</span> <span class='va'>species</span> <span class='op'>!=</span> <span class='st'>""</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>species</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span>registros <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>registros</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/slice.html'>slice</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 10 × 2
+   species                  registros
+   &lt;chr&gt;                        &lt;int&gt;
+ 1 Sciurus variegatoides           83
+ 2 Bradypus variegatus             81
+ 3 Heteromys desmarestianus        48
+ 4 Choloepus hoffmanni             46
+ 5 Peromyscus mexicanus            38
+ 6 Melanomys caliginosus           30
+ 7 Alouatta palliata               20
+ 8 Orthogeomys cherriei            20
+ 9 Didelphis marsupialis           16
+10 Cebus capucinus                 15</code></pre>
+</div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
