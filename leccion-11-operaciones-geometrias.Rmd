@@ -103,8 +103,7 @@ red_vial <-
   st_read(
     "https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/ign/infraestructura/redvial-simplificadas_500m.geojson",
     quiet = TRUE
-  ) %>%
-  st_transform(4326)
+  )
 
 # Mapeo
 plot(
@@ -235,4 +234,91 @@ plot(
 
 # Tamaño de la capa simplificada con rmapshaper::ms_simplify()
 object.size(provincias_simp)
+```
+
+### Centroides
+Un centroide es un punto que identifica el centro de un objeto geográfico. Puede calcularse para geometrías de líneas y de polígonos y se utilizan para brindar una representación simplificada de geometrías más complejas. Existen varios métodos para calcularlos. 
+
+El paquete  ```sf```  incluye la función [st_centroid()](https://r-spatial.github.io/sf/reference/geos_unary.html) la cual calcula el *centroide geográfico* (comúnmente llamado "el centroide"). Es posible que el centroide geográfico se ubique fuera de la geometría "padre" (ej. en una con forma de rosca). Para evitar este resultado, la función [st_point_on_surface()](https://r-spatial.github.io/sf/reference/geos_unary.html) se asegura de que el centroide esté siempre dentro de la geometría "padre".
+
+```{r st_centroid, collapse=TRUE}
+# Costa Rica y sus centroides calculados con st_centroid() y st_point_on_surface()
+plot(
+  st_union(provincias),
+  main = "Centroides de CR: st_centroid (rojo) y st_point_on_surface (verde)",
+  axes = TRUE,
+  graticule = TRUE)
+
+plot(st_centroid(st_union(provincias)),
+     add = TRUE,
+     pch = 16,
+     col = "red")
+
+plot(
+  st_point_on_surface(st_union(provincias)),
+  add = TRUE,
+  pch = 16,
+  col = "green")
+
+# Coordenadas del centroide calculado con st_centroid()
+# CRTM05
+st_coordinates(st_centroid(st_union(provincias)))
+# WGS84
+st_coordinates(st_transform(st_centroid(st_union(provincias)), crs = 4326))
+
+# Coordenadas del centroide calculado con st_point_on_surface()
+# CRTM05
+st_coordinates(st_point_on_surface(st_union(provincias)))
+# WGS84
+st_coordinates(st_transform(st_point_on_surface(st_union(provincias)), crs = 4326))
+
+
+# Provincias de Costa Rica y sus centroides calculados con st_centroid() y st_point_on_surface()
+plot(
+  provincias$geometry,
+  extent = st_bbox(c(xmin = 280000, xmax = 660000, ymin = 880000, ymax= 1250000)),  
+  main = "Centroides de provincias: st_centroid (rojo) y st_point_on_surface (verde)",
+  axes = TRUE,
+  graticule = TRUE)
+
+plot(st_centroid(provincias),
+     add = TRUE,
+     pch = 16,
+     col = "red")
+
+plot(
+  st_point_on_surface(provincias),
+  add = TRUE,
+  pch = 16,
+  col = "green")
+
+
+# Ruta 32 y sus centroides calculados con st_centroid() y st_point_on_surface()
+plot(
+  provincias$geometry,
+  extent = st_bbox(c(xmin = 280000, xmax = 660000, ymin = 880000, ymax= 1250000)),  
+  main = "Centroides de la ruta 32: st_centroid (rojo) y st_point_on_surface (verde)",
+  axes = TRUE,
+  graticule = TRUE)
+
+ruta_32 <-
+  red_vial %>%
+  filter(num_ruta == "32")
+
+plot(
+  ruta_32$geometry,
+  add = TRUE,
+  col = "blue")
+
+plot(
+  st_centroid(st_union(ruta_32)),
+  add = TRUE,
+  pch = 16,
+  col = "red")
+
+plot(
+  st_point_on_surface(st_union(ruta_32)),
+  add = TRUE,
+  pch = 16,
+  col = "green")
 ```
