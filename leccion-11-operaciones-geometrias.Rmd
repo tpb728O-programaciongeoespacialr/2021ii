@@ -118,6 +118,18 @@ plot(
 )
 ```
 
+**Altitud (WorldClim)**
+```{r carga-datos-altitud}
+# Carga de datos
+altitud <-
+  rast(
+    "/vsicurl/https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/master/datos/worldclim/altitud.tif"
+  )
+
+# Mapeo
+plot(altitud)
+```
+
 **Mamíferos (datos agrupados por la Infraestructura Mundial de Información en Biodiversidad)**  
 ```{r carga-datos-mammalia}
 # Carga de datos
@@ -456,3 +468,4 @@ plot(
   axes = TRUE,
   graticule = TRUE)  
 ```
+
