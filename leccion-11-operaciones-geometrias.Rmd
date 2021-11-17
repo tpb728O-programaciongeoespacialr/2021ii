@@ -30,6 +30,9 @@ library(sf)
 # Paquete para manejo de datos raster
 library(terra)
 
+# Paquete para simplificación y edición de geometrías
+library(rmapshaper)
+
 # Paquetes con datos geoespaciales para ejemplos
 library(spData)
 library(spDataLarge)
@@ -44,8 +47,7 @@ provincias <-
   st_read(
     "https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/ign/delimitacion-territorial-administrativa/provincias-simplificadas_100m.geojson",
     quiet = TRUE
-  ) %>%
-  st_transform(4326)
+  )
 
 # Mapeo
 plot(
@@ -155,3 +157,82 @@ plot(
 # Introducción
 Esta lección brinda una visión general de las operaciones con geometrías en datos vectoriales implementadas en el paquete [sf](https://r-spatial.github.io/sf/) y en datos raster implementadas en el paquete [terra](https://rspatial.org/terra/index.html). Estas operaciones trabajan con la columna de geometrías (ej. ```geometry```, ```geom```) del paquete ```sf```, para el caso de los datos vectoriales, y con la localización geográfica de los pixeles para el caso de los datos raster. En la sección final, se muestran varias operaciones de interacción entre los modelos raster y vectorial.
 
+# Datos vectoriales
+Las operaciones con geometrías en datos vectoriales incluyen:
+
+- Simplificación.  
+- Centroides. 
+- Áreas de amortiguamiento (_buffers_).  
+- Recortes (_clipping_).  
+- Uniones de geometrías.  
+
+## Operaciones con geometrías con el paquete sf
+Estas operaciones modifican las geometrías de objetos vectoriales (```sf```).
+
+### Simplificación
+La simplificación puede realizarse en geometrías de líneas y polígonos. Reduce la cantidad de memoria, disco y ancho de banda que utilizan las geometrías. Para simplificar geometrías, ```sf``` incluye el método [st_simplify](https://r-spatial.github.io/sf/reference/geos_unary.html), basado en el algoritmo de Douglas-Peucker, el cual recibe el argumento ```dTolerance``` para controlar el nivel de generalización de las unidades del mapa. Este argumento se expresa en las unidades de medida del CRS de la capa, por lo que es conveniente utilizar un CRS con unidades de medida de distancias (ej. metros).
+
+```{r st_simplify, collapse=TRUE}
+# Mapa de la capa de provincias sin simplificación adicional
+plot(
+  provincias$geometry,
+  extent = st_bbox(c(xmin = 280000, xmax = 660000, ymin = 880000, ymax= 1250000)),  
+  main = "Provincias con geometrías no simplificadas",
+  axes = TRUE,
+  graticule = TRUE)
+
+# Simplificación sin preservación de topología
+provincias_simp <-
+  provincias %>%
+  st_simplify(dTolerance = 5000, preserveTopology = FALSE)
+
+# Mapa de la capa de provincias con simplificación y sin preservación de topología
+plot(
+  provincias_simp$geometry,
+  extent = st_bbox(c(xmin = 280000, xmax = 660000, ymin = 880000, ymax= 1250000)),  
+  main = "Provincias simplificadas sin preservación de topología",
+  axes = TRUE,
+  graticule = TRUE)
+
+# Simplificación con preservación de topología
+provincias_simp_topo <-
+  provincias %>%
+  st_simplify(dTolerance = 5000, preserveTopology = TRUE)
+
+# Mapa de la capa de provincias con simplificación y con preservación de topología
+plot(
+  provincias_simp_topo$geometry,
+  extent = st_bbox(c(xmin = 280000, xmax = 660000, ymin = 880000, ymax= 1250000)),  
+  main = "Provincias simplificadas con preservación de topología",
+  axes = TRUE,
+  graticule = TRUE)
+
+# Tamaño de la capa original
+object.size(provincias)
+
+# Tamaño de la capa simplificada sin preservación de topología
+object.size(provincias_simp)
+
+# Tamaño de la capa simplificada con preservación de topología
+object.size(provincias_simp_topo)
+```
+
+La función [rmapshaper::ms_simplify()](https://rdrr.io/pkg/rmapshaper/man/ms_simplify.html) proporciona un método alternativo para la simplificación de geometrías, el cual preserva la topología.
+
+```{r ms_simplify, collapse=TRUE}
+# Simplificación con rmapshaper::ms_simplify()
+provincias_simp <-
+  provincias %>%
+  rmapshaper::ms_simplify(keep = 0.1, keep_shapes = TRUE)
+
+# Mapa de la capa de provincias con simplificación mediante rmapshaper::ms_simplify()
+plot(
+  provincias_simp$geometry,
+  extent = st_bbox(c(xmin = 280000, xmax = 660000, ymin = 880000, ymax= 1250000)),  
+  main = "Provincias simplificadas con rmapshaper::ms_simplify()",
+  axes = TRUE,
+  graticule = TRUE)
+
+# Tamaño de la capa simplificada con rmapshaper::ms_simplify()
+object.size(provincias_simp)
+```
