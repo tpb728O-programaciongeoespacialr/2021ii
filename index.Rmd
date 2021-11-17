@@ -67,6 +67,7 @@ Este sitio web corresponde al curso impartido durante el segundo ciclo lectivo d
 
 # Proyectos
 [01 - Tablero de control implementado con flexdashboard](proyecto-01-flexdashboard.html)  
+[02 - Tablero de control implementado con Shiny](proyecto-02-shiny.html)  
 
 # Recursos
 [Recursos adicionales a la bibliografía del curso](recursos.html)

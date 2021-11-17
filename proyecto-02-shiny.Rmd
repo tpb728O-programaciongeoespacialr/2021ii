@@ -1,0 +1,30 @@
+---
+title: "Proyecto 02 - Tablero de control implementado con Shiny"
+output: 
+  distill::distill_article:
+    toc: true
+    toc_depth: 4
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Fecha de entrega y entregables
+La fecha límite para la entrega es el **miércoles 01 de diciembre de 2021**. Debe crear una aplicación shiny, publicarla en shinyapps.io, y enviarle la dirección al profesor por correo electrónico.
+
+El proyecto puede realizarse en grupos de un máximo de tres estudiantes.
+
+## Desarrollo y calificación
+La aplicación shiny estará basada en el tablero de control desarrollado en el proyecto 1 y la tarea 3. Se calificarán los siguientes aspectos (entre paréntesis, se muestra el porcentaje correspondiente de la nota final):
+
+- (40%) Al menos dos controles de entrada para filtrar los datos (ej. listas de selección). Los componentes del tablero (tablas, gráficos, mapas) deben actualizar la información apropiadamente con base en lo especificado por el usuario en los controles de entrada.
+
+- (10%) El mapa del tablero debe contener:
+    - Al menos una capa base y una capa "overlay".
+    - Un control de capas.
+    - Un control de escala.
+    - Un control de coordenadas del puntero del ratón.
+    - Un control de búsqueda en OSM.
+    
+- (50%) Al menos una operación espacial o de geometrías, como las estudiadas en clase, por ejemplo: conteo de puntos en polígonos, estadísticas (ej. suma, promedio) de esos puntos, longitud de líneas en polígonos, cálculo de *buffers*, recorte (*crop*) de geometrías. Por favor especifique en su correo cuales son las operaciones espaciales que está realizando.
