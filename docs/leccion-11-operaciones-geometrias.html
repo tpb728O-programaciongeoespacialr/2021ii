@@ -2460,6 +2460,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <li><a href="#simplificación">Simplificación</a></li>
 <li><a href="#centroides">Centroides</a></li>
 <li><a href="#áreas-de-amortiguamiento-buffers">Áreas de amortiguamiento (<em>buffers</em>)</a></li>
+<li><a href="#recortes-clipping">Recortes (<em>clipping</em>)</a></li>
+<li><a href="#uniones-de-geometrías">Uniones de geometrías</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -2522,8 +2524,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_read.html'>st_read</a></span><span class='op'>(</span>
     <span class='st'>"https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/ign/delimitacion-territorial-administrativa/cantones-simplificadas_100m.geojson"</span>,
     quiet <span class='op'>=</span> <span class='cn'>TRUE</span>
-  <span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_transform.html'>st_transform</a></span><span class='op'>(</span><span class='fl'>4326</span><span class='op'>)</span>
+  <span class='op'>)</span>
 
 <span class='co'># Mapeo</span>
 <span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span>
@@ -2545,8 +2546,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_read.html'>st_read</a></span><span class='op'>(</span>
     <span class='st'>"https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/sinac/areas-silvestres-protegidas-simplificadas_100m.geojson"</span>,
     quiet <span class='op'>=</span> <span class='cn'>TRUE</span>
-  <span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_transform.html'>st_transform</a></span><span class='op'>(</span><span class='fl'>4326</span><span class='op'>)</span>
+  <span class='op'>)</span>
 
 <span class='co'># Mapeo</span>
 <span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span>
@@ -2920,6 +2920,89 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
  8 Orthogeomys cherriei            20
  9 Didelphis marsupialis           16
 10 Cebus capucinus                 15</code></pre>
+</div>
+<h3 id="recortes-clipping">Recortes (<em>clipping</em>)</h3>
+<p>El recorte de una geometría con base en la forma de otra puede realizarse con el método <a href="https://r-spatial.github.io/sf/reference/geos_binary_ops.html">st_intersection()</a>, el cual retorna la intersección entre dos geometrías.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Recorte de la sección del Parque Internacional La Amistad (PILA) ubicada en Puntarenas</span>
+<span class='va'>pila</span> <span class='op'>&lt;-</span>
+  <span class='va'>asp</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>nombre_asp</span> <span class='op'>==</span> <span class='st'>"Internacional La Amistad"</span><span class='op'>)</span>
+
+<span class='va'>puntarenas_limon</span> <span class='op'>&lt;-</span>
+  <span class='va'>provincias</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>provincia</span> <span class='op'>==</span> <span class='st'>"Puntarenas"</span> <span class='op'>|</span> <span class='va'>provincia</span> <span class='op'>==</span> <span class='st'>"Limón"</span><span class='op'>)</span>
+
+<span class='co'># Mapa de Puntarenas, Limón y el PILA</span>
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>puntarenas_limon</span><span class='op'>$</span><span class='va'>geometry</span>,
+  main <span class='op'>=</span> <span class='st'>"Puntarenas, Limón y el PILA"</span>,
+  extent <span class='op'>=</span> <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_bbox.html'>st_bbox</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/terra/man/c.html'>c</a></span><span class='op'>(</span>xmin <span class='op'>=</span> <span class='fl'>350000</span>, xmax <span class='op'>=</span> <span class='fl'>660000</span>, ymin <span class='op'>=</span> <span class='fl'>880000</span>, ymax<span class='op'>=</span> <span class='fl'>1250000</span><span class='op'>)</span><span class='op'>)</span>,  
+  axes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  graticule <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>pila</span><span class='op'>$</span><span class='va'>geometry</span>,
+  border <span class='op'>=</span> <span class='st'>"green"</span>,
+  add <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</code></pre>
+</div>
+<img src="leccion-11-operaciones-geometrias_files/figure-html5/st_intersection-1.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>puntarenas</span> <span class='op'>&lt;-</span>
+  <span class='va'>provincias</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>provincia</span> <span class='op'>==</span> <span class='st'>"Puntarenas"</span><span class='op'>)</span>
+
+<span class='co'># Recorte de la sección del PILA ubicada en Puntarenas</span>
+<span class='va'>pila_puntarenas</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r-spatial.github.io/sf/reference/geos_binary_ops.html'>st_intersection</a></span><span class='op'>(</span><span class='va'>pila</span>, <span class='va'>puntarenas</span><span class='op'>)</span>
+
+<span class='co'># Mapa de la sección recortada</span>
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>pila_puntarenas</span><span class='op'>$</span><span class='va'>geometry</span>,
+  main <span class='op'>=</span> <span class='st'>"Sección del PILA ubicada en Puntarenas"</span>,
+  col <span class='op'>=</span> <span class='st'>"red"</span>,
+  axes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  graticule <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>puntarenas_limon</span><span class='op'>$</span><span class='va'>geometry</span>,
+  add <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="leccion-11-operaciones-geometrias_files/figure-html5/st_intersection-2.png" width="624" /></p>
+</div>
+<h3 id="uniones-de-geometrías">Uniones de geometrías</h3>
+<p>En lecciones anteriores, se ha mostrado como agregar geometrías mediante los métodos <a href="https://r-spatial.github.io/sf/reference/aggregate.sf.html">agregate()</a> y <a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a>. Internamente, ambos métodos utilizan la función <a href="https://r-spatial.github.io/sf/reference/geos_combine.html">st_union()</a> para combinar las geometrías y disolver sus límites.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Cantones de la provincia de San José</span>
+<span class='va'>cantones_sanjose</span> <span class='op'>&lt;-</span>
+  <span class='va'>cantones</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>provincia</span> <span class='op'>==</span> <span class='st'>"San José"</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>cantones_sanjose</span><span class='op'>$</span><span class='va'>geometry</span>,
+  main <span class='op'>=</span> <span class='st'>"Cantones de San José"</span>,
+  axes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  graticule <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>  
+</code></pre>
+</div>
+<img src="leccion-11-operaciones-geometrias_files/figure-html5/st_union-1.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Cantones de la provincia de San José unificados</span>
+<span class='va'>cantones_sanjose_unificados</span> <span class='op'>&lt;-</span> 
+  <span class='fu'><a href='https://r-spatial.github.io/sf/reference/geos_combine.html'>st_union</a></span><span class='op'>(</span><span class='va'>cantones_sanjose</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>cantones_sanjose_unificados</span>,
+  main <span class='op'>=</span> <span class='st'>"Cantones de San José unificados"</span>,
+  axes <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  graticule <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>  
+</code></pre>
+</div>
+<p><img src="leccion-11-operaciones-geometrias_files/figure-html5/st_union-2.png" width="624" /></p>
 </div>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->

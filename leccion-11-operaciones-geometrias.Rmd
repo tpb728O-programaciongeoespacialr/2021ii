@@ -65,8 +65,7 @@ cantones <-
   st_read(
     "https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/ign/delimitacion-territorial-administrativa/cantones-simplificadas_100m.geojson",
     quiet = TRUE
-  ) %>%
-  st_transform(4326)
+  )
 
 # Mapeo
 plot(
@@ -84,8 +83,7 @@ asp <-
   st_read(
     "https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/sinac/areas-silvestres-protegidas-simplificadas_100m.geojson",
     quiet = TRUE
-  ) %>%
-  st_transform(4326)
+  )
 
 # Mapeo
 plot(
@@ -384,4 +382,77 @@ mamiferos_buffer_ruta_32 %>%
   summarise(registros = n()) %>%
   arrange(desc(registros)) %>%
   slice(1:10)
+```
+
+### Recortes (*clipping*)
+El recorte de una geometría con base en la forma de otra puede realizarse con el método [st_intersection()](https://r-spatial.github.io/sf/reference/geos_binary_ops.html), el cual retorna la intersección entre dos geometrías.
+
+```{r st_intersection, collapse=TRUE}
+# Recorte de la sección del Parque Internacional La Amistad (PILA) ubicada en Puntarenas
+pila <-
+  asp %>%
+  filter(nombre_asp == "Internacional La Amistad")
+
+puntarenas_limon <-
+  provincias %>%
+  filter(provincia == "Puntarenas" | provincia == "Limón")
+
+# Mapa de Puntarenas, Limón y el PILA
+plot(
+  puntarenas_limon$geometry,
+  main = "Puntarenas, Limón y el PILA",
+  extent = st_bbox(c(xmin = 350000, xmax = 660000, ymin = 880000, ymax= 1250000)),  
+  axes = TRUE,
+  graticule = TRUE)
+
+plot(
+  pila$geometry,
+  border = "green",
+  add = TRUE)
+
+puntarenas <-
+  provincias %>%
+  filter(provincia == "Puntarenas")
+
+# Recorte de la sección del PILA ubicada en Puntarenas
+pila_puntarenas <- st_intersection(pila, puntarenas)
+
+# Mapa de la sección recortada
+plot(
+  pila_puntarenas$geometry,
+  main = "Sección del PILA ubicada en Puntarenas",
+  col = "red",
+  axes = TRUE,
+  graticule = TRUE)
+
+plot(
+  puntarenas_limon$geometry,
+  add = TRUE
+)
+```
+
+### Uniones de geometrías
+En lecciones anteriores, se ha mostrado como agregar geometrías mediante los métodos [agregate()](https://r-spatial.github.io/sf/reference/aggregate.sf.html) y [summarize()](https://dplyr.tidyverse.org/reference/summarise.html). Internamente, ambos métodos utilizan la función [st_union()](https://r-spatial.github.io/sf/reference/geos_combine.html) para combinar las geometrías y disolver sus límites.
+
+```{r st_union, collapse=TRUE}
+# Cantones de la provincia de San José
+cantones_sanjose <-
+  cantones %>%
+  filter(provincia == "San José")
+
+plot(
+  cantones_sanjose$geometry,
+  main = "Cantones de San José",
+  axes = TRUE,
+  graticule = TRUE)  
+
+# Cantones de la provincia de San José unificados
+cantones_sanjose_unificados <- 
+  st_union(cantones_sanjose)
+
+plot(
+  cantones_sanjose_unificados,
+  main = "Cantones de San José unificados",
+  axes = TRUE,
+  graticule = TRUE)  
 ```
