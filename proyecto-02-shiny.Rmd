@@ -27,4 +27,4 @@ La aplicación shiny estará basada en el tablero de control desarrollado en el 
     - Un control de coordenadas del puntero del ratón.
     - Un control de búsqueda en OSM.
     
-- (50%) Al menos una operación espacial o de geometrías, como las estudiadas en clase, por ejemplo: conteo de puntos en polígonos, estadísticas (ej. suma, promedio) de esos puntos, longitud de líneas en polígonos, cálculo de *buffers*, recorte (*crop*) de geometrías. Por favor especifique en su correo cuales son las operaciones espaciales que está realizando.
+- (50%) Al menos dos operaciones espaciales o de geometrías, como las estudiadas en clase, por ejemplo: conteo de puntos en polígonos, estadísticas (ej. suma, promedio) de esos puntos, longitud de líneas en polígonos, cálculo de *buffers*, recorte (*crop*) de geometrías. Por favor especifique en su correo cuales son las operaciones espaciales que está realizando.
