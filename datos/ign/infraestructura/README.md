@@ -8,7 +8,7 @@ $ ogr2ogr \
 # Vías
 $ ogr2ogr \
     -makevalid \
-    vias-simplificadas_100m.geojson \
+    vias.geojson \
     WFS:"http://geos.snitcr.go.cr/be/IGN_5/wfs" "IGN_5:vias_5000"  
 
 # Vías con geometrías simplificadas (100 m)
