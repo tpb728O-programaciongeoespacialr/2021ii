@@ -42,6 +42,7 @@ Este sitio web corresponde al curso impartido durante el segundo ciclo lectivo d
 [08 Operaciones de datos de atributos](leccion-08-operaciones-atributos.html)  
 [09 Shiny](leccion-09-shiny.html)  
 [10 Operaciones de datos espaciales](leccion-10-operaciones-espaciales.html)  
+[11 Operaciones de geometrías](leccion-11-operaciones-geometrias.html)  
 
 # Aplicaciones desarrolladas como ejemplo
 
