@@ -469,3 +469,119 @@ plot(
   graticule = TRUE)  
 ```
 
+# Datos raster
+Las operaciones con geometrías en datos raster incluyen:
+
+- Intersecciones geométricas.  
+- Cambio de extensión y de origen.  
+- Agregación y desagregación. 
+
+## Operaciones con geometrías con el paquete terra
+
+### Intersecciones geométricas
+Los objetos ```SpatRaster``` pueden intersecarse con las funciones [intersect()](https://rdrr.io/pkg/terra/man/intersect.html) y [crop()](https://rdrr.io/pkg/terra/man/crop.html).
+
+```{r raster-intersection}
+# Objeto a recortar
+elev <- rast(system.file("raster/elev.tif", package = "spData"))
+
+clip <- rast(
+  xmin = 0.9,
+  xmax = 1.8,
+  ymin = -0.45,
+  ymax = 0.45,
+  resolution = 0.3,
+  vals = rep(1, 9)
+)
+
+# Objeto recortado
+elev_clipped <- crop(elev, clip)
+
+plot(elev)
+plot(elev_clipped, add = TRUE)
+```
+
+### Agregación y desagregación
+La resolución de un raster puede disminuirse con la función [aggregate()](https://rdrr.io/cran/terra/man/aggregate.html) o aumentarse con la función [disaggregate()](https://rdrr.io/cran/terra/man/disaggregate.html).
+
+En el siguiente bloque de código, se utiliza la función ```aggregate()``` para disminuir la resolución del raster de altitud de Costa Rica por un factor de 4, como se especifica con el argumento```factor = 4```. Así, se generará una celda en el raster agrupado por cada ocho celdas del raster original. El argumento ```fun = mean``` indica que en el raster agrupado, cada celda será el promedio de las cuatro celdas correspondientes en el raster original.
+
+```{r aggregate}
+# Capa de altitud de Costa Rica
+plot(
+  altitud,
+  main = "Capa de altitud de Costa Rica",
+  axes = TRUE)
+
+# Agrupación de la capa de altitud de Costa Rica
+altitud_agregada <- 
+  altitud %>%
+  aggregate(fact = 8, fun = mean)
+
+# Capa de altitud agrupada de Costa Rica
+plot(
+  altitud_agregada,
+  main = "Capa agrupada de altitud de Costa Rica",
+  axes = TRUE)
+
+# Metadatos de la capa original de altitud
+altitud
+
+# Metadatos de la capa agrupada de altitud
+altitud_agregada
+
+# Tamaño de la capa original de altitud
+object.size(altitud)
+
+# Tamaño de la capa agrupada de altitud
+object.size(altitud_agregada)
+```
+
+La función ```disaggregate()``` genera varias celdas por cada celda del raster original. Debe especificarse un método con el argumento ```method```. Su valor puede ser ```""```, para copiar los valores de la celda de entrada o ```bilinear```, que es un método de interpolación.
+
+En el siguiente bloque de código, se desagrega el raster de elevación por un factor de dos.
+
+```{r disaggregate}
+# Desagregación de la capa de elevación
+elev_desagregada <- 
+  elev %>%
+  disaggregate(fact = 2, method = "bilinear")
+
+plot(elev_desagregada)
+
+# Metadatos de la capa original de elevación
+elev
+
+# Metadatos de la capa desagrupada de elevación
+elev_desagregada
+
+# Tamaño de la capa original de elevación
+object.size(elev)
+
+# Metadatos de la capa desagrupada de elevación
+object.size(elev_desagregada)
+```
+
+# Interacciones raster-vector
+
+## Recorte (*cropping*) de datos raster
+Los métodos [crop()](https://rdrr.io/cran/terra/man/crop.html) y [mask()](https://rdrr.io/cran/terra/man/mask.html) pueden utilizarse para recortar (*crop*) un objeto raster con base en el contorno de un objeto vectorial.
+
+```{r}
+# Polígono de la provincia de Limón
+limon <-
+  provincias %>%
+  filter(provincia == "Limón") %>%
+  st_transform(4326)
+
+# crop() + mask() a capa de altitud
+altitud_limon <-
+  altitud %>%
+  crop(vect(limon)) %>%
+  mask(vect(limon))
+
+plot(
+  altitud_limon,
+  main = "crop() + mask() a capa de altitud de Costa Rica",
+  axes = TRUE)
+```

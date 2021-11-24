@@ -2464,6 +2464,18 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <li><a href="#uniones-de-geometrías">Uniones de geometrías</a></li>
 </ul></li>
 </ul></li>
+<li><a href="#datos-raster">Datos raster</a>
+<ul>
+<li><a href="#operaciones-con-geometrías-con-el-paquete-terra">Operaciones con geometrías con el paquete terra</a>
+<ul>
+<li><a href="#intersecciones-geométricas">Intersecciones geométricas</a></li>
+<li><a href="#agregación-y-desagregación">Agregación y desagregación</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#interacciones-raster-vector">Interacciones raster-vector</a>
+<ul>
+<li><a href="#recorte-cropping-de-datos-raster">Recorte (<em>cropping</em>) de datos raster</a></li>
+</ul></li>
 </ul>
 </nav>
 </div>
@@ -3019,7 +3031,187 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <p><img src="leccion-11-operaciones-geometrias_files/figure-html5/st_union-2.png" width="624" /></p>
 </div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h1 id="datos-raster">Datos raster</h1>
+<p>Las operaciones con geometrías en datos raster incluyen:</p>
+<ul>
+<li>Intersecciones geométricas.<br />
+</li>
+<li>Cambio de extensión y de origen.<br />
+</li>
+<li>Agregación y desagregación.</li>
+</ul>
+<h2 id="operaciones-con-geometrías-con-el-paquete-terra">Operaciones con geometrías con el paquete terra</h2>
+<h3 id="intersecciones-geométricas">Intersecciones geométricas</h3>
+<p>Los objetos <code>SpatRaster</code> pueden intersecarse con las funciones <a href="https://rdrr.io/pkg/terra/man/intersect.html">intersect()</a> y <a href="https://rdrr.io/pkg/terra/man/crop.html">crop()</a>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Objeto a recortar</span>
+<span class='va'>elev</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/rast.html'>rast</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"raster/elev.tif"</span>, package <span class='op'>=</span> <span class='st'>"spData"</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='va'>clip</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/rast.html'>rast</a></span><span class='op'>(</span>
+  xmin <span class='op'>=</span> <span class='fl'>0.9</span>,
+  xmax <span class='op'>=</span> <span class='fl'>1.8</span>,
+  ymin <span class='op'>=</span> <span class='op'>-</span><span class='fl'>0.45</span>,
+  ymax <span class='op'>=</span> <span class='fl'>0.45</span>,
+  resolution <span class='op'>=</span> <span class='fl'>0.3</span>,
+  vals <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>9</span><span class='op'>)</span>
+<span class='op'>)</span>
+
+<span class='co'># Objeto recortado</span>
+<span class='va'>elev_clipped</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/crop.html'>crop</a></span><span class='op'>(</span><span class='va'>elev</span>, <span class='va'>clip</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>elev</span><span class='op'>)</span>
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>elev_clipped</span>, add <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="leccion-11-operaciones-geometrias_files/figure-html5/raster-intersection-1.png" width="624" /></p>
+</div>
+<h3 id="agregación-y-desagregación">Agregación y desagregación</h3>
+<p>La resolución de un raster puede disminuirse con la función <a href="https://rdrr.io/cran/terra/man/aggregate.html">aggregate()</a> o aumentarse con la función <a href="https://rdrr.io/cran/terra/man/disaggregate.html">disaggregate()</a>.</p>
+<p>En el siguiente bloque de código, se utiliza la función <code>aggregate()</code> para disminuir la resolución del raster de altitud de Costa Rica por un factor de 4, como se especifica con el argumento<code>factor = 4</code>. Así, se generará una celda en el raster agrupado por cada ocho celdas del raster original. El argumento <code>fun = mean</code> indica que en el raster agrupado, cada celda será el promedio de las cuatro celdas correspondientes en el raster original.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Capa de altitud de Costa Rica</span>
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>altitud</span>,
+  main <span class='op'>=</span> <span class='st'>"Capa de altitud de Costa Rica"</span>,
+  axes <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</code></pre>
+</div>
+<img src="leccion-11-operaciones-geometrias_files/figure-html5/aggregate-1.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Agrupación de la capa de altitud de Costa Rica</span>
+<span class='va'>altitud_agregada</span> <span class='op'>&lt;-</span> 
+  <span class='va'>altitud</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://r-spatial.github.io/sf/reference/aggregate.sf.html'>aggregate</a></span><span class='op'>(</span>fact <span class='op'>=</span> <span class='fl'>8</span>, fun <span class='op'>=</span> <span class='va'>mean</span><span class='op'>)</span>
+
+<span class='co'># Capa de altitud agrupada de Costa Rica</span>
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>altitud_agregada</span>,
+  main <span class='op'>=</span> <span class='st'>"Capa agrupada de altitud de Costa Rica"</span>,
+  axes <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</code></pre>
+</div>
+<img src="leccion-11-operaciones-geometrias_files/figure-html5/aggregate-2.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Metadatos de la capa original de altitud</span>
+<span class='va'>altitud</span>
+</code></pre>
+</div>
+<pre><code>class       : SpatRaster 
+dimensions  : 687, 546, 1  (nrow, ncol, nlyr)
+resolution  : 0.008333333, 0.008333333  (x, y)
+extent      : -87.10189, -82.55189, 5.494651, 11.21965  (xmin, xmax, ymin, ymax)
+coord. ref. : +proj=longlat +datum=WGS84 +no_defs 
+source      : altitud.tif 
+name        : altitud </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Metadatos de la capa agrupada de altitud</span>
+<span class='va'>altitud_agregada</span>
+</code></pre>
+</div>
+<pre><code>class       : SpatRaster 
+dimensions  : 86, 69, 1  (nrow, ncol, nlyr)
+resolution  : 0.06666667, 0.06666667  (x, y)
+extent      : -87.10189, -82.50189, 5.486317, 11.21965  (xmin, xmax, ymin, ymax)
+coord. ref. : +proj=longlat +datum=WGS84 +no_defs 
+source      : memory 
+name        :  altitud 
+min value   : 6.296875 
+max value   : 3139.156 </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Tamaño de la capa original de altitud</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/object.size.html'>object.size</a></span><span class='op'>(</span><span class='va'>altitud</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>1304 bytes</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Tamaño de la capa agrupada de altitud</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/object.size.html'>object.size</a></span><span class='op'>(</span><span class='va'>altitud_agregada</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>1304 bytes</code></pre>
+</div>
+<p>La función <code>disaggregate()</code> genera varias celdas por cada celda del raster original. Debe especificarse un método con el argumento <code>method</code>. Su valor puede ser <code>""</code>, para copiar los valores de la celda de entrada o <code>bilinear</code>, que es un método de interpolación.</p>
+<p>En el siguiente bloque de código, se desagrega el raster de elevación por un factor de dos.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Desagregación de la capa de elevación</span>
+<span class='va'>elev_desagregada</span> <span class='op'>&lt;-</span> 
+  <span class='va'>elev</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/terra/man/disaggregate.html'>disaggregate</a></span><span class='op'>(</span>fact <span class='op'>=</span> <span class='fl'>2</span>, method <span class='op'>=</span> <span class='st'>"bilinear"</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>elev_desagregada</span><span class='op'>)</span>
+</code></pre>
+</div>
+<img src="leccion-11-operaciones-geometrias_files/figure-html5/disaggregate-1.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Metadatos de la capa original de elevación</span>
+<span class='va'>elev</span>
+</code></pre>
+</div>
+<pre><code>class       : SpatRaster 
+dimensions  : 6, 6, 1  (nrow, ncol, nlyr)
+resolution  : 0.5, 0.5  (x, y)
+extent      : -1.5, 1.5, -1.5, 1.5  (xmin, xmax, ymin, ymax)
+coord. ref. : +proj=longlat +datum=WGS84 +no_defs 
+source      : elev.tif 
+name        : elev 
+min value   :    1 
+max value   :   36 </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Metadatos de la capa desagrupada de elevación</span>
+<span class='va'>elev_desagregada</span>
+</code></pre>
+</div>
+<pre><code>class       : SpatRaster 
+dimensions  : 12, 12, 1  (nrow, ncol, nlyr)
+resolution  : 0.25, 0.25  (x, y)
+extent      : -1.5, 1.5, -1.5, 1.5  (xmin, xmax, ymin, ymax)
+coord. ref. : +proj=longlat +datum=WGS84 +no_defs 
+source      : memory 
+name        : elev 
+min value   :    1 
+max value   :   36 </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Tamaño de la capa original de elevación</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/object.size.html'>object.size</a></span><span class='op'>(</span><span class='va'>elev</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>1304 bytes</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Metadatos de la capa desagrupada de elevación</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/object.size.html'>object.size</a></span><span class='op'>(</span><span class='va'>elev_desagregada</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>1304 bytes</code></pre>
+</div>
+<h1 id="interacciones-raster-vector">Interacciones raster-vector</h1>
+<h2 id="recorte-cropping-de-datos-raster">Recorte (<em>cropping</em>) de datos raster</h2>
+<p>Los métodos <a href="https://rdrr.io/cran/terra/man/crop.html">crop()</a> y <a href="https://rdrr.io/cran/terra/man/mask.html">mask()</a> pueden utilizarse para recortar (<em>crop</em>) un objeto raster con base en el contorno de un objeto vectorial.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Polígono de la provincia de Limón</span>
+<span class='va'>limon</span> <span class='op'>&lt;-</span>
+  <span class='va'>provincias</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>provincia</span> <span class='op'>==</span> <span class='st'>"Limón"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_transform.html'>st_transform</a></span><span class='op'>(</span><span class='fl'>4326</span><span class='op'>)</span>
+
+<span class='co'># crop() + mask() a capa de altitud</span>
+<span class='va'>altitud_limon</span> <span class='op'>&lt;-</span>
+  <span class='va'>altitud</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/terra/man/crop.html'>crop</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/terra/man/vect.html'>vect</a></span><span class='op'>(</span><span class='va'>limon</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/terra/man/mask.html'>mask</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/terra/man/vect.html'>vect</a></span><span class='op'>(</span><span class='va'>limon</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>altitud_limon</span>,
+  main <span class='op'>=</span> <span class='st'>"crop() + mask() a capa de altitud de Costa Rica"</span>,
+  axes <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="leccion-11-operaciones-geometrias_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
+</div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
