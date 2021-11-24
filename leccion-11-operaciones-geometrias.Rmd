@@ -473,7 +473,6 @@ plot(
 Las operaciones con geometrías en datos raster incluyen:
 
 - Intersecciones geométricas.  
-- Cambio de extensión y de origen.  
 - Agregación y desagregación. 
 
 ## Operaciones con geometrías con el paquete terra
@@ -497,6 +496,14 @@ clip <- rast(
 # Objeto recortado
 elev_clipped <- crop(elev, clip)
 
+# Metadatos del objeto recortado
+elev_clipped
+
+# Mapeo
+plot(elev)
+
+plot(elev_clipped)
+
 plot(elev)
 plot(elev_clipped, add = TRUE)
 ```
@@ -504,7 +511,7 @@ plot(elev_clipped, add = TRUE)
 ### Agregación y desagregación
 La resolución de un raster puede disminuirse con la función [aggregate()](https://rdrr.io/cran/terra/man/aggregate.html) o aumentarse con la función [disaggregate()](https://rdrr.io/cran/terra/man/disaggregate.html).
 
-En el siguiente bloque de código, se utiliza la función ```aggregate()``` para disminuir la resolución del raster de altitud de Costa Rica por un factor de 4, como se especifica con el argumento```factor = 4```. Así, se generará una celda en el raster agrupado por cada ocho celdas del raster original. El argumento ```fun = mean``` indica que en el raster agrupado, cada celda será el promedio de las cuatro celdas correspondientes en el raster original.
+En el siguiente bloque de código, se utiliza la función ```aggregate()``` para disminuir la resolución del raster de altitud de Costa Rica por un factor de 8, como se especifica con el argumento ```factor = 8```. El argumento ```fun = mean``` indica que en el raster agrupado, cada celda será el promedio de las cuatro celdas correspondientes en el raster original.
 
 ```{r aggregate}
 # Capa de altitud de Costa Rica
@@ -567,7 +574,7 @@ object.size(elev_desagregada)
 ## Recorte (*cropping*) de datos raster
 Los métodos [crop()](https://rdrr.io/cran/terra/man/crop.html) y [mask()](https://rdrr.io/cran/terra/man/mask.html) pueden utilizarse para recortar (*crop*) un objeto raster con base en el contorno de un objeto vectorial.
 
-```{r}
+```{r crop}
 # Polígono de la provincia de Limón
 limon <-
   provincias %>%

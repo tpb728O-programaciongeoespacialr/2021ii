@@ -3036,8 +3036,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <ul>
 <li>Intersecciones geométricas.<br />
 </li>
-<li>Cambio de extensión y de origen.<br />
-</li>
 <li>Agregación y desagregación.</li>
 </ul>
 <h2 id="operaciones-con-geometrías-con-el-paquete-terra">Operaciones con geometrías con el paquete terra</h2>
@@ -3060,15 +3058,40 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span class='co'># Objeto recortado</span>
 <span class='va'>elev_clipped</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/terra/man/crop.html'>crop</a></span><span class='op'>(</span><span class='va'>elev</span>, <span class='va'>clip</span><span class='op'>)</span>
 
+<span class='co'># Metadatos del objeto recortado</span>
+<span class='va'>elev_clipped</span>
+</code></pre>
+</div>
+<pre><code>class       : SpatRaster 
+dimensions  : 2, 1, 1  (nrow, ncol, nlyr)
+resolution  : 0.5, 0.5  (x, y)
+extent      : 1, 1.5, -0.5, 0.5  (xmin, xmax, ymin, ymax)
+coord. ref. : +proj=longlat +datum=WGS84 +no_defs 
+source      : memory 
+name        : elev 
+min value   :   18 
+max value   :   24 </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Mapeo</span>
 <span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>elev</span><span class='op'>)</span>
+</code></pre>
+</div>
+<img src="leccion-11-operaciones-geometrias_files/figure-html5/raster-intersection-1.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>elev_clipped</span><span class='op'>)</span>
+</code></pre>
+</div>
+<img src="leccion-11-operaciones-geometrias_files/figure-html5/raster-intersection-2.png" width="624" />
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>elev</span><span class='op'>)</span>
 <span class='fu'><a href='https://r-spatial.github.io/sf/reference/plot.html'>plot</a></span><span class='op'>(</span><span class='va'>elev_clipped</span>, add <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="leccion-11-operaciones-geometrias_files/figure-html5/raster-intersection-1.png" width="624" /></p>
+<p><img src="leccion-11-operaciones-geometrias_files/figure-html5/raster-intersection-3.png" width="624" /></p>
 </div>
 <h3 id="agregación-y-desagregación">Agregación y desagregación</h3>
 <p>La resolución de un raster puede disminuirse con la función <a href="https://rdrr.io/cran/terra/man/aggregate.html">aggregate()</a> o aumentarse con la función <a href="https://rdrr.io/cran/terra/man/disaggregate.html">disaggregate()</a>.</p>
-<p>En el siguiente bloque de código, se utiliza la función <code>aggregate()</code> para disminuir la resolución del raster de altitud de Costa Rica por un factor de 4, como se especifica con el argumento<code>factor = 4</code>. Así, se generará una celda en el raster agrupado por cada ocho celdas del raster original. El argumento <code>fun = mean</code> indica que en el raster agrupado, cada celda será el promedio de las cuatro celdas correspondientes en el raster original.</p>
+<p>En el siguiente bloque de código, se utiliza la función <code>aggregate()</code> para disminuir la resolución del raster de altitud de Costa Rica por un factor de 8, como se especifica con el argumento <code>factor = 8</code>. El argumento <code>fun = mean</code> indica que en el raster agrupado, cada celda será el promedio de las cuatro celdas correspondientes en el raster original.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Capa de altitud de Costa Rica</span>
@@ -3209,9 +3232,9 @@ max value   :   36 </code></pre>
   axes <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </code></pre>
 </div>
-<p><img src="leccion-11-operaciones-geometrias_files/figure-html5/unnamed-chunk-1-1.png" width="624" /></p>
+<p><img src="leccion-11-operaciones-geometrias_files/figure-html5/crop-1.png" width="624" /></p>
 </div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
